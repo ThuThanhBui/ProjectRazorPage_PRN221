@@ -1,0 +1,14 @@
+D:\ProjectVisualStudio\PRN221\Data\bin\Debug\net7.0\Data.deps.json
+D:\ProjectVisualStudio\PRN221\Data\bin\Debug\net7.0\Data.runtimeconfig.json
+D:\ProjectVisualStudio\PRN221\Data\bin\Debug\net7.0\Data.dll
+D:\ProjectVisualStudio\PRN221\Data\bin\Debug\net7.0\Data.pdb
+D:\ProjectVisualStudio\PRN221\Data\obj\Debug\net7.0\Data.csproj.AssemblyReference.cache
+D:\ProjectVisualStudio\PRN221\Data\obj\Debug\net7.0\Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\ProjectVisualStudio\PRN221\Data\obj\Debug\net7.0\Data.AssemblyInfoInputs.cache
+D:\ProjectVisualStudio\PRN221\Data\obj\Debug\net7.0\Data.AssemblyInfo.cs
+D:\ProjectVisualStudio\PRN221\Data\obj\Debug\net7.0\Data.csproj.CoreCompileInputs.cache
+D:\ProjectVisualStudio\PRN221\Data\obj\Debug\net7.0\Data.dll
+D:\ProjectVisualStudio\PRN221\Data\obj\Debug\net7.0\refint\Data.dll
+D:\ProjectVisualStudio\PRN221\Data\obj\Debug\net7.0\Data.pdb
+D:\ProjectVisualStudio\PRN221\Data\obj\Debug\net7.0\Data.genruntimeconfig.cache
+D:\ProjectVisualStudio\PRN221\Data\obj\Debug\net7.0\ref\Data.dll
