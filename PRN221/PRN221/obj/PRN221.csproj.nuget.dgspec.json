@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ProjectVisualStudio\\PRN221\\PRN221\\PRN221.csproj": {}
+    "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\PRN221\\PRN221.csproj": {}
   },
   "projects": {
-    "D:\\ProjectVisualStudio\\PRN221\\DataAccess\\DataAccess.csproj": {
+    "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\PRN221\\PRN221.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ProjectVisualStudio\\PRN221\\DataAccess\\DataAccess.csproj",
-        "projectName": "DataAccess",
-        "projectPath": "D:\\ProjectVisualStudio\\PRN221\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\PRN221\\PRN221.csproj",
+        "projectName": "PRN221",
+        "projectPath": "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\PRN221\\PRN221.csproj",
         "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "D:\\ProjectVisualStudio\\PRN221\\DataAccess\\obj\\",
+        "outputPath": "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\PRN221\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,7 +27,14 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\Repository\\Repository.csproj": {
+                "projectPath": "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\Repository\\Repository.csproj"
+              },
+              "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\Service\\Service.csproj": {
+                "projectPath": "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\Service\\Service.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -39,6 +46,18 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.18, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[7.0.12, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -51,6 +70,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -59,14 +81,14 @@
         }
       }
     },
-    "D:\\ProjectVisualStudio\\PRN221\\Data\\Data.csproj": {
+    "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ProjectVisualStudio\\PRN221\\Data\\Data.csproj",
-        "projectName": "Data",
-        "projectPath": "D:\\ProjectVisualStudio\\PRN221\\Data\\Data.csproj",
+        "projectUniqueName": "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\Repository\\Repository.csproj",
+        "projectName": "Repository",
+        "projectPath": "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\Repository\\Repository.csproj",
         "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "D:\\ProjectVisualStudio\\PRN221\\Data\\obj\\",
+        "outputPath": "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -117,7 +139,7 @@
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
@@ -144,14 +166,14 @@
         }
       }
     },
-    "D:\\ProjectVisualStudio\\PRN221\\PRN221\\PRN221.csproj": {
+    "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\Service\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ProjectVisualStudio\\PRN221\\PRN221\\PRN221.csproj",
-        "projectName": "PRN221",
-        "projectPath": "D:\\ProjectVisualStudio\\PRN221\\PRN221\\PRN221.csproj",
+        "projectUniqueName": "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\Service\\Service.csproj",
+        "projectName": "Service",
+        "projectPath": "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\Service\\Service.csproj",
         "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "D:\\ProjectVisualStudio\\PRN221\\PRN221\\obj\\",
+        "outputPath": "D:\\PRN221\\ProjectRazorPage_PRN221\\PRN221\\Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -167,14 +189,7 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {
-              "D:\\ProjectVisualStudio\\PRN221\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "D:\\ProjectVisualStudio\\PRN221\\DataAccess\\DataAccess.csproj"
-              },
-              "D:\\ProjectVisualStudio\\PRN221\\Data\\Data.csproj": {
-                "projectPath": "D:\\ProjectVisualStudio\\PRN221\\Data\\Data.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -186,14 +201,6 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "dependencies": {
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[7.0.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -206,9 +213,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

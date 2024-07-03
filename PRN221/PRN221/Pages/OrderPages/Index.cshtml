@@ -1,0 +1,72 @@
+﻿@page
+@model PRN221.Pages.OrderPages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].totalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].createdDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].updatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Voucher)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Order) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.totalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createdDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.updatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Voucher.content)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,10 +1,16 @@
-﻿using Data.Entities;
+﻿
+using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<PRNDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB"));
+});
 
 var app = builder.Build();
 
@@ -26,13 +32,11 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 // Chuyển hướng đến Index.cshtml hoặc trang cụ thể khác
-//app.MapGet("/", context =>
-//{
-//    context.Response.Redirect("/Privacy");
-//    return Task.CompletedTask;
-//});
-builder.Services.AddDbContext<PRNDbContext>(options =>
+app.MapGet("/", context =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB"));
+    context.Response.Redirect("/OrderPages/Index");
+    return Task.CompletedTask;
 });
+
+
 app.Run();

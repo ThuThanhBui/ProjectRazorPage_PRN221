@@ -9,43 +9,63 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PRN221
 build_property.RootNamespace = PRN221
-build_property.ProjectDir = D:\ProjectVisualStudio\PRN221\PRN221\
+build_property.ProjectDir = D:\PRN221\ProjectRazorPage_PRN221\PRN221\PRN221\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\ProjectVisualStudio\PRN221\PRN221
+build_property.MSBuildProjectDirectory = D:\PRN221\ProjectRazorPage_PRN221\PRN221\PRN221
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/ProjectVisualStudio/PRN221/PRN221/Pages/Error.cshtml]
+[D:/PRN221/ProjectRazorPage_PRN221/PRN221/PRN221/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ProjectVisualStudio/PRN221/PRN221/Pages/Index.cshtml]
+[D:/PRN221/ProjectRazorPage_PRN221/PRN221/PRN221/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ProjectVisualStudio/PRN221/PRN221/Pages/Privacy.cshtml]
+[D:/PRN221/ProjectRazorPage_PRN221/PRN221/PRN221/Pages/OrderPages/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJQYWdlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/PRN221/ProjectRazorPage_PRN221/PRN221/PRN221/Pages/OrderPages/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJQYWdlc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/PRN221/ProjectRazorPage_PRN221/PRN221/PRN221/Pages/OrderPages/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJQYWdlc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/PRN221/ProjectRazorPage_PRN221/PRN221/PRN221/Pages/OrderPages/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJQYWdlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/PRN221/ProjectRazorPage_PRN221/PRN221/PRN221/Pages/OrderPages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJQYWdlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/PRN221/ProjectRazorPage_PRN221/PRN221/PRN221/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ProjectVisualStudio/PRN221/PRN221/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[D:/PRN221/ProjectRazorPage_PRN221/PRN221/PRN221/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ProjectVisualStudio/PRN221/PRN221/Pages/Test.cshtml]
+[D:/PRN221/ProjectRazorPage_PRN221/PRN221/PRN221/Pages/Test.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ProjectVisualStudio/PRN221/PRN221/Pages/_ViewImports.cshtml]
+[D:/PRN221/ProjectRazorPage_PRN221/PRN221/PRN221/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ProjectVisualStudio/PRN221/PRN221/Pages/_ViewStart.cshtml]
+[D:/PRN221/ProjectRazorPage_PRN221/PRN221/PRN221/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ProjectVisualStudio/PRN221/PRN221/Pages/Shared/_Layout.cshtml]
+[D:/PRN221/ProjectRazorPage_PRN221/PRN221/PRN221/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-rh02z0n1ii
