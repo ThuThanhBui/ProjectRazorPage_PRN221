@@ -9,15 +9,3 @@ D:\ProjectVisualStudio\PRN221\Service\obj\Debug\net7.0\Service.dll
 D:\ProjectVisualStudio\PRN221\Service\obj\Debug\net7.0\refint\Service.dll
 D:\ProjectVisualStudio\PRN221\Service\obj\Debug\net7.0\Service.pdb
 D:\ProjectVisualStudio\PRN221\Service\obj\Debug\net7.0\ref\Service.dll
-D:\PRN221\ProjectRazorPage_PRN221\PRN221\Service\bin\Debug\net7.0\Service.deps.json
-D:\PRN221\ProjectRazorPage_PRN221\PRN221\Service\bin\Debug\net7.0\Service.dll
-D:\PRN221\ProjectRazorPage_PRN221\PRN221\Service\bin\Debug\net7.0\Service.pdb
-D:\PRN221\ProjectRazorPage_PRN221\PRN221\Service\obj\Debug\net7.0\Service.GeneratedMSBuildEditorConfig.editorconfig
-D:\PRN221\ProjectRazorPage_PRN221\PRN221\Service\obj\Debug\net7.0\Service.AssemblyInfoInputs.cache
-D:\PRN221\ProjectRazorPage_PRN221\PRN221\Service\obj\Debug\net7.0\Service.AssemblyInfo.cs
-D:\PRN221\ProjectRazorPage_PRN221\PRN221\Service\obj\Debug\net7.0\Service.csproj.CoreCompileInputs.cache
-D:\PRN221\ProjectRazorPage_PRN221\PRN221\Service\obj\Debug\net7.0\Service.sourcelink.json
-D:\PRN221\ProjectRazorPage_PRN221\PRN221\Service\obj\Debug\net7.0\Service.dll
-D:\PRN221\ProjectRazorPage_PRN221\PRN221\Service\obj\Debug\net7.0\refint\Service.dll
-D:\PRN221\ProjectRazorPage_PRN221\PRN221\Service\obj\Debug\net7.0\Service.pdb
-D:\PRN221\ProjectRazorPage_PRN221\PRN221\Service\obj\Debug\net7.0\ref\Service.dll

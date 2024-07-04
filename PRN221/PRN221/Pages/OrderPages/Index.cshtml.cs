@@ -6,28 +6,37 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Data.Entities;
+using Service.Interface;
+using Service.Model;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Microsoft.IdentityModel.Tokens;
 
 namespace PRN221.Pages.OrderPages
 {
     public class IndexModel : PageModel
     {
-        private readonly Data.Entities.PRNDbContext _context;
-
-        public IndexModel(Data.Entities.PRNDbContext context)
+        private readonly IOrderService _orderService;
+        public IndexModel(IOrderService orderService)
         {
-            _context = context;
+            _orderService = orderService;
         }
 
-        public IList<Order> Order { get;set; } = default!;
+        public List<OrderModel> Orders { get; set; } = default!;
+
+        [BindProperty(SupportsGet = true)]
+        public string StatusFilter { get; set; }
 
         public async Task OnGetAsync()
         {
-            if (_context.Orders != null)
+            if (!StatusFilter.IsNullOrEmpty())
             {
-                Order = await _context.Orders
-                .Include(o => o.User)
-                .Include(o => o.Voucher).ToListAsync();
+                Orders = await _orderService.GetByStatus(StatusFilter);
             }
+            else
+            {
+                Orders = await _orderService.GetAll();
+            }
+
         }
     }
 }
