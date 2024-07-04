@@ -10,63 +10,111 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<form method="get">
+    <label for="StatusFilter">Filter by Status:</label>
+    <select id="StatusFilter" name="StatusFilter" asp-for="StatusFilter">
+        <option value="">All</option>
+        <option value="Completed">Completed</option>
+        <option value="Approved">Approved</option>
+        <option value="Waiting">Waiting</option>
+        <option value="Delivering">Delivering</option>
+        <option value="Canceled">Canceled</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].description)
+                <p>Full name</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].totalPrice)
+                <p>Description</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].status)
+                <p>Voucher</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].createdDate)
+                <p>Total price</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].updatedDate)
+                <p>Created date</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].User)
+                <p>Updated date</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].Voucher)
+                <p>Status</p>
             </th>
-            <th></th>
+            <th>
+                <p>Action</p>
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Order) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.totalPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.createdDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.updatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Voucher.content)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Orders)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.fullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @if (item.Voucher != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Voucher.content)
+                    }
+                    else
+                    {
+                        <p>No voucher</p>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.totalPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.createdDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.updatedDate)
+                </td>
+                <td>
+                    @if (item.status == "Completed")
+                    {
+                        <p class="btn btn-success">
+                            @Html.DisplayFor(modelItem => item.status)
+                        </p>
+                    }
+                    else if (item.status == "Approved")
+                    {
+                        <p class="btn btn-primary">
+                            @Html.DisplayFor(modelItem => item.status)
+                        </p>
+                    }
+                    else if (item.status == "Waiting" || item.status == "Delivering")
+                    {
+                        <p class="btn btn-warning">
+                            @Html.DisplayFor(modelItem => item.status)
+                        </p>
+                    }
+                    else if (item.status == "Canceled")
+                    {
+                        <p class="btn btn-danger">
+                            @Html.DisplayFor(modelItem => item.status)
+                        </p>
+                    }
+
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -1,6 +1,11 @@
 ﻿
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using PRN221.Tools;
+using Repository.Repository;
+using Repository.Repository.Interface;
+using Service;
+using Service.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +17,10 @@ builder.Services.AddDbContext<PRNDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB"));
 });
 
+builder.Services.AddAutoMapper(typeof(Mapper));
+
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,11 +41,11 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 // Chuyển hướng đến Index.cshtml hoặc trang cụ thể khác
-app.MapGet("/", context =>
-{
-    context.Response.Redirect("/OrderPages/Index");
-    return Task.CompletedTask;
-});
+//app.MapGet("/", context =>
+//{
+//    context.Response.Redirect("/OrderPages/Index");
+//    return Task.CompletedTask;
+//});
 
 
 app.Run();
