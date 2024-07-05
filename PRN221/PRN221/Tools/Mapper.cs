@@ -9,6 +9,7 @@ namespace PRN221.Tools
         public Mapper()
         {
             CreateMap<Order, OrderModel>().ReverseMap();
+            CreateMap<Blog, BlogModel>().ReverseMap();
         }
     }
 }
