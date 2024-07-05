@@ -6,57 +6,37 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Data.Entities;
+using Service.Interface;
+using Service.Model;
 
 namespace PRN221.Pages.OrderPages
 {
     public class DeleteModel : PageModel
     {
-        private readonly Data.Entities.PRNDbContext _context;
+        private readonly IOrderService _orderService;
 
-        public DeleteModel(Data.Entities.PRNDbContext context)
+        public DeleteModel(IOrderService orderService)
         {
-            _context = context;
+            _orderService = orderService;
         }
 
         [BindProperty]
-      public Order Order { get; set; } = default!;
+        public OrderModel Order { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == null || _context.Orders == null)
-            {
-                return NotFound();
-            }
+            var order = await _orderService.GetById(id);
 
-            var order = await _context.Orders.FirstOrDefaultAsync(m => m.id == id);
+            Order = order;
 
-            if (order == null)
-            {
-                return NotFound();
-            }
-            else 
-            {
-                Order = order;
-            }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid? id)
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
-            if (id == null || _context.Orders == null)
-            {
-                return NotFound();
-            }
-            var order = await _context.Orders.FindAsync(id);
+            await _orderService.DeleteById(id);
 
-            if (order != null)
-            {
-                Order = order;
-                _context.Orders.Remove(Order);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
+            return RedirectToPage("/OrderPages/Index");
         }
     }
 }

@@ -7,72 +7,44 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Data.Entities;
+using Service.Interface;
+using Service.Model;
 
 namespace PRN221.Pages.OrderPages
 {
     public class EditModel : PageModel
     {
-        private readonly Data.Entities.PRNDbContext _context;
+        private readonly IOrderService _orderService;
 
-        public EditModel(Data.Entities.PRNDbContext context)
+        public EditModel(IOrderService orderService)
         {
-            _context = context;
+            _orderService = orderService;
         }
 
         [BindProperty]
-        public Order Order { get; set; } = default!;
+        public OrderModel Order { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == null || _context.Orders == null)
-            {
-                return NotFound();
-            }
+            var order = await _orderService.GetById(id);
 
-            var order =  await _context.Orders.FirstOrDefaultAsync(m => m.id == id);
-            if (order == null)
-            {
-                return NotFound();
-            }
             Order = order;
-           ViewData["userId"] = new SelectList(_context.Users, "id", "address");
-           ViewData["voucherId"] = new SelectList(_context.Vouchers, "id", "content");
+            //ViewData["userId"] = new SelectList(_context.Users, "id", "email");
+            //ViewData["voucherId"] = new SelectList(_context.Vouchers, "id", "content");
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            var order = await _orderService.GetById(id);
 
-            _context.Attach(Order).State = EntityState.Modified;
+            order = Order;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OrderExists(Order.id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _orderService.Update(order);
 
-            return RedirectToPage("./Index");
-        }
-
-        private bool OrderExists(Guid id)
-        {
-          return (_context.Orders?.Any(e => e.id == id)).GetValueOrDefault();
+            return RedirectToPage("/OrderPages/Index");
         }
     }
 }

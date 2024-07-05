@@ -5,9 +5,8 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Order</h4>
+<h1>Order Management</h1>
+<h4>Order edit</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,39 +14,36 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Order.id" />
             <div class="form-group">
-                <label asp-for="Order.description" class="control-label"></label>
+                <label>Description</label>
                 <input asp-for="Order.description" class="form-control" />
                 <span asp-validation-for="Order.description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.totalPrice" class="control-label"></label>
+                <label>Total price</label>
                 <input asp-for="Order.totalPrice" class="form-control" />
                 <span asp-validation-for="Order.totalPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.status" class="control-label"></label>
+                <label>Status</label>
                 <input asp-for="Order.status" class="form-control" />
                 <span asp-validation-for="Order.status" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.createdDate" class="control-label"></label>
+                <label>Created date</label>
                 <input asp-for="Order.createdDate" class="form-control" />
                 <span asp-validation-for="Order.createdDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.updatedDate" class="control-label"></label>
+                <label>Updated date</label>
                 <input asp-for="Order.updatedDate" class="form-control" />
                 <span asp-validation-for="Order.updatedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.voucherId" class="control-label"></label>
-                <select asp-for="Order.voucherId" class="form-control" asp-items="ViewBag.voucherId"></select>
-                <span asp-validation-for="Order.voucherId" class="text-danger"></span>
+                <label>Voucher</label>
+                <input asp-for="Order.voucherId" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Order.userId" class="control-label"></label>
-                <select asp-for="Order.userId" class="form-control" asp-items="ViewBag.userId"></select>
-                <span asp-validation-for="Order.userId" class="text-danger"></span>
+                <input type="hidden" asp-for="Order.userId" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -61,5 +57,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
