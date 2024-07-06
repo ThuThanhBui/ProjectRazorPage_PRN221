@@ -21,6 +21,7 @@ builder.Services.AddAutoMapper(typeof(Mapper));
 
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -41,11 +42,11 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 // Chuyển hướng đến Index.cshtml hoặc trang cụ thể khác
-//app.MapGet("/", context =>
-//{
-//    context.Response.Redirect("/OrderPages/Index");
-//    return Task.CompletedTask;
-//});
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/Home");
+    return Task.CompletedTask;
+});
 
 
 app.Run();

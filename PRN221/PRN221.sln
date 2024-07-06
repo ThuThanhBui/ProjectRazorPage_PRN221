@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRN221", "PRN221\PRN221.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{DAF69EEF-7848-4B35-A125-63D0C90346A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{2AAD15D6-6D2C-4D71-9D33-F04FF070B676}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{2AAD15D6-6D2C-4D71-9D33-F04FF070B676}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
