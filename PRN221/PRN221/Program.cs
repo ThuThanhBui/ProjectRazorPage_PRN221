@@ -21,6 +21,8 @@ builder.Services.AddAutoMapper(typeof(Mapper));
 
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+builder.Services.AddScoped<IBlogService, BlogService>();
 
 var app = builder.Build();
 
