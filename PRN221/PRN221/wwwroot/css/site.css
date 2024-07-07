@@ -13,34 +13,52 @@ html {
     color: var(--dark-pink);
 }
 
-.med-pink{
+.med-pink {
     color: var(--med-pink);
 }
+
 .light-pink {
     color: var(--light-pink);
 }
 
 .navbar {
-    background-color: var(--dark-pink);
 }
 
-    .navbar a {
-        color: var(--light-pink);
+    .navbar li {
     }
 
         .navbar li :hover {
-            background-color: var(--light-pink);
-            color: var(--dark-pink);
+            background-color: var(--dark-pink);
+            color: var(--light-color);
         }
+
+    .navbar a {
+        font-size: 20px;
+        margin-inline: 8px;
+        padding: 8px;
+        text-decoration: none;
+        color: var(--dark-pink);
+    }
+
+.btn-pink {
+    background-color: var(--light-pink);
+    color: var(--dark-pink);
+    border-color: var(--dark-pink);
+    padding: 8px 16px;
+    border-radius: 24px;
+}
+
+    .btn-pink:hover {
+        background-color: var(--dark-pink);
+        color: var(--light-pink);
+        border-color: var(--dark-pink);
+        padding: 8px 16px;
+    }
 
 @media (min-width: 768px) {
     html {
         font-size: 16px;
     }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
