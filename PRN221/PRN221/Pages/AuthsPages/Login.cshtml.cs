@@ -41,7 +41,7 @@ namespace PRN221.Pages.AuthsPages
 			{
 				HttpContext.Session.SetString("role", user.Role.roleName);
 				HttpContext.Session.SetString("email", user.email);
-				return RedirectToPage("/Index");
+				return RedirectToPage("/Home");
 			}
 		}
     }

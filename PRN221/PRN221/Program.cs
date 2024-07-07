@@ -29,12 +29,19 @@ builder.Services.AddAutoMapper(typeof(Mapper));
 
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddScoped<IUserReposiroty, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IRoleService, RoleService>();
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+builder.Services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
+builder.Services.AddScoped<IProductTypeService, ProductTypeService>();
 
 var app = builder.Build();
 
@@ -57,11 +64,11 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 // Chuyển hướng đến Index.cshtml hoặc trang cụ thể khác
-//app.MapGet("/", context =>
-//{
-//    context.Response.Redirect("/OrderPages/Index");
-//    return Task.CompletedTask;
-//});
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/ProductManagement/Index");
+    return Task.CompletedTask;
+});
 
 
 app.Run();

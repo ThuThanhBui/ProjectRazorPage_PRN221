@@ -12,6 +12,8 @@ namespace PRN221.Tools
             CreateMap<Blog, BlogModel>().ReverseMap();
             CreateMap<User, UserModel>().ReverseMap();
             CreateMap<Role, RoleModel>().ReverseMap();
+            CreateMap<Product, ProductModel>().ReverseMap();
+            CreateMap<ProductType, ProductTypeModel>().ReverseMap();
         }
     }
 }
