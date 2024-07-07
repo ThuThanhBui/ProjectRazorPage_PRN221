@@ -1,0 +1,98 @@
+﻿@page
+@model PRN221.Pages.ProductManagement.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Product Management</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<form method="get">
+    <label for="StatusFilter">Filter by Type:</label>
+    <select id="typeFilter" name="typeFilter" asp-for="typeFilter">
+        <option value="">All</option>
+        @foreach (var type in Model.ProductTypes)
+        {
+            <option value="@type.id">@type.productType</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Product type
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Stock quantity
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Created date
+            </th>
+            <th>
+                Updated date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productType.productType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.stockQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @if(item.isDeleted == true)
+                    {
+                        <p>Inactive</p>
+                    } else if (item.isDeleted == false)
+                    {
+                        <p>Active</p>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.createdDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.updatedDate)
+                </td>
+
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
