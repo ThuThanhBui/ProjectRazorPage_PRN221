@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Repository.Migrations
 {
     [DbContext(typeof(PRNDbContext))]
-    [Migration("20240703074010_init-db")]
-    partial class initdb
+    [Migration("20240708141356_DBInit")]
+    partial class DBInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -286,9 +286,17 @@ namespace Repository.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWId()");
 
-                    b.Property<string>("content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("condition")
+                        .HasColumnType("int");
+
+                    b.Property<int>("content")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("createdDate")
                         .HasColumnType("datetime2");
@@ -301,6 +309,10 @@ namespace Repository.Migrations
 
                     b.Property<Guid>("voucherTypeId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("vouchername")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 

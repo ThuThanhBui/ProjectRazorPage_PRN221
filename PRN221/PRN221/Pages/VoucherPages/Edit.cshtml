@@ -35,10 +35,20 @@
                 <span asp-validation-for="Voucher.updatedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label>Voucher type</label>
+                <select asp-for="@Model.Voucher.voucherTypeId">
+                    @foreach (var type in Model.VoucherTypes)
+                    {
+                        <option value="@type.id">@type.typeName</option>
+                    }
+                </select>
+            </div>
+        <!--    <div class="form-group">
                 <label asp-for="Voucher.voucherTypeId" class="control-label"></label>
                 <select asp-for="Voucher.voucherTypeId" class="form-control" asp-items="ViewBag.voucherTypeId"></select>
                 <span asp-validation-for="Voucher.voucherTypeId" class="text-danger"></span>
             </div>
+                -->
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

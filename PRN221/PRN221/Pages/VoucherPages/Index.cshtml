@@ -14,7 +14,19 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].vouchername)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Voucher[0].content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].condition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].EndDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Voucher[0].isDeleted)
@@ -35,7 +47,19 @@
 @foreach (var item in Model.Voucher) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.vouchername)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.content)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.condition)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.isDeleted)

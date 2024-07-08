@@ -11,6 +11,7 @@ namespace Service.Interface
     public interface IVoucherService
     {
         Task<List<VoucherModel>> GetAll();
+        Task<List<VoucherTypeModel>> GetAllVoucherType();
         Task<VoucherModel> GetById(Guid id);
         Task<bool> Add(VoucherModel voucher);
         Task<bool> DeleteById(Guid id);

@@ -7,36 +7,32 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Data.Entities;
+using Service.Interface;
+using Service.Model;
 
 namespace PRN221.Pages.VoucherPages
 {
     public class EditModel : PageModel
     {
-        private readonly Data.Entities.PRNDbContext _context;
+    
+        private readonly IVoucherService _service;
 
-        public EditModel(Data.Entities.PRNDbContext context)
+        public EditModel( IVoucherService service)
         {
-            _context = context;
+   
+            _service = service;
         }
-
+        public List<VoucherTypeModel> VoucherTypes { get; set; } = new List<VoucherTypeModel>();
         [BindProperty]
-        public Voucher Voucher { get; set; } = default!;
+        public VoucherModel Voucher { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task OnGetAsync(Guid id)
         {
-            if (id == null || _context.Vouchers == null)
-            {
-                return NotFound();
-            }
-
-            var voucher =  await _context.Vouchers.FirstOrDefaultAsync(m => m.id == id);
-            if (voucher == null)
-            {
-                return NotFound();
-            }
+            var voucher =  await _service.GetById(id);
             Voucher = voucher;
-           ViewData["voucherTypeId"] = new SelectList(_context.VoucherTypes, "id", "typeName");
-            return Page();
+            VoucherTypes = await _service.GetAllVoucherType();
+            if(VoucherTypes == null || VoucherTypes.Count == 0) { Console.WriteLine("No voucher types"); }
+          
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -47,31 +43,20 @@ namespace PRN221.Pages.VoucherPages
             {
                 return Page();
             }
+            Voucher.updatedDate = DateTime.Now;
 
-            _context.Attach(Voucher).State = EntityState.Modified;
-
-            try
+          var v = await _service.Update(Voucher);
+            if (v)
             {
-                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!VoucherExists(Voucher.id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+            return Page();
+            
             }
 
-            return RedirectToPage("./Index");
+         
         }
 
-        private bool VoucherExists(Guid id)
-        {
-          return (_context.Vouchers?.Any(e => e.id == id)).GetValueOrDefault();
-        }
-    }
+     
+    
 }

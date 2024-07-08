@@ -70,10 +70,10 @@ insert into VoucherType(id, typeName) values ('bbc4208d-c6d4-405f-99c9-ee2f17c0b
 insert into VoucherType(id, typeName) values ('b2645a49-584a-4156-b843-38f8d0dd5a63', 'Fixed Discount Voucher');
 
 --voucher
-insert into voucher (id, [content], isDeleted, createdDate, updatedDate, voucherTypeId) values ('881cffa2-7c4a-48c9-96ab-85624d035fa4', '10%', 1, '5/13/2024', '4/29/2024', 'bbc4208d-c6d4-405f-99c9-ee2f17c0b212');
-insert into voucher (id, [content], isDeleted, createdDate, updatedDate, voucherTypeId) values ('6f5332b3-919c-40ae-876e-aa2cc73d63d8', '25%', 1, '1/29/2024', '12/18/2023', 'bbc4208d-c6d4-405f-99c9-ee2f17c0b212');
-insert into voucher (id, [content], isDeleted, createdDate, updatedDate, voucherTypeId) values ('7c31fe53-be49-4197-87e9-1b5facc00bcb', '200', 1, '5/6/2024', '11/9/2023', 'b2645a49-584a-4156-b843-38f8d0dd5a63');
-insert into voucher (id, [content], isDeleted, createdDate, updatedDate, voucherTypeId) values ('110f4c38-3437-4233-af57-d88560672ae9', '100', 1, '10/21/2023', '6/15/2023', 'b2645a49-584a-4156-b843-38f8d0dd5a63');
+insert into voucher (id,[vouchername] ,content, condition,StartDate,EndDate,isDeleted, createdDate, updatedDate, voucherTypeId) values ('881cffa2-7c4a-48c9-96ab-85624d035fa4','abc' ,200000,200000,'7/8/2024', '8/8/2024', 1, '5/13/2024', '4/29/2024', 'bbc4208d-c6d4-405f-99c9-ee2f17c0b212');
+insert into voucher (id, [vouchername],content, condition,StartDate,EndDate,isDeleted, createdDate, updatedDate, voucherTypeId) values ('6f5332b3-919c-40ae-876e-aa2cc73d63d8','def' , 300000,200000,'7/8/2024', '8/8/2024', 0, '1/29/2024', '12/18/2023', 'bbc4208d-c6d4-405f-99c9-ee2f17c0b212');
+insert into voucher (id, [vouchername],content, condition,StartDate,EndDate,isDeleted, createdDate, updatedDate, voucherTypeId) values ('7c31fe53-be49-4197-87e9-1b5facc00bcb','xyz' , 400000,200000,'7/8/2024', '8/8/2024', 0, '5/6/2024', '11/9/2023', 'b2645a49-584a-4156-b843-38f8d0dd5a63');
+insert into voucher (id, [vouchername],content, condition,StartDate,EndDate,isDeleted, createdDate, updatedDate, voucherTypeId) values ('110f4c38-3437-4233-af57-d88560672ae9','abc' , 500000,200000, '7/8/2024', '8/8/2024',1, '10/21/2023', '6/15/2023', 'b2645a49-584a-4156-b843-38f8d0dd5a63');
 
 --order
 insert into [order] (id, [description], totalPrice, [status], createdDate, updatedDate, userId)
