@@ -12,10 +12,34 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Voucher.vouchername)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Voucher.vouchername)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Voucher.content)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Voucher.content)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Voucher.condition)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Voucher.condition)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Voucher.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Voucher.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Voucher.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Voucher.EndDate)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Voucher.isDeleted)

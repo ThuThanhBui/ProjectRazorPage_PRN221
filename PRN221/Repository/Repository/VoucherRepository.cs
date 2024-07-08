@@ -28,7 +28,7 @@ namespace Repository.Repository
         {
             Voucher voucher = await GetById(id);
             voucher.isDeleted = true;
-            await Update(voucher);
+            _context.Vouchers.Update(voucher);
             return await _context.SaveChangesAsync() > 0;
         }
 
@@ -36,6 +36,12 @@ namespace Repository.Repository
         {
             List<Voucher> list = await _context.Vouchers.ToListAsync();
             return list;
+        }
+
+        public async Task<List<VoucherType>> GetAllVoucherType()
+        {
+          List<VoucherType> vouchers = await _context.VoucherTypes.ToListAsync();
+            return vouchers;
         }
 
         public async Task<Voucher> GetById(Guid id)

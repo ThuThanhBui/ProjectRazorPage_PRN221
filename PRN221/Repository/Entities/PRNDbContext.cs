@@ -199,9 +199,12 @@ namespace Data.Entities
                 e.ToTable("Voucher");
                 e.HasKey(e => e.id);
                 e.Property(x => x.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
-
+                e.Property(e => e.vouchername).IsRequired();
                 e.Property(e => e.content).IsRequired();
                 e.Property(e => e.isDeleted);
+                e.Property(e => e.condition);
+                e.Property(e => e.StartDate);
+                e.Property(e => e.EndDate);
                 e.Property(e => e.createdDate);
                 e.Property(e => e.updatedDate);
 

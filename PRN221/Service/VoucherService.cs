@@ -58,6 +58,18 @@ namespace Service
             }
         }
 
+        public async Task<List<VoucherTypeModel>> GetAllVoucherType()
+        {
+            try
+            {
+                return _mapper.Map<List<VoucherTypeModel>>(await _repository.GetAllVoucherType());
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<VoucherModel> GetById(Guid id)
         {
             try

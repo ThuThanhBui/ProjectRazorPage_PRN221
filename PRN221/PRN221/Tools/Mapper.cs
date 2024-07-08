@@ -13,6 +13,7 @@ namespace PRN221.Tools
             CreateMap<Product, ProductModel>().ReverseMap();
             CreateMap<ProductType, ProductTypeModel>().ReverseMap();
             CreateMap<Voucher, VoucherModel>().ReverseMap();
+            CreateMap<VoucherType, VoucherTypeModel>().ReverseMap();
         }
     }
 }

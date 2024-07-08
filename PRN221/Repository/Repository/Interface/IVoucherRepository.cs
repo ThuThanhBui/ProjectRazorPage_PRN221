@@ -10,6 +10,8 @@ namespace Repository.Repository.Interface
     public interface IVoucherRepository
     {
         Task<List<Voucher>> GetAll();
+
+        Task<List<VoucherType>> GetAllVoucherType();
         Task<Voucher> GetById(Guid id);
         Task<bool> Add(Voucher voucher);
         Task<bool> DeleteById(Guid id);
