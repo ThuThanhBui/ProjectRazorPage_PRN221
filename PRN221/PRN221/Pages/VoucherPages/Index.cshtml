@@ -1,5 +1,5 @@
 ﻿@page
-@model PRN221.Pages.BlogPages.IndexModel
+@model PRN221.Pages.VoucherPages.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -14,44 +14,31 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Blog[0].title)
+                @Html.DisplayNameFor(model => model.Voucher[0].content)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Blog[0].content)
+                @Html.DisplayNameFor(model => model.Voucher[0].isDeleted)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Blog[0].isDeleted)
+                @Html.DisplayNameFor(model => model.Voucher[0].createdDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Blog[0].createdDate)
+                @Html.DisplayNameFor(model => model.Voucher[0].updatedDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Blog[0].updatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Blog[0].User)
+                @Html.DisplayNameFor(model => model.Voucher[0].voucherType)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Blog) {
+@foreach (var item in Model.Voucher) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.title)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.content)
             </td>
             <td>
-                    @if (item.isDeleted == true)
-                    {
-                        <p>Inactive</p>
-                    }
-                    else if (item.isDeleted == false)
-                    {
-                        <p>Active</p>
-                    }
+                @Html.DisplayFor(modelItem => item.isDeleted)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.createdDate)
@@ -60,7 +47,7 @@
                 @Html.DisplayFor(modelItem => item.updatedDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.email)
+                @Html.DisplayFor(modelItem => item.voucherType.typeName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |

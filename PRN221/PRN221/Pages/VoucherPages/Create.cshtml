@@ -1,0 +1,53 @@
+﻿@page
+@model PRN221.Pages.VoucherPages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Voucher</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Voucher.content" class="control-label"></label>
+                <input asp-for="Voucher.content" class="form-control" />
+                <span asp-validation-for="Voucher.content" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Voucher.isDeleted" /> @Html.DisplayNameFor(model => model.Voucher.isDeleted)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.createdDate" class="control-label"></label>
+                <input asp-for="Voucher.createdDate" class="form-control" />
+                <span asp-validation-for="Voucher.createdDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.updatedDate" class="control-label"></label>
+                <input asp-for="Voucher.updatedDate" class="form-control" />
+                <span asp-validation-for="Voucher.updatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.voucherTypeId" class="control-label"></label>
+                <select asp-for="Voucher.voucherTypeId" class ="form-control" asp-items="ViewBag.voucherTypeId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

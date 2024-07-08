@@ -24,10 +24,16 @@ namespace Repository.Repository
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> Delete(Blog blog)
+        public async Task<bool> Delete(Guid id)
         {
+            var blog = await GetById(id);
+            if (blog == null)
+            {
+                return false;
+            }
+
             blog.isDeleted = true;
-            await Update(blog);
+            _context.Blogs.Update(blog); ;
             return await _context.SaveChangesAsync() > 0;
         }
 

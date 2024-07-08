@@ -10,7 +10,7 @@ namespace Repository.Repository.Interface
     public interface IBlogRepository
     {
         public Task<bool> Add(Blog blog);
-        public Task<bool> Delete(Blog blog);
+        public Task<bool> Delete(Guid id);
         public Task<bool> Update(Blog blog);
         public Task<List<Blog>> GetAll();
         public Task<List<Blog>> GetAllById(Guid userid);

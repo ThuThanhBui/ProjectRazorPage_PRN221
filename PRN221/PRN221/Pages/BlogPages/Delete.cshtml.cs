@@ -6,29 +6,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Data.Entities;
+using Service.Model;
+using Service.Interface;
 
 namespace PRN221.Pages.BlogPages
 {
     public class DeleteModel : PageModel
     {
-        private readonly Data.Entities.PRNDbContext _context;
+        private readonly IBlogService _service;
 
-        public DeleteModel(Data.Entities.PRNDbContext context)
+        public DeleteModel(IBlogService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
-      public Blog Blog { get; set; } = default!;
+      public BlogModel Blog { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == null || _context.Blogs == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var blog = await _context.Blogs.FirstOrDefaultAsync(m => m.id == id);
+            var blog = await _service.GetBlogById(id);
 
             if (blog == null)
             {
@@ -41,22 +43,28 @@ namespace PRN221.Pages.BlogPages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid? id)
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
-            if (id == null || _context.Blogs == null)
+            if (id == Guid.Empty)  // Check for empty Guid instead of null
             {
                 return NotFound();
             }
-            var blog = await _context.Blogs.FindAsync(id);
 
-            if (blog != null)
+            var blog = await _service.GetBlogById(id);
+            if (blog == null)
             {
-                Blog = blog;
-                _context.Blogs.Remove(Blog);
-                await _context.SaveChangesAsync();
+                return NotFound();
+            }
+
+            bool result = await _service.DeleteBlog(id);
+            if (!result)
+            {
+                ModelState.AddModelError("", "Error while delete blog");
+                return Page();
             }
 
             return RedirectToPage("./Index");
+
         }
     }
 }
