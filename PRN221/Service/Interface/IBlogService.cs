@@ -10,7 +10,7 @@ namespace Service.Interface
     public interface IBlogService
     {
         public Task<bool> AddBlog(BlogModel blog);
-        public Task<bool> DeleteBlog(BlogModel blog);
+        public Task<bool> DeleteBlog(Guid blog);
         public Task<bool> UpdateBlog(BlogModel blog);
         public Task<List<BlogModel>> GetAllBlogs();
         public Task<List<BlogModel>> GetAllBlogsById(Guid userid);

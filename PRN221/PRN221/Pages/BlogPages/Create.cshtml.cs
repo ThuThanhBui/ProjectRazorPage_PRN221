@@ -6,40 +6,50 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Data.Entities;
+using Service.Interface;
+using Service.Model;
+using System.Runtime.InteropServices;
+using PRN221.Service.Model;
+
 
 namespace PRN221.Pages.BlogPages
 {
     public class CreateModel : PageModel
     {
-        private readonly Data.Entities.PRNDbContext _context;
 
-        public CreateModel(Data.Entities.PRNDbContext context)
-        {
-            _context = context;
-        }
+        private readonly IBlogService _service;
 
-        public IActionResult OnGet()
+        public CreateModel(IBlogService service)
         {
-        ViewData["userId"] = new SelectList(_context.Users, "id", "address");
-            return Page();
+            _service = service;
         }
 
         [BindProperty]
-        public Blog Blog { get; set; } = default!;
+        public BlogModel Blog { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Blogs == null || Blog == null)
+          if (!ModelState.IsValid || Blog == null)
             {
                 return Page();
             }
+            //     HttpContent.Session.GetString("userId");
+          
+                Blog.userId = Session.userid;
+                Blog.createdDate = DateTime.Now;
+                Blog.updatedDate = DateTime.Now;
+                Blog.isDeleted = false;
+            var add =await _service.AddBlog(Blog);
+            if (add)
+            {
+                TempData["Message"] = "Added Successfully.";
+                return RedirectToPage("./Index");
+            }
+            ModelState.AddModelError("", "Error while adding blog");
+            return Page();
 
-            _context.Blogs.Add(Blog);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
         }
     }
 }

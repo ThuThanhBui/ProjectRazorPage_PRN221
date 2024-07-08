@@ -40,10 +40,9 @@ namespace Service
             }
         }
 
-        public async Task<bool> DeleteBlog(BlogModel blog)
+        public async Task<bool> DeleteBlog(Guid blog)
         {
-            var s = _mapper.Map<Blog>(blog);
-            return await _repository.Delete(s);
+            return await _repository.Delete(blog);
         }
 
         public async Task<List<BlogModel>> GetAllBlogs()
