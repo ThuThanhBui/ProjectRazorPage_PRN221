@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,7 @@ namespace Service.Model
         public bool isDeleted { get; set; }
         public DateTime createdDate { get; set; }
         public DateTime updatedDate { get; set; }
+        public Guid userId { get; set; }
+     //   public virtual User User { get; set; }
     }
 }

@@ -1,9 +1,14 @@
 ﻿using AutoMapper;
 using Data.Entities;
+using Repository.Repository;
 using Repository.Repository.Interface;
 using Service.Interface;
 using Service.Model;
-using System.Security.Principal;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Service
 {
@@ -12,29 +17,28 @@ namespace Service
         private readonly IVoucherRepository _repository;
         private readonly IMapper _mapper;
 
-        public VoucherService(IVoucherRepository repository, IMapper mapper)
-        {
+        public VoucherService(IVoucherRepository repository , IMapper mapper) 
+        { 
             _repository = repository;
             _mapper = mapper;
         }
-
-        public async Task<bool> Add(VoucherModel model)
+        public async Task<bool> Add(VoucherModel voucher)
         {
             try
             {
-                return await _repository.Add(_mapper.Map<Voucher>(model));
+                return await _repository.Add(_mapper.Map<Voucher>(voucher));
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
 
-        public async Task<bool> Delete(Guid id)
+        public async Task<bool> DeleteById(Guid id)
         {
-            try
+             try
             {
-                return await _repository.Delete(id);
+                return await _repository.DeleteById(id);
             }
             catch (Exception ex)
             {
@@ -54,11 +58,11 @@ namespace Service
             }
         }
 
-        public async Task<VoucherModel> GetById(Guid? id)
+        public async Task<List<VoucherTypeModel>> GetAllVoucherType()
         {
             try
             {
-                return  _mapper.Map<VoucherModel>(await _repository.GetById(id));
+                return _mapper.Map<List<VoucherTypeModel>>(await _repository.GetAllVoucherType());
             }
             catch (Exception ex)
             {
@@ -66,11 +70,11 @@ namespace Service
             }
         }
 
-        public async Task<List<VoucherModel>> GetVoucherByTypeId(Guid id)
+        public async Task<VoucherModel> GetById(Guid id)
         {
             try
             {
-                return _mapper.Map<List<VoucherModel>>(await _repository.GetVoucherByTypeId(id));
+                return _mapper.Map<VoucherModel>(await _repository.GetById(id));
             }
             catch (Exception ex)
             {
@@ -78,11 +82,11 @@ namespace Service
             }
         }
 
-        public async Task<bool> Update(VoucherModel model)
+        public async Task<bool> Update(VoucherModel voucher)
         {
             try
             {
-                return await _repository.Update(_mapper.Map<Voucher>(model));
+                return await _repository.Update(_mapper.Map<Voucher>(voucher));
             }
             catch (Exception ex)
             {

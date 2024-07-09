@@ -11,10 +11,10 @@ namespace Service.Interface
     public interface IVoucherService
     {
         Task<List<VoucherModel>> GetAll();
-        Task<List<VoucherModel>> GetVoucherByTypeId(Guid id);
-        Task<VoucherModel> GetById(Guid? id);
+        Task<List<VoucherTypeModel>> GetAllVoucherType();
+        Task<VoucherModel> GetById(Guid id);
         Task<bool> Add(VoucherModel voucher);
-        Task<bool> Delete(Guid id);
+        Task<bool> DeleteById(Guid id);
         Task<bool> Update(VoucherModel voucher);
     }
 }

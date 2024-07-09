@@ -7,35 +7,39 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Data.Entities;
+using Service.Model;
+using Service.Interface;
 
 namespace PRN221.Pages.BlogPages
 {
     public class EditModel : PageModel
     {
         private readonly Data.Entities.PRNDbContext _context;
+        private readonly IBlogService _service;
 
-        public EditModel(Data.Entities.PRNDbContext context)
+        public EditModel(Data.Entities.PRNDbContext context , IBlogService service)
         {
             _context = context;
+            _service = service;
         }
 
         [BindProperty]
-        public Blog Blog { get; set; } = default!;
+        public BlogModel Blog { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == null || _context.Blogs == null)
+            if (id == Guid.Empty || _context.Blogs == null)
             {
                 return NotFound();
             }
 
-            var blog =  await _context.Blogs.FirstOrDefaultAsync(m => m.id == id);
+            var blog = await _service.GetBlogById(id);
             if (blog == null)
             {
                 return NotFound();
             }
             Blog = blog;
-           ViewData["userId"] = new SelectList(_context.Users, "id", "address");
+          //  ViewData["userId"] = new SelectList(_context.Users, "id", "address");
             return Page();
         }
 
@@ -48,30 +52,23 @@ namespace PRN221.Pages.BlogPages
                 return Page();
             }
 
-            _context.Attach(Blog).State = EntityState.Modified;
-
-            try
+           if(Blog != null)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BlogExists(Blog.id))
+             var up =   await _service.UpdateBlog(Blog);
+                if (up)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
+                    TempData["Message"] = "Added Successfully.";
+                    return RedirectToPage("./Index");
                 }
             }
 
-            return RedirectToPage("./Index");
+            ModelState.AddModelError("", "Error while adding blog");
+            return Page();
         }
 
-        private bool BlogExists(Guid id)
-        {
-          return (_context.Blogs?.Any(e => e.id == id)).GetValueOrDefault();
-        }
+        //private bool BlogExists(Guid id)
+        //{
+        //  return (_context.Blogs?.Any(e => e.id == id)).GetValueOrDefault();
+        //}
     }
 }

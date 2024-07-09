@@ -44,7 +44,14 @@
                 @Html.DisplayFor(modelItem => item.content)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.isDeleted)
+                    @if (item.isDeleted == true)
+                    {
+                        <p>Inactive</p>
+                    }
+                    else if (item.isDeleted == false)
+                    {
+                        <p>Active</p>
+                    }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.createdDate)
@@ -53,7 +60,7 @@
                 @Html.DisplayFor(modelItem => item.updatedDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.address)
+                @Html.DisplayFor(modelItem => item.User.email)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |

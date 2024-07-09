@@ -9,62 +9,59 @@ using Data.Entities;
 using Service.Model;
 using Service.Interface;
 
-namespace PRN221.Pages.BlogPages
+namespace PRN221.Pages.VoucherPages
 {
     public class DeleteModel : PageModel
     {
-        private readonly IBlogService _service;
+        private readonly Data.Entities.PRNDbContext _context;
+        private readonly IVoucherService _service;
 
-        public DeleteModel(IBlogService service)
+        public DeleteModel(Data.Entities.PRNDbContext context, IVoucherService service)
         {
+            _context = context;
             _service = service;
         }
 
         [BindProperty]
-      public BlogModel Blog { get; set; } = default!;
+        public VoucherModel Voucher { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == null)
+            if (id == Guid.Empty || _context.Vouchers == null)
             {
                 return NotFound();
             }
 
-            var blog = await _service.GetBlogById(id);
+            var voucher = await _service.GetById(id);
 
-            if (blog == null)
+            if (voucher == null)
             {
                 return NotFound();
             }
             else 
             {
-                Blog = blog;
+                Voucher = voucher;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(Guid id)
         {
-            if (id == Guid.Empty)  // Check for empty Guid instead of null
+            if (id == Guid.Empty || _context.Vouchers == null)
             {
                 return NotFound();
             }
+            var voucher = await _service.DeleteById(id);
 
-            var blog = await _service.GetBlogById(id);
-            if (blog == null)
+            if (voucher)
             {
-                return NotFound();
+            
+                return RedirectToPage("./Index");
+
             }
-
-            bool result = await _service.DeleteBlog(id);
-            if (!result)
-            {
-                ModelState.AddModelError("", "Error while delete blog");
-                return Page();
-            }
-
-            return RedirectToPage("./Index");
-
+            ModelState.AddModelError("", "Error while delete voucher");
+            return Page();
+         
         }
     }
 }
