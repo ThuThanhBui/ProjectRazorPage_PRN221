@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Repository.Migrations
 {
     [DbContext(typeof(PRNDbContext))]
-    [Migration("20240708141356_DBInit")]
-    partial class DBInit
+    [Migration("20240709055558_dbInit")]
+    partial class dbInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,9 @@ namespace Repository.Migrations
 
                     b.Property<DateTime>("createdDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("img")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isDeleted")
                         .HasColumnType("bit");
@@ -123,11 +126,18 @@ namespace Repository.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWId()");
 
+                    b.Property<string>("brand")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("createdDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("description")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("img")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isDeleted")
@@ -253,6 +263,9 @@ namespace Repository.Migrations
 
                     b.Property<string>("gender")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("img")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isDeleted")

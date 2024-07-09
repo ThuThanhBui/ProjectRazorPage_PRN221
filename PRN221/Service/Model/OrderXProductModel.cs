@@ -13,7 +13,7 @@ namespace Service.Model
         public Guid productId { get; set; }
         public int quantity { get; set; }
 
-        public Order Order { get; set; }
-        public Product Product { get; set; }
+        public OrderModel Order { get; set; }
+        public ProductModel Product { get; set; }
     }
 }

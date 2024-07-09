@@ -8,6 +8,7 @@ namespace Data.Entities
     {
         [Key]
         public Guid id { get; set; }
+        public string? img { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public int stockQuantity { get; set; }
@@ -15,7 +16,7 @@ namespace Data.Entities
         public bool isDeleted { get; set; }
         public DateTime createdDate { get; set; }
         public DateTime updatedDate { get; set; }
-
+        public string brand {  get; set; }
         public Guid productTypeId { get; set; }
         public virtual ProductType productType { get; set; }
         public virtual ICollection<OrderXProduct>? OrderXProducts { get; set; }

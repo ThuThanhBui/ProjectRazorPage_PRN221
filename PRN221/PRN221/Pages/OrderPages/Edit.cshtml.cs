@@ -29,9 +29,9 @@ namespace PRN221.Pages.OrderPages
         public OrderModel Order { get; set; } = default!;
 
         public List<VoucherModel> vouchers { get; set; } = default!;
-        public List<OrderXProductModel> orderXProducts { get; set; } = default!;
+        public List<OrderXProductModel> orderXProducts { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public async Task OnGetAsync(Guid id)
         {
             var order = await _orderService.GetById(id);
             Order = order;
@@ -40,29 +40,30 @@ namespace PRN221.Pages.OrderPages
 
             orderXProducts = await _orderXProductService.GetByOrderId(Order.id);
 
-            return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid id)
+        public async Task<IActionResult> OnPostAsync(Guid id, List<OrderXProductModel> orderXProduct)
         {
             var order = await _orderService.GetById(id);
-
-            VoucherModel voucher = await _voucherService.GetById(Order.voucherId);
+            //orderXProducts = await _orderXProductService.GetByOrderId(Order.id);
             decimal total = 0;
-            foreach (var item in orderXProducts)
+            foreach (var item in orderXProduct)
             {
                 total += item.Product.price * item.quantity;
             }
-
-            if (voucher.voucherType.typeName == "Percentage Discount Voucher")
+            if (Order.voucherId.HasValue)
             {
-                total = total / 100 * (1 - int.Parse(voucher.content.Substring(0, 2)));
+                VoucherModel voucher = await _voucherService.GetById((Guid)Order.voucherId);
+                if (voucher.voucherType.typeName == "Percentage Discount Voucher")
+                {
+                    total = total / 100 * (100 - voucher.content);
+                }
+                else if (voucher.voucherType.typeName == "Fixed Discount Voucher")
+                {
+                    total = total - voucher.content;
+                }
             }
-            else if (voucher.voucherType.typeName == "Fixed Discount Voucher")
-            {
-                total = total - decimal.Parse(voucher.content);
-            }
-
+            Order.totalPrice = total;
             order = Order;
 
             bool updateSuccess = await _orderService.Update(order);

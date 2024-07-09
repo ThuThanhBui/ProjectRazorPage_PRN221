@@ -4,72 +4,78 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
-<h1>Order Management</h1>
-<h4>Order edit</h4>
-<hr />
-<div class="row">
-    <div>
-        <form method="post">
-            <div>
-                @foreach (var item in Model.orderXProducts)
-                {
-                    <div class="card border shadow-none">
-                        <div class="card-body">
-                            <div class="d-flex align-items-start border-bottom pb-3">
+<div class="container">
+    <h1>Order Management</h1>
+    <h4>Order edit</h4>
+    <hr />
+    <div style="width:60%">
+        <div>
+            <label>List product</label>
+            <form method="post">
+                <div>
+                    @foreach (var item in Model.orderXProducts)
+                    {
+                        <div class="card">
+                            <div class="d-flex align-items-start p-2">
                                 <div class="me-4">
-                                    <img src="https://i.pinimg.com/564x/24/c7/f8/24c7f87928b40c3b306fd9848ebb0c51.jpg" alt="Generic placeholder image" class="rounded">
+                                    <img src="https://i.pinimg.com/564x/24/c7/f8/24c7f87928b40c3b306fd9848ebb0c51.jpg" alt="Generic placeholder image" class="rounded border">
                                 </div>
                                 <div class="flex-grow-1 align-self-center overflow-hidden">
                                     <div>
-                                        <h5>@item.Product.name</h5>
-                                        <p class="mb-0 mt-1">Quanity: <input asp-for="@item.quantity" type="number"/></p>
+                                        <h6>@item.Product.name</h6>
+                                        <p class="mb-0 mt-1">Quanity: <input asp-for="@item.quantity" type="number" /></p>
+                                        <input type="hidden" name="orderXProduct[@Model.orderXProducts.IndexOf(item)].productId" value="@item.productId" />
+                                        <input type="hidden" name="orderXProduct[@Model.orderXProducts.IndexOf(item)].orderId" value="@item.orderId" />
+                                        <input type="hidden" name="orderXProduct[@Model.orderXProducts.IndexOf(item)].quantity" value="@item.quantity" />
+                                        <input type="hidden" name="orderXProduct[@Model.orderXProducts.IndexOf(item)].Product.price" value="@item.Product.price" />
+                                        <input type="hidden" name="orderXProduct[@Model.orderXProducts.IndexOf(item)].Order" value="@item.Order" />
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                }
-            </div>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Order.id" />
-            <div class="form-group">
-                <label>Description</label>
-                <input asp-for="Order.description" class="form-control" />
-                <span asp-validation-for="Order.description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Voucher</label>
-                <select asp-for="@Model.Order.voucherId">
-                    <option value="">No voucher</option>
-                    @foreach (var v in Model.vouchers)
-                    {
-                        <option value="@v.id">@v.content</option>
                     }
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Status</label>
-                <select asp-for="Order.status">
-                    <option value="Completed">Completed</option>
-                    <option value="Approved">Approved</option>
-                    <option value="Waiting">Waiting</option>
-                    <option value="Delivering">Delivering</option>
-                    <option value="Canceled">Canceled</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="hidden" asp-for="Order.userId" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Order.id" />
+                <div class="form-group">
+                    <label>Description</label>
+                    <input asp-for="Order.description" class="form-control" />
+                    <span asp-validation-for="Order.description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Voucher</label>
+                    <select asp-for="@Model.Order.voucherId">
+                        <option value="">No voucher</option>
+                        @foreach (var v in Model.vouchers)
+                        {
+                            <option value="@v.id">@v.vouchername</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select asp-for="Order.status">
+                        <option value="Completed">Completed</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Waiting">Waiting</option>
+                        <option value="Delivering">Delivering</option>
+                        <option value="Canceled">Canceled</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" asp-for="Order.userId" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
+    <div>
+        <a asp-page="./Index">Back to List</a>
+    </div>
 </div>
 
 @section Scripts {
