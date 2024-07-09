@@ -10,7 +10,6 @@ namespace Service.Model
 {
     public class VoucherModel
     {
-        [Key]
         public Guid id { get; set; }
         public string vouchername { get; set; }
         public int content { get; set; }
@@ -21,7 +20,7 @@ namespace Service.Model
         public DateTime createdDate { get; set; }
         public DateTime updatedDate { get; set; }
         public Guid voucherTypeId { get; set; }
-        public virtual VoucherType voucherType { get; set; }
+        public VoucherTypeModel? voucherType { get; set; }
 
     }
 }

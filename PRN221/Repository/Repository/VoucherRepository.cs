@@ -46,7 +46,7 @@ namespace Repository.Repository
 
         public async Task<Voucher> GetById(Guid id)
         {
-            return await _context.Vouchers.FindAsync(id);
+            return await _context.Vouchers.Where(m => m.id == id).Include(m => m.voucherType).SingleOrDefaultAsync();
         }
 
         public async Task<bool> Update(Voucher voucher)

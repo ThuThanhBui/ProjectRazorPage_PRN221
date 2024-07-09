@@ -55,7 +55,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Voucher.voucherTypeId" class="control-label"></label>
-                <select asp-for="@Model.Voucher.voucherTypeId">
+                <select asp-for="Voucher.voucherTypeId">
                     @foreach (var type in Model.VoucherTypes)
                     {
                         <option value="@type.id">@type.typeName</option>
