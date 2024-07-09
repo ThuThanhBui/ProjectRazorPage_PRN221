@@ -54,6 +54,7 @@ namespace PRN221.Pages.BlogPages
 
            if(Blog != null)
             {
+                Blog.updatedDate = DateTime.UtcNow;
              var up =   await _service.UpdateBlog(Blog);
                 if (up)
                 {
