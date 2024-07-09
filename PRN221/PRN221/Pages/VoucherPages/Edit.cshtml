@@ -15,9 +15,28 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Voucher.id" />
             <div class="form-group">
+                <label asp-for="Voucher.vouchername" class="control-label"></label>
+                <input asp-for="Voucher.vouchername" class="form-control" />
+                <span asp-validation-for="Voucher.vouchername" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Voucher.content" class="control-label"></label>
                 <input asp-for="Voucher.content" class="form-control" />
                 <span asp-validation-for="Voucher.content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.condition" class="control-label"></label>
+                <input asp-for="Voucher.condition" class="form-control" />
+                <span asp-validation-for="Voucher.condition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.StartDate" class="control-label"></label>
+                <input asp-for="Voucher.StartDate" class="form-control" />
+                <span asp-validation-for="Voucher.StartDate" class="text-danger"></span>
+            </div>  <div class="form-group">
+                <label asp-for="Voucher.EndDate" class="control-label"></label>
+                <input asp-for="Voucher.EndDate" class="form-control" />
+                <span asp-validation-for="Voucher.EndDate" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -36,7 +55,7 @@
             </div>
             <div class="form-group">
                 <label>Voucher type</label>
-                <select asp-for="@Model.Voucher.voucherTypeId">
+                <select asp-for="Voucher.voucherTypeId">
                     @foreach (var type in Model.VoucherTypes)
                     {
                         <option value="@type.id">@type.typeName</option>
