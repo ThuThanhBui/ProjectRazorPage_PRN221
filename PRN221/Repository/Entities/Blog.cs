@@ -8,6 +8,8 @@ namespace Data.Entities
     {
         [Key]
         public Guid id { get; set; }
+        public string? img { get; set; }
+
         public string title { get; set; }
         public string content { get; set; }
         public bool isDeleted { get; set; }

@@ -54,6 +54,13 @@ html {
         border-color: var(--dark-pink);
         padding: 8px 16px;
     }
+.form-group{
+    margin-bottom: 8px
+}
+.card img {
+    width: 100px;
+    height: 100px;
+}
 
 @media (min-width: 768px) {
     html {

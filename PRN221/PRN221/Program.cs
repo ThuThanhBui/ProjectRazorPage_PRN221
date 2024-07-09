@@ -44,6 +44,10 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+
+builder.Services.AddScoped<IOrderXProductRepository, OrderXProductRepository>();
+builder.Services.AddScoped<IOrderXProductService, OrderXProductService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -67,7 +71,7 @@ app.MapRazorPages();
 // Chuyển hướng đến Index.cshtml hoặc trang cụ thể khác
 app.MapGet("/", context =>
 {
-    context.Response.Redirect("/ProductManagement/Index");
+    context.Response.Redirect("/Home");
     return Task.CompletedTask;
 });
 

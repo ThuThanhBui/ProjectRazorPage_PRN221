@@ -31,7 +31,6 @@ namespace Data.Entities
             var strConn = config.GetConnectionString("MyDB");
             return strConn;
         }
-
         
         public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
@@ -44,14 +43,13 @@ namespace Data.Entities
         public virtual DbSet<VoucherType> VoucherTypes { get; set; }
         public virtual DbSet<OrderXProduct> OrderXProducts { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Role>(e =>
             {
                 e.ToTable("Role");
                 e.HasKey(e => e.id);
-                e.Property(x => x.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
+                e.Property(e => e.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
 
                 e.Property(e => e.roleName).IsRequired();
             });
@@ -60,9 +58,10 @@ namespace Data.Entities
             {
                 e.ToTable("User");
                 e.HasKey(e => e.id);
-                e.Property(x => x.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
+                e.Property(e => e.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
 
                 e.Property(e => e.fullName);
+                e.Property(e => e.img);
                 e.Property(e => e.email);
                 e.Property(e => e.password);
                 e.Property(e => e.telephone);
@@ -82,88 +81,93 @@ namespace Data.Entities
             modelBuilder.Entity<Blog>(e =>
             {
                 e.ToTable("Blog");
-                e.HasKey(x => x.id);
-                e.Property(x => x.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
+                e.HasKey(e => e.id);
+                e.Property(e => e.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
 
-                e.Property(x => x.title).IsRequired();
-                e.Property(x => x.content).IsRequired();
-                e.Property(x => x.isDeleted);
-                e.Property(x => x.createdDate);
-                e.Property(x => x.updatedDate);
+                e.Property(e => e.img);
 
-                e.HasOne(x => x.User)
-                .WithMany(x => x.Blogs)
-                .HasForeignKey(x => x.userId)
+                e.Property(e => e.title).IsRequired();
+                e.Property(e => e.content).IsRequired();
+                e.Property(e => e.isDeleted);
+                e.Property(e => e.createdDate);
+                e.Property(e => e.updatedDate);
+
+                e.HasOne(e => e.User)
+                .WithMany(e => e.Blogs)
+                .HasForeignKey(e => e.userId)
                 .HasConstraintName("FK_Blog_User");
             });
 
             modelBuilder.Entity<Order>(e =>
             {
                 e.ToTable("Order");
-                e.HasKey(x => x.id);
-                e.Property(x => x.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
+                e.HasKey(e => e.id);
+                e.Property(e => e.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
 
-                e.Property(x => x.description);
-                e.Property(x => x.totalPrice).IsRequired();
-                e.Property(x => x.status);
-                e.Property(x => x.createdDate);
-                e.Property(x => x.updatedDate);
+                e.Property(e => e.description);
+                e.Property(e => e.totalPrice).IsRequired();
+                e.Property(e => e.status);
+                e.Property(e => e.createdDate);
+                e.Property(e => e.updatedDate);
 
-                e.HasOne(x => x.User)
-                .WithMany(x => x.Orders)
-                .HasForeignKey(x => x.userId)
+                e.HasOne(e => e.User)
+                .WithMany(e => e.Orders)
+                .HasForeignKey(e => e.userId)
                 .HasConstraintName("FK_Order_User");
 
-                e.HasOne(x => x.Voucher)
-                .WithMany(x => x.orders)
-                .HasForeignKey(x => x.voucherId)
+                e.HasOne(e => e.Voucher)
+                .WithMany(e => e.orders)
+                .HasForeignKey(e => e.voucherId)
                 .HasConstraintName("FK_Order_Voucher");
             });
 
             modelBuilder.Entity<Product>(e =>
             {
                 e.ToTable("Product");
-                e.HasKey(x => x.id);
-                e.Property(x => x.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
+                e.HasKey(e => e.id);
+                e.Property(e => e.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
 
-                e.Property(x => x.name).IsRequired();
-                e.Property(x => x.description);
-                e.Property(x => x.stockQuantity).IsRequired();
-                e.Property(x => x.price).IsRequired();
-                e.Property(x => x.isDeleted);
-                e.Property(x => x.createdDate);
-                e.Property(x => x.updatedDate);
+                e.Property(e => e.brand);
+                e.Property(e => e.img);
+                e.Property(e => e.name).IsRequired();
+                e.Property(e => e.description);
+                e.Property(e => e.stockQuantity).IsRequired();
+                e.Property(e => e.price).IsRequired();
+                e.Property(e => e.brand);
+                e.Property(e => e.isDeleted);
+                e.Property(e => e.createdDate);
+                e.Property(e => e.updatedDate);
 
-                e.HasOne(x => x.productType)
-                .WithMany(x => x.products)
-                .HasForeignKey(x => x.productTypeId)
+                e.HasOne(e => e.productType)
+                .WithMany(e => e.products)
+                .HasForeignKey(e => e.productTypeId)
                 .HasConstraintName("FK_Product_ProductType");
             });
 
             modelBuilder.Entity<ProductType>(e =>
             {
                 e.ToTable("ProductType");
-                e.HasKey(x => x.id);
-                e.Property(x => x.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
+                e.HasKey(e => e.id);
+                e.Property(e => e.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
 
-                e.Property(x => x.productType).IsRequired();
+                e.Property(e => e.productType).IsRequired();
             });
 
             modelBuilder.Entity<OrderXProduct>(e =>
             {
                 e.ToTable("OrderXProduct");
-                e.Property(x => x.quantity).IsRequired();
+                e.Property(e => e.quantity).IsRequired();
                 e.HasKey(x => new
                 {
                     x.orderId, x.productId
                 });
 
-                e.HasOne(x => x.Order)
+                e.HasOne(e => e.Order)
                 .WithMany(o => o.OrderXProducts)
                 .HasForeignKey(o => o.orderId)
                 .HasConstraintName("FK_OrderXProduct_Order");
 
-                e.HasOne(x => x.Product)
+                e.HasOne(e => e.Product)
                 .WithMany(p => p.OrderXProducts)
                 .HasForeignKey(p => p.productId)
                 .HasConstraintName("FK_OrderXProduct_Product");
@@ -174,7 +178,7 @@ namespace Data.Entities
             {
                 e.ToTable("ProductFeedback");
                 e.HasKey(e => e.id);
-                e.Property(x => x.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
+                e.Property(e => e.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
 
                 e.Property(e => e.rating).IsRequired();
                 e.Property(e => e.comment);
@@ -198,7 +202,7 @@ namespace Data.Entities
             {
                 e.ToTable("Voucher");
                 e.HasKey(e => e.id);
-                e.Property(x => x.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
+                e.Property(e => e.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
                 e.Property(e => e.vouchername).IsRequired();
                 e.Property(e => e.content).IsRequired();
                 e.Property(e => e.isDeleted);
@@ -218,7 +222,7 @@ namespace Data.Entities
             {
                 e.ToTable("VoucherType");
                 e.HasKey(e => e.id);
-                e.Property(x => x.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
+                e.Property(e => e.id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWId()");
 
                 e.Property(e => e.typeName).IsRequired();
             });

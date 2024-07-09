@@ -15,36 +15,66 @@ namespace PRN221.Pages.OrderPages
     public class EditModel : PageModel
     {
         private readonly IOrderService _orderService;
+        private readonly IVoucherService _voucherService;
+        private readonly IOrderXProductService _orderXProductService;
 
-        public EditModel(IOrderService orderService)
+        public EditModel(IOrderService orderService, IVoucherService voucherService, IOrderXProductService orderXProductService)
         {
             _orderService = orderService;
+            _voucherService = voucherService;
+            _orderXProductService = orderXProductService;
         }
 
         [BindProperty]
         public OrderModel Order { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public List<VoucherModel> vouchers { get; set; } = default!;
+        public List<OrderXProductModel> orderXProducts { get; set; }
+
+        public async Task OnGetAsync(Guid id)
         {
             var order = await _orderService.GetById(id);
-
             Order = order;
-            //ViewData["userId"] = new SelectList(_context.Users, "id", "email");
-            //ViewData["voucherId"] = new SelectList(_context.Vouchers, "id", "content");
-            return Page();
+
+            vouchers = await _voucherService.GetAll();
+
+            orderXProducts = await _orderXProductService.GetByOrderId(Order.id);
+
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(Guid id)
+        public async Task<IActionResult> OnPostAsync(Guid id, List<OrderXProductModel> orderXProduct)
         {
             var order = await _orderService.GetById(id);
-
+            //orderXProducts = await _orderXProductService.GetByOrderId(Order.id);
+            decimal total = 0;
+            foreach (var item in orderXProduct)
+            {
+                total += item.Product.price * item.quantity;
+            }
+            if (Order.voucherId.HasValue)
+            {
+                VoucherModel voucher = await _voucherService.GetById((Guid)Order.voucherId);
+                if (voucher.voucherType.typeName == "Percentage Discount Voucher")
+                {
+                    total = total / 100 * (100 - voucher.content);
+                }
+                else if (voucher.voucherType.typeName == "Fixed Discount Voucher")
+                {
+                    total = total - voucher.content;
+                }
+            }
+            Order.totalPrice = total;
             order = Order;
 
-            await _orderService.Update(order);
-
-            return RedirectToPage("/OrderPages/Index");
+            bool updateSuccess = await _orderService.Update(order);
+            if (updateSuccess)
+            {
+                return RedirectToPage("/OrderPages/Index");
+            }
+            else
+            {
+                return Page();
+            }
         }
     }
 }
