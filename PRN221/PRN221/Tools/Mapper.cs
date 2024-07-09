@@ -12,6 +12,8 @@ namespace PRN221.Tools
             CreateMap<Blog, BlogModel>().ReverseMap();
             CreateMap<Product, ProductModel>().ReverseMap();
             CreateMap<ProductType, ProductTypeModel>().ReverseMap();
+            CreateMap<Voucher, VoucherModel>().ReverseMap();
+            CreateMap<OrderXProduct, OrderXProductModel>().ReverseMap();
         }
     }
 }

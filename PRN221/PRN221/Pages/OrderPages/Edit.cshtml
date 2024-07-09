@@ -9,8 +9,28 @@
 <h4>Order edit</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div>
         <form method="post">
+            <div>
+                @foreach (var item in Model.orderXProducts)
+                {
+                    <div class="card border shadow-none">
+                        <div class="card-body">
+                            <div class="d-flex align-items-start border-bottom pb-3">
+                                <div class="me-4">
+                                    <img src="https://i.pinimg.com/564x/24/c7/f8/24c7f87928b40c3b306fd9848ebb0c51.jpg" alt="Generic placeholder image" class="rounded">
+                                </div>
+                                <div class="flex-grow-1 align-self-center overflow-hidden">
+                                    <div>
+                                        <h5>@item.Product.name</h5>
+                                        <p class="mb-0 mt-1">Quanity: <input asp-for="@item.quantity" type="number"/></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Order.id" />
             <div class="form-group">
@@ -19,28 +39,24 @@
                 <span asp-validation-for="Order.description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label>Total price</label>
-                <input asp-for="Order.totalPrice" class="form-control" />
-                <span asp-validation-for="Order.totalPrice" class="text-danger"></span>
+                <label>Voucher</label>
+                <select asp-for="@Model.Order.voucherId">
+                    <option value="">No voucher</option>
+                    @foreach (var v in Model.vouchers)
+                    {
+                        <option value="@v.id">@v.content</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label>Status</label>
-                <input asp-for="Order.status" class="form-control" />
-                <span asp-validation-for="Order.status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Created date</label>
-                <input asp-for="Order.createdDate" class="form-control" />
-                <span asp-validation-for="Order.createdDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Updated date</label>
-                <input asp-for="Order.updatedDate" class="form-control" />
-                <span asp-validation-for="Order.updatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Voucher</label>
-                <input asp-for="Order.voucherId" class="form-control" />
+                <select asp-for="Order.status">
+                    <option value="Completed">Completed</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Waiting">Waiting</option>
+                    <option value="Delivering">Delivering</option>
+                    <option value="Canceled">Canceled</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="hidden" asp-for="Order.userId" class="form-control" />
