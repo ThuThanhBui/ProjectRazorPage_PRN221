@@ -45,13 +45,16 @@
                     </li>
                 </ul>
             </div>
+            <form class="d-flex" method="post" asp-page="/authspages/logout">
+                <button type="submit" class="btn btn-danger">Log out</button>
+            </form>
         </nav>
     </header>
         <div>
             @RenderBody()
         </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer position-static text-muted">
         <div class="container">
             &copy; 2024 - PRN221 - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
