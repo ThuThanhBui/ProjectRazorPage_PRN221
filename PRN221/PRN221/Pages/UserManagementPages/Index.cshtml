@@ -1,0 +1,59 @@
+﻿    @page
+@model PRN221.Pages.UserManagement.IndexModel
+
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<h1>User Management</h1>
+
+<p>
+    <a asp-page="Create">Create New User</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Telephone</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Created Date</th>
+            <th>Updated Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => user.FullName)</td>
+                <td>@Html.DisplayFor(modelItem => user.Email)</td>
+                <td>@Html.DisplayFor(modelItem => user.Telephone)</td>
+                <td>@Html.DisplayFor(modelItem => user.Gender)</td>
+                <td>@Html.DisplayFor(modelItem => user.Address)</td>
+                <td>@Html.DisplayFor(modelItem => user.RoleId)</td> 
+                <td>
+                    @if (user.IsDeleted)
+                    {
+                        <p>Inactive</p>
+                    }
+                    else
+                    {
+                        <p>Active</p>
+                    }
+                </td>
+                <td>@Html.DisplayFor(modelItem => user.CreatedDate)</td>
+                <td>@Html.DisplayFor(modelItem => user.UpdatedDate)</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@user.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@user.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@user.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

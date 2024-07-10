@@ -1,4 +1,5 @@
 ﻿using Data.Entities;
+using Service.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,12 @@ namespace Service.Interface
 	{
 		Task<User> Login(string email, string password);
 		Task<bool> Add(User user);
-	}
+
+        //XuanViet
+        //Task<bool> AddUser(UserModel user);
+        Task<bool> DeleteUser(Guid id);
+        Task<List<UserModel>> GetAllUsers();
+        Task<UserModel> GetUserById(Guid id);
+        Task<bool> UpdateUser(UserModel user);
+    }
 }
