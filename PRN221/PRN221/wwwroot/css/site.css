@@ -21,6 +21,33 @@ html {
     color: var(--light-pink);
 }
 
+.limited-lines-1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.limited-lines-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.limited-lines-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
 .navbar {
 }
 
@@ -54,13 +81,55 @@ html {
         border-color: var(--dark-pink);
         padding: 8px 16px;
     }
-.form-group{
+
+.chosenBrand {
+    background-color: var(--light-color);
+    border-style: solid;
+    border-color: var(--dark-pink);
+    font-size: 32px;
+    margin-inline: 16px;
+    padding: 4px;
+    text-transform: uppercase;
+    color: var(--dark-pink);
+}
+
+.form-group {
     margin-bottom: 8px
 }
+
 .card img {
     width: 100px;
     height: 100px;
 }
+
+.product-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-size: 64px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.list-brand .btn-brand {
+    font-size: 32px;
+    margin-inline: 16px;
+    padding: 4px;
+    text-transform: uppercase;
+    color: var(--dark-pink);
+    border-style: solid;
+    border-color: white;
+    background-color: white;
+}
+
+    .list-brand .btn-brand:hover {
+        background-color: var(--light-color);
+        border-style: solid;
+        border-color: var(--dark-pink);
+    }
 
 @media (min-width: 768px) {
     html {
@@ -75,4 +144,175 @@ html {
 
 body {
     margin-bottom: 60px;
+}
+
+.thumb-wrapper {
+    text-align: center;
+}
+
+.img-box img {
+    max-width: 100%;
+    height: auto;
+}
+
+.thumb-content {
+    padding: 15px;
+}
+
+.product-name h4 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.item-price .price {
+    color: var(--dark-pink);
+    font-size: 24px;
+    font-weight: 700;
+    opacity: 80%;
+}
+
+.item-price span {
+    font-size: 16px;
+    opacity: 70%;
+}
+
+.star-rating i {
+    color: #ffc107;
+    opacity: 70%;
+    margin-top: 12px;
+    font-size: 24px;
+}
+
+.wish-icon {
+    position: relative;
+    font-size: 32px;
+    float: right;
+    top: 12px;
+    right: 12px;
+    color: var(--light-pink);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--dark-pink);
+    padding: 12px;
+}
+
+.blog-list {
+    background-color: var(--light-color);
+    padding: 48px 16px;
+}
+
+.why-6 img {
+    width: 150px;
+    height: 150px;
+}
+
+.blog-posts {
+    justify-content: center;
+    margin-top: 36px;
+}
+
+.each-blog {
+    background-color: white;
+    margin-bottom: 24px;
+    margin-left: 24px;
+    padding: 24px;
+}
+
+    .each-blog:hover {
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+.media.blog-media {
+    display: flex;
+}
+
+.blog-img {
+    width: 30%;
+}
+
+    .blog-img img {
+        width: 100%;
+        height: 100%
+    }
+
+.media-body {
+    width: 70%;
+}
+
+.media.blog-media .media-body h5 {
+    color: var(--dark-pink);
+    transition: color 0.3s ease;
+    margin-bottom: 15px;
+}
+
+    .media.blog-media .media-body h5:hover {
+        cursor: pointer;
+    }
+
+.media.blog-media .media-body {
+    padding: 30px 30px 10px;
+    font-size: 14px;
+    background: #fff;
+    border-top: none;
+}
+
+    .media.blog-media .media-body a.post-link {
+        display: block;
+        color: #222;
+        font-size: 11px;
+        padding: 23px 0;
+        text-transform: uppercase;
+        font-weight: 400;
+        border-bottom: solid;
+        border-color: var(--light-color);
+    }
+
+        .media.blog-media .media-body a.post-link:hover {
+            color: var(--dark-pink);
+            cursor: pointer;
+        }
+
+    .media.blog-media .media-body ul {
+        position: relative;
+        padding: 10px 0 0;
+    }
+
+        .media.blog-media .media-body ul li {
+            display: inline-block;
+            width: 49%;
+            position: relative;
+        }
+
+.parent-say {
+    padding-bottom: 102px;
+}
+
+.stars-image {
+    width: 116px;
+}
+
+.review {
+    font-size: 24px;
+    font-weight: 600;
+    padding: 24px 0px;
+}
+.author {
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--dark-pink);
+}
+.footer {
+    border-top: solid;
+    border-color: #dddddd;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--dark-pink);
+    background-color: var(--light-color);
+    padding: 24px
 }

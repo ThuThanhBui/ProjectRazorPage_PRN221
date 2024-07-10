@@ -63,5 +63,16 @@ namespace Repository.Repository
             return await _context.Products.Include(o => o.productType).Where(o => o.productTypeId == id).ToListAsync();
 
         }
+
+        public async Task<List<string>> GetAllBrand()
+        {
+            return await _context.Products.Select(p => p.brand).Distinct().ToListAsync();
+        }
+
+        public async Task<List<Product>> GetByBrand(string brand)
+        {
+            return await _context.Products.Where(p => p.brand == brand) .ToListAsync();
+
+        }
     }
 }

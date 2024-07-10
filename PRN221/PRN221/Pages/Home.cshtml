@@ -2,7 +2,8 @@
 @model PRN221.Pages.HomeModel
 @{
 }
-<div class="position-relative">
+
+<div class="position-relative" style="margin-bottom: 32px">
     <img src="/img/home_background.png" class="w-100" />
     <div class="position-absolute" style="top:78px; left:64px">
         <p style="font-size: 48px; margin-bottom:0px; color:#D14D72">Baby Fomula</p>
@@ -13,5 +14,244 @@
         <button class="btn-pink">
             Shop All Baby Formula
         </button>
+    </div>
+</div>
+
+<div class="product-list align-items-center">
+    <p class="title" style="color: #707070">ORGANIC COW'S MILK FORMULA</p>
+    <p style="width:50%; font-weight:400">
+        When it comes to <span style="font-weight:700; text-decoration-line:underline">Organic Cow's Milk formula</span>, we’ve chosen the best for your baby. These brands are sweetened with lactose,
+        the life-giving carbohydrate present in breastmilk. All cows from these farms roam pesticide-free pastures managed by gentle farmers.
+        When you buy your baby formula online, you’ll also find a wide variety of nutritional options, including hypoallergenic, probiotic, and organic formulas.
+    </p>
+    <div class="list-brand d-flex">
+        @foreach (var item in Model.brands)
+        {
+            <form>
+                <input type="hidden" asp-for="chosenBrand" value="@item" />
+                <button id="@("button_" + item)" class="@((item == Model.chosenBrand) ? "chosenBrand" : "btn-brand")">@item</button>
+            </form>
+        }
+    </div>
+</div>
+
+<div class="mt-5 mb-5">
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @{
+                int itemCount = 0;
+                for (int i = 0; i < Model.Products.Count(); i += 3)
+                {
+                    <div class="carousel-item @(itemCount == 0 ? "active" : "")">
+                        <div class="row justify-content-center">
+                            @for (int j = i; j < i + 3 && j < Model.Products.Count(); j++)
+                            {
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <p class="wish-icon"><i class="fa fa-heart-o"></i></p>
+                                        <div class="img-box">
+                                            <!--
+                                                <img src="Model.Products[j].Image" class="img-responsive" alt="Model.Products[j].Name">
+                                            -->
+                                            <img src="~/img/logo.png" class="img-responsive" alt="pic">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <div class="product-name">
+                                                <h4>@Model.Products[j].name</h4>
+                                            </div>
+                                            <div class="star-rating">
+                                                <ul class="m-0 p-0">
+                                                    @{
+                                                        int fullStars = (int)Math.Floor(4.2);
+                                                        for (int star = 0; star < 5; star++)
+                                                        {
+                                                            if (star < fullStars)
+                                                            {
+                                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            }
+                                                            else if (star < 4.2)
+                                                            {
+                                                                <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                                            }
+                                                            else
+                                                            {
+                                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                            }
+                                                        }
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <div class="item-price">
+                                                <span>Only from</span>
+                                                <span class="price">
+                                                    $@Model.Products[j].price
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    itemCount++;
+                }
+            }
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+</div>
+
+<div class="blog-list">
+    <div class="title pt-5 pb-5">Why Thousands of Parents Trust Us</div>
+    <div class="row why-6">
+        <div class="col-md-2 col-6">
+            <div class="icon-box d-flex flex-column justify-content-center">
+                <img src="~/img/delivery.png" class="img-fluid mx-auto mobile-w lazyloaded" alt="Free and Fast">
+                <p class="text-center">Guaranteed Delivery</p>
+            </div>
+        </div>
+        <div class="col-md-2 col-6">
+            <div class="icon-box d-flex flex-column justify-content-center">
+                <img src="~/img/service.png" class="img-fluid mx-auto mobile-w lazyloaded" alt="Free and Fast">
+                <p class="text-center">5 Star Customer Service</p>
+            </div>
+        </div>
+        <div class="col-md-2 col-6">
+            <div class="icon-box d-flex flex-column justify-content-center">
+                <img src="~/img/price.png" class="img-fluid mx-auto mobile-w lazyloaded" alt="Free and Fast">
+                <p class="text-center">Competitive Prices</p>
+            </div>
+        </div>
+        <div class="col-md-2 col-6">
+            <div class="icon-box d-flex flex-column justify-content-center">
+                <img src="~/img/formula.png" class="img-fluid mx-auto mobile-w lazyloaded" alt="Free and Fast">
+                <p class="text-center">Authentic Formula Guarantee</p>
+            </div>
+        </div>
+        <div class="col-md-2 col-6">
+            <div class="icon-box d-flex flex-column justify-content-center">
+                <img src="~/img/promise.png" class="img-fluid mx-auto mobile-w lazyloaded" alt="Free and Fast">
+                <p class="text-center">Our Mommy Promise</p>
+            </div>
+        </div>
+        <div class="col-md-2 col-6">
+            <div class="icon-box d-flex flex-column justify-content-center">
+                <img src="~/img/exp.png" class="img-fluid mx-auto mobile-w lazyloaded" alt="Free and Fast">
+                <p class="text-center">6+ Months Until Expiration</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="row blog-posts">
+            @foreach (var item in Model.Blogs)
+            {
+                <div class="col-md-5 each-blog">
+                    <div class="media blog-media">
+                        <div class="blog-img">
+                            <img class="d-flex" src="https://i.pinimg.com/564x/4a/cd/15/4acd1567ad46c191e24db156a14766e6.jpg" alt="Generic placeholder image">
+                        </div>
+                        <div class="media-body">
+                            <a><h5 class="mt-0 limited-lines-1">@item.title</h5></a>
+                            <p class="limited-lines-3">@item.content</p>
+                            <a class="post-link">Read More</a>
+                            <ul>
+                                <li>By: @item.User.fullName</li>
+                                <li style="right:0">@item.createdDate.ToString("dd/MM/yyyy")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="parent-say">
+    <div class="title pb-5 mt-5">What Parents Have to Say</div>
+    <div class="container">
+    <div id="mycarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item">
+                <div class="row align-items-center">
+                    <div class="col-lg-5 ">
+                        <div class=" d-flex flex-column p-3 align-items-center align-items-md-start">
+                            <img src="//mommyformula.com/cdn/shop/files/ratings.png?v=1664365567" class="stars-image lazyloaded" alt="stars image">
+                            <p class="review text-center text-md-start">Mommy Formula's Guaranteed delivery gave me peace of mind. Formula was delivered on time. Affordable prices compared to other websites.</p>
+                            <div class="name d-flex align-items-center justify-content-center justify-content-md-start">
+                                    <p class="author">Jamie V.</p>
+                            </div>
+                            <p class="job text-center text-md-start"></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <img src="//mommyformula.com/cdn/shop/files/img-1.png?v=1684773893" class="d-block w-100 lazyloaded" alt="...">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="carousel-item active">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 ">
+                        <div class=" d-flex flex-column  p-3 align-items-center align-items-md-start">
+                            <img src="//mommyformula.com/cdn/shop/files/ratings.png?v=1664365567" class="stars-image lazyloaded" alt="stars image">
+                            <p class="review text-center text-md-start">Love this site! Great experience so far. Two bulk orders and zero issues. Quick delivery too. What I needed was in stock both times which is such a relief.</p>
+                            <div class="name d-flex align-items-center justify-content-center justify-content-md-start">
+                                    <p class="author">Christi B.</p>
+                            </div>
+                            <p class="job text-center text-md-start"></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <img src="//mommyformula.com/cdn/shop/files/img-2.png?v=1684773908" class="d-block w-100 lazyloaded" alt="...">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 ">
+                        <div class=" d-flex flex-column  p-3 align-items-center align-items-md-start">
+                            <img src="//mommyformula.com/cdn/shop/files/ratings.png?v=1664365567" class="stars-image lazyloaded" alt="stars image">
+                            <p class="review text-center text-md-start">Great service. I don’t know how they do it but I get my formula in a couple days. Customer support was amazing. Will be back for more formula!</p>
+                            <div class="name d-flex align-items-center justify-content-center justify-content-md-start">
+                                    <p class="author">Manuel R.</p>
+                            </div>
+                            <p class="job text-center text-md-start"></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <img src="//mommyformula.com/cdn/shop/files/img-3.png?v=1684773923" class="d-block w-100 lazyloaded" alt="...">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 ">
+                        <div class=" d-flex flex-column  p-3 align-items-center align-items-md-start">
+                            <img src="//mommyformula.com/cdn/shop/files/ratings.png?v=1664365567" class="stars-image lazyloaded" alt="stars image">
+                            <p class="review text-center text-md-start">Competitive pricing for this formula. Easy to navigate and order. My formula arrived quickly and well packaged. Will purchase more formula!</p>
+                            <div class="name d-flex align-items-center justify-content-center justify-content-md-start">
+                                <p class="author">Dani A.</p>
+                            </div>
+                            <p class="job text-center text-md-start"></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <img src="//mommyformula.com/cdn/shop/files/img-4.png?v=1684773936" class="d-block w-100 lazyloaded" alt="...">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 </div>
