@@ -22,15 +22,6 @@ namespace PRN221.Pages.UserManagement
         {
         }
 
-        //public async Task<IActionResult> OnPostAsync()
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Page();
-        //    }
-
-        //    await _userService.AddUser(User);
-        //    return RedirectToPage("Index");
-        //}
+        
     }
 }

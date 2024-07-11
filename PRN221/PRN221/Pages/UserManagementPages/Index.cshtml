@@ -2,13 +2,13 @@
 @model PRN221.Pages.UserManagement.IndexModel
 
 @{
-    ViewData["Title"] = "User Management";
+    ViewData["Title"] = "Index";
 }
 
-<h1>User Management</h1>
+<h2>User Management</h2>
 
 <p>
-    <a asp-page="Create">Create New User</a>
+    <a asp-page="Create" class="btn btn-primary">Create New User</a>
 </p>
 
 <table class="table">
@@ -19,7 +19,7 @@
             <th>Telephone</th>
             <th>Gender</th>
             <th>Address</th>
-            <th>Role</th>
+            <th>Role Name</th>
             <th>Status</th>
             <th>Created Date</th>
             <th>Updated Date</th>
@@ -35,7 +35,7 @@
                 <td>@Html.DisplayFor(modelItem => user.Telephone)</td>
                 <td>@Html.DisplayFor(modelItem => user.Gender)</td>
                 <td>@Html.DisplayFor(modelItem => user.Address)</td>
-                <td>@Html.DisplayFor(modelItem => user.RoleId)</td> 
+                <td>@Html.DisplayFor(modelItem => user.Role.roleName)</td> 
                 <td>
                     @if (user.IsDeleted)
                     {
@@ -49,11 +49,11 @@
                 <td>@Html.DisplayFor(modelItem => user.CreatedDate)</td>
                 <td>@Html.DisplayFor(modelItem => user.UpdatedDate)</td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@user.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@user.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@user.Id">Delete</a>
+                    <a asp-page="Create" class="btn btn-primary btn-sm">Edit</a>
+                    <a asp-page="./Delete" asp-route-id="@user.Id" class="btn btn-danger btn-sm">Delete</a>
                 </td>
+
             </tr>
         }
-    </tbody>
+    </tbody> 
 </table>
