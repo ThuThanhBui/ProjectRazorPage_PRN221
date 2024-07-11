@@ -34,10 +34,9 @@ namespace PRN221.Pages.UserManagement
         {
             User.UpdatedDate = DateTime.Now;
 
-            var updateSuccess = await _userService.Update(User);
-            if (updateSuccess)
+            var addSuccess = await _userService.Update(User);
+            if (addSuccess)
             {
-                TempData["Message"] = "Edit successful.";
                 return RedirectToPage("/UserManagementPages/Index");
             }
             else

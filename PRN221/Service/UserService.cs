@@ -58,12 +58,6 @@ namespace Service
             return _mapper.Map<List<UserModel>>(users);
         }
 
-        public async Task<List<UserModel>> GetPagedUsers(int pageIndex, int pageSize)
-        {
-            var users = await _userRepository.GetPagedUsers(pageIndex, pageSize);
-            return _mapper.Map<List<UserModel>>(users);
-        }
-
         public async Task<UserModel> GetById(Guid id)
         {
             try

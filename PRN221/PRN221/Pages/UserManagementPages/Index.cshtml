@@ -1,27 +1,9 @@
-﻿@page
+﻿    @page
 @model PRN221.Pages.UserManagement.IndexModel
 
 @{
     ViewData["Title"] = "Index";
 }
-
-<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="successModalLabel">Success</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <h2>User Management</h2>
 
@@ -64,60 +46,16 @@
                         <p style="color: blue">Active</p>
                     }
                 </td>
+
+
                 <td>@Html.DisplayFor(modelItem => user.CreatedDate)</td>
                 <td>@Html.DisplayFor(modelItem => user.UpdatedDate)</td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@user.Id" class="btn btn-primary btn-sm">Edit</a>
                     <a asp-page="./Delete" asp-route-id="@user.Id" class="btn btn-danger btn-sm">Delete</a>
                 </td>
+
             </tr>
         }
-    </tbody>
+    </tbody> 
 </table>
-
-<nav aria-label="Page navigation">
-    <ul class="pagination">
-        @if (Model.PageIndex > 1)
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route-pageIndex="@(Model.PageIndex - 1)">Previous</a>
-            </li>
-        }
-
-        @for (int i = Model.StartPage; i <= Model.EndPage; i++)
-        {
-            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
-                <a class="page-link" asp-route-pageIndex="@i">@i</a>
-            </li>
-        }
-
-        @if (Model.PageIndex < Model.TotalPages)
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route-pageIndex="@(Model.PageIndex + 1)">Next</a>
-            </li>
-        }
-
-        @if (Model.PageIndex != Model.TotalPages)
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route-pageIndex="@Model.TotalPages">Last</a>
-            </li>
-        }
-    </ul>
-</nav>
-
-@section Scripts {
-    <script>
-        $(function () {
-            var message = '@TempData["Message"]';
-            if (message) {
-                $('#successModal .modal-body').text(message);
-                $('#successModal').modal('show');
-                setTimeout(function () {
-                    $('#successModal').modal('hide');
-                }, 3000);
-            }
-        });
-    </script>
-}

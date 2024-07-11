@@ -39,13 +39,12 @@
             </div>
             <div class="form-group">
                 <label>Role Name</label>
-                <select asp-for="@Model.User.RoleId" class="form-control">
-                    @foreach (var role in Model.Roles)
+                <select asp-for="@Model.User.RoleId">
+                    @foreach (var type in Model.Roles)
                     {
-                        <option value="@role.id">@role.roleName</option>
+                        <option value="@type.id">@type.roleName</option>
                     }
                 </select>
-                <span asp-validation-for="@Model.User.RoleId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="User.IsDeleted" class="control-label"></label>

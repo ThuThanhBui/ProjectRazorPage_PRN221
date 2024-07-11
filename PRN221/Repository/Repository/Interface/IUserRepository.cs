@@ -17,7 +17,6 @@ namespace Repository.Repository.Interface
         Task<bool> Update(User user);
         Task<bool> Delete(Guid id);
         Task<List<User>> GetAll();
-        Task<List<User>> GetPagedUsers(int pageIndex, int pageSize);
         Task<User> GetById(Guid id);
     }
 }
