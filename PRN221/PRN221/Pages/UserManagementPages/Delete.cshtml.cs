@@ -31,7 +31,11 @@ namespace PRN221.Pages.UserManagement
 
         public async Task<IActionResult> OnPostAsync(Guid id)
         {
-            await _userService.DeleteUser(id);
+            var deleted = await _userService.DeleteUser(id);
+            if (!deleted)
+            {
+                return NotFound();
+            }
             return RedirectToPage("Index");
         }
     }

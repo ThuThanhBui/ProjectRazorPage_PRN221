@@ -33,22 +33,7 @@ namespace Service
 		}
 
 
-
         //XuanViet
-        //public async Task<bool> AddUser(UserModel user)
-        //{
-        //    try
-        //    {
-        //        var entity = _mapper.Map<User>(user);
-        //        var result = await _userRepository.Add(entity);
-        //        return result;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
-
         public async Task<bool> DeleteUser(Guid id)
         {
             return await _userRepository.Delete(id);
@@ -66,10 +51,5 @@ namespace Service
             return _mapper.Map<UserModel>(user);
         }
         
-        public async Task<bool> UpdateUser(UserModel user)
-        {
-            var entity = _mapper.Map<User>(user);
-            return await _userRepository.Update(entity);
-        }
     }
 }
