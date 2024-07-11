@@ -1,5 +1,7 @@
+using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Service;
 using Service.Interface;
 using Service.Model;
 using System;
@@ -10,56 +12,39 @@ namespace PRN221.Pages.UserManagement
     public class EditModel : PageModel
     {
         private readonly IUserService _userService;
+        private readonly IRoleService _roleService;
 
-        [BindProperty]
-        public UserModel User { get; set; }
-
-        public EditModel(IUserService userService)
+        public EditModel(IUserService userService, IRoleService roleService)
         {
             _userService = userService;
+            _roleService = roleService;
         }
 
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        [BindProperty]
+        public UserModel User { get; set; } = default!;
+        public List<RoleModel> Roles { get; set; } = default!;
+
+        public async Task OnGetAsync(Guid id)
         {
-            if (id == Guid.Empty)
-            {
-                return NotFound();
-            }
-
-            User = await _userService.GetUserById(id);
-
-            if (User == null)
-            {
-                return NotFound();
-            }
-
-            return Page();
+            User = await _userService.GetById(id);
+            Roles = await _roleService.GetAll();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            User.UpdatedDate = DateTime.Now;
+
+            var addSuccess = await _userService.Update(User);
+            if (addSuccess)
             {
-                return Page();
+                return RedirectToPage("/UserManagementPages/Index");
             }
-
-            try
+            else
             {
-                var isUpdated = await _userService.Update(User);
-
-                if (!isUpdated)
-                {
-                    ModelState.AddModelError(string.Empty, "Unable to update user.");
-                    return Page();
-                }
-
-                return RedirectToPage("./Index");
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, $"Error: {ex.Message}");
+                await OnGetAsync(User.Id);
                 return Page();
             }
         }
+
     }
 }

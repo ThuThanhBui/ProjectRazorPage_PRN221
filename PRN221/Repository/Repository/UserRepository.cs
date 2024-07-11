@@ -58,6 +58,21 @@ namespace Repository.Repository
 		}
 
         //XuanViet
+        public async Task<bool> Update(User user)
+        {
+            var u = await GetById(user.id);
+            u.fullName = user.fullName;
+            u.email = user.email;
+            u.isDeleted = user.isDeleted;
+            u.telephone = user.telephone;
+            u.gender = user.gender;
+            u.address = user.address;
+            u.roleId = user.roleId;
+            u.createdDate = user.createdDate;
+            u.updatedDate = user.updatedDate;
+
+            return await context.SaveChangesAsync() > 0;
+        }
 
         public async Task<bool> Delete(Guid id)
         {
@@ -74,12 +89,12 @@ namespace Repository.Repository
             
         public async Task<List<User>> GetAll()
         {
-            return await context.Users.ToListAsync();
+            return await context.Users.Include(u => u.Role).ToListAsync();
         }
 
         public async Task<User> GetById(Guid id)
         {
-            return await context.Users.FindAsync(id);
+            return await context.Users.Where(u => u.id == id).SingleOrDefaultAsync();
         }
 
     }

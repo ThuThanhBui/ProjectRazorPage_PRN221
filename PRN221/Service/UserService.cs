@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data.Entities;
+using Repository.Repository;
 using Repository.Repository.Interface;
 using Service.Interface;
 using Service.Model;
@@ -34,6 +35,18 @@ namespace Service
 
 
         //XuanViet
+        public async Task<bool> Update(UserModel user)
+        {
+            try
+            {
+                return await _userRepository.Update(_mapper.Map<User>(user));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<bool> DeleteUser(Guid id)
         {
             return await _userRepository.Delete(id);
@@ -45,10 +58,16 @@ namespace Service
             return _mapper.Map<List<UserModel>>(users);
         }
 
-        public async Task<UserModel> GetUserById(Guid id)
+        public async Task<UserModel> GetById(Guid id)
         {
-            var user = await _userRepository.GetById(id);
-            return _mapper.Map<UserModel>(user);
+            try
+            {
+                return _mapper.Map<UserModel>(await _userRepository.GetById(id));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         
     }

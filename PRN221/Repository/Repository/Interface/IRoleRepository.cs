@@ -10,5 +10,6 @@ namespace Repository.Repository.Interface
     public interface IRoleRepository
     {
         Task<Role> getRoleByName(string roleName);
+        Task<List<Role>> GetAll();
     }
 }

@@ -11,5 +11,6 @@ namespace Service.Interface
     public interface IRoleService
     {
         Task<RoleModel> getRoleByName(string roleName);
+        Task<List<RoleModel>> GetAll();
     }
 }

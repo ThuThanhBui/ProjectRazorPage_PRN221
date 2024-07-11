@@ -20,7 +20,7 @@ namespace PRN221.Pages.UserManagement
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            User = await _userService.GetUserById(id);
+            User = await _userService.GetById(id);
             if (User == null)
             {
                 return NotFound();

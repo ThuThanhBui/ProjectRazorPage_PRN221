@@ -31,6 +31,6 @@ namespace Service.Model
         public bool IsDeleted { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
-        public virtual Role Role { get; set; }
+        public virtual RoleModel Role { get; set; }
     }
 }
