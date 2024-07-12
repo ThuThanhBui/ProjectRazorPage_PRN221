@@ -36,6 +36,7 @@ namespace PRN221.Pages.UserManagement
             {
                 return NotFound();
             }
+            TempData["Message"] = "Deletion successful.";
             return RedirectToPage("Index");
         }
     }
