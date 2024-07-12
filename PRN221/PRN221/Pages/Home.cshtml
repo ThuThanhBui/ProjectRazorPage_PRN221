@@ -50,10 +50,15 @@
                                     <div class="thumb-wrapper">
                                         <p class="wish-icon"><i class="fa fa-heart-o"></i></p>
                                         <div class="img-box">
-                                            <!--
-                                                <img src="Model.Products[j].Image" class="img-responsive" alt="Model.Products[j].Name">
-                                            -->
-                                            <img src="~/img/logo.png" class="img-responsive" alt="pic">
+                                            @if (!string.IsNullOrEmpty(Model.Products[j].img))
+                                            {
+                                                <img src="data:image/jpg;base64,@Model.Products[j].img" alt="Image" />
+                                            }
+                                            else
+                                            {
+                                                <p>No image found.</p>
+                                            }
+
                                         </div>
                                         <div class="thumb-content">
                                             <div class="product-name">
@@ -146,112 +151,113 @@
             </div>
         </div>
     </div>
-    <div>
-        <div class="row blog-posts">
-            @foreach (var item in Model.Blogs)
-            {
-                <div class="col-md-5 each-blog">
-                    <div class="media blog-media">
-                        <div class="blog-img">
-                            <img class="d-flex" src="https://i.pinimg.com/564x/4a/cd/15/4acd1567ad46c191e24db156a14766e6.jpg" alt="Generic placeholder image">
-                        </div>
-                        <div class="media-body">
-                            <a><h5 class="mt-0 limited-lines-1">@item.title</h5></a>
-                            <p class="limited-lines-3">@item.content</p>
-                            <a class="post-link">Read More</a>
-                            <ul>
-                                <li>By: @item.User.fullName</li>
-                                <li style="right:0">@item.createdDate.ToString("dd/MM/yyyy")</li>
-                            </ul>
-                        </div>
+    <div class="row blog-posts">
+        @foreach (var item in Model.Blogs)
+        {
+            <div class="col-md-5 each-blog">
+                <div class="media blog-media">
+                    <div class="blog-img">
+                        <img class="d-flex" src="https://i.pinimg.com/564x/4a/cd/15/4acd1567ad46c191e24db156a14766e6.jpg" alt="Generic placeholder image">
+                    </div>
+                    <div class="media-body">
+                        <a><h5 class="mt-0 limited-lines-1">@item.title</h5></a>
+                        <p class="limited-lines-3">@item.content</p>
+                        <a class="post-link">Read More</a>
+                        <ul>
+                            <li>By: @item.User.fullName</li>
+                            <li style="right:0">@item.createdDate.ToString("dd/MM/yyyy")</li>
+                        </ul>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
+    </div>
+    <div style="width: 30%; margin-top: 16px">
+        <button class="btn-pink text-center" style="width:100%; font-size: 24px  ">MORE BLOGS</button>
     </div>
 </div>
 
 <div class="parent-say">
     <div class="title pb-5 mt-5">What Parents Have to Say</div>
     <div class="container">
-    <div id="mycarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item">
-                <div class="row align-items-center">
-                    <div class="col-lg-5 ">
-                        <div class=" d-flex flex-column p-3 align-items-center align-items-md-start">
-                            <img src="//mommyformula.com/cdn/shop/files/ratings.png?v=1664365567" class="stars-image lazyloaded" alt="stars image">
-                            <p class="review text-center text-md-start">Mommy Formula's Guaranteed delivery gave me peace of mind. Formula was delivered on time. Affordable prices compared to other websites.</p>
-                            <div class="name d-flex align-items-center justify-content-center justify-content-md-start">
+        <div id="mycarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5 ">
+                            <div class=" d-flex flex-column p-3 align-items-center align-items-md-start">
+                                <img src="//mommyformula.com/cdn/shop/files/ratings.png?v=1664365567" class="stars-image lazyloaded" alt="stars image">
+                                <p class="review text-center text-md-start">Mommy Formula's Guaranteed delivery gave me peace of mind. Formula was delivered on time. Affordable prices compared to other websites.</p>
+                                <div class="name d-flex align-items-center justify-content-center justify-content-md-start">
                                     <p class="author">Jamie V.</p>
+                                </div>
+                                <p class="job text-center text-md-start"></p>
                             </div>
-                            <p class="job text-center text-md-start"></p>
                         </div>
-                    </div>
-                    <div class="col-lg-5 ">
-                        <img src="//mommyformula.com/cdn/shop/files/img-1.png?v=1684773893" class="d-block w-100 lazyloaded" alt="...">
-                    </div>
+                        <div class="col-lg-5 ">
+                            <img src="//mommyformula.com/cdn/shop/files/img-1.png?v=1684773893" class="d-block w-100 lazyloaded" alt="...">
+                        </div>
 
+                    </div>
                 </div>
-            </div>
 
-            <div class="carousel-item active">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 ">
-                        <div class=" d-flex flex-column  p-3 align-items-center align-items-md-start">
-                            <img src="//mommyformula.com/cdn/shop/files/ratings.png?v=1664365567" class="stars-image lazyloaded" alt="stars image">
-                            <p class="review text-center text-md-start">Love this site! Great experience so far. Two bulk orders and zero issues. Quick delivery too. What I needed was in stock both times which is such a relief.</p>
-                            <div class="name d-flex align-items-center justify-content-center justify-content-md-start">
+                <div class="carousel-item active">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 ">
+                            <div class=" d-flex flex-column  p-3 align-items-center align-items-md-start">
+                                <img src="//mommyformula.com/cdn/shop/files/ratings.png?v=1664365567" class="stars-image lazyloaded" alt="stars image">
+                                <p class="review text-center text-md-start">Love this site! Great experience so far. Two bulk orders and zero issues. Quick delivery too. What I needed was in stock both times which is such a relief.</p>
+                                <div class="name d-flex align-items-center justify-content-center justify-content-md-start">
                                     <p class="author">Christi B.</p>
+                                </div>
+                                <p class="job text-center text-md-start"></p>
                             </div>
-                            <p class="job text-center text-md-start"></p>
                         </div>
-                    </div>
-                    <div class="col-lg-6 ">
-                        <img src="//mommyformula.com/cdn/shop/files/img-2.png?v=1684773908" class="d-block w-100 lazyloaded" alt="...">
-                    </div>
+                        <div class="col-lg-6 ">
+                            <img src="//mommyformula.com/cdn/shop/files/img-2.png?v=1684773908" class="d-block w-100 lazyloaded" alt="...">
+                        </div>
 
+                    </div>
                 </div>
-            </div>
 
-            <div class="carousel-item">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 ">
-                        <div class=" d-flex flex-column  p-3 align-items-center align-items-md-start">
-                            <img src="//mommyformula.com/cdn/shop/files/ratings.png?v=1664365567" class="stars-image lazyloaded" alt="stars image">
-                            <p class="review text-center text-md-start">Great service. I don’t know how they do it but I get my formula in a couple days. Customer support was amazing. Will be back for more formula!</p>
-                            <div class="name d-flex align-items-center justify-content-center justify-content-md-start">
+                <div class="carousel-item">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 ">
+                            <div class=" d-flex flex-column  p-3 align-items-center align-items-md-start">
+                                <img src="//mommyformula.com/cdn/shop/files/ratings.png?v=1664365567" class="stars-image lazyloaded" alt="stars image">
+                                <p class="review text-center text-md-start">Great service. I don’t know how they do it but I get my formula in a couple days. Customer support was amazing. Will be back for more formula!</p>
+                                <div class="name d-flex align-items-center justify-content-center justify-content-md-start">
                                     <p class="author">Manuel R.</p>
+                                </div>
+                                <p class="job text-center text-md-start"></p>
                             </div>
-                            <p class="job text-center text-md-start"></p>
                         </div>
-                    </div>
-                    <div class="col-lg-6 ">
-                        <img src="//mommyformula.com/cdn/shop/files/img-3.png?v=1684773923" class="d-block w-100 lazyloaded" alt="...">
-                    </div>
+                        <div class="col-lg-6 ">
+                            <img src="//mommyformula.com/cdn/shop/files/img-3.png?v=1684773923" class="d-block w-100 lazyloaded" alt="...">
+                        </div>
 
+                    </div>
                 </div>
-            </div>
 
-            <div class="carousel-item">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 ">
-                        <div class=" d-flex flex-column  p-3 align-items-center align-items-md-start">
-                            <img src="//mommyformula.com/cdn/shop/files/ratings.png?v=1664365567" class="stars-image lazyloaded" alt="stars image">
-                            <p class="review text-center text-md-start">Competitive pricing for this formula. Easy to navigate and order. My formula arrived quickly and well packaged. Will purchase more formula!</p>
-                            <div class="name d-flex align-items-center justify-content-center justify-content-md-start">
-                                <p class="author">Dani A.</p>
+                <div class="carousel-item">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 ">
+                            <div class=" d-flex flex-column  p-3 align-items-center align-items-md-start">
+                                <img src="//mommyformula.com/cdn/shop/files/ratings.png?v=1664365567" class="stars-image lazyloaded" alt="stars image">
+                                <p class="review text-center text-md-start">Competitive pricing for this formula. Easy to navigate and order. My formula arrived quickly and well packaged. Will purchase more formula!</p>
+                                <div class="name d-flex align-items-center justify-content-center justify-content-md-start">
+                                    <p class="author">Dani A.</p>
+                                </div>
+                                <p class="job text-center text-md-start"></p>
                             </div>
-                            <p class="job text-center text-md-start"></p>
                         </div>
-                    </div>
-                    <div class="col-lg-6 ">
-                        <img src="//mommyformula.com/cdn/shop/files/img-4.png?v=1684773936" class="d-block w-100 lazyloaded" alt="...">
-                    </div>
+                        <div class="col-lg-6 ">
+                            <img src="//mommyformula.com/cdn/shop/files/img-4.png?v=1684773936" class="d-block w-100 lazyloaded" alt="...">
+                        </div>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </div>

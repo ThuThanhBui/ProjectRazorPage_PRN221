@@ -4,12 +4,13 @@
 @{
     ViewData["Title"] = "Order Management";
 }
-
 <h1>Order Management</h1>
+<!--
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+-->
 
 <form method="get">
     <label for="StatusFilter">Filter by Status:</label>
@@ -49,7 +50,7 @@
                 <p>Status</p>
             </th>
             <th>
-                <p>Action</p>
+                <p>Edit</p>
             </th>
         </tr>
     </thead>
@@ -58,15 +59,15 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.User.fullName)
+                    @item.User.fullName
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.description)
+                <td style="width:25%">
+                    @item.description
                 </td>
                 <td>
                     @if (item.Voucher != null)
                     {
-                        @Html.DisplayFor(modelItem => item.Voucher.content)
+                        @item.Voucher.vouchername
                     }
                     else
                     {
@@ -74,45 +75,50 @@
                     }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.totalPrice)
+                    @item.totalPrice
+                    $
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.createdDate)
+                    @item.createdDate.ToString("dd/MM/yyyy")
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.updatedDate)
+                    @item.updatedDate.ToString("dd/MM/yyyy")
+
                 </td>
                 <td>
                     @if (item.status == "Completed")
                     {
                         <p class="btn btn-success">
-                            @Html.DisplayFor(modelItem => item.status)
+                            @item.status
                         </p>
                     }
                     else if (item.status == "Approved")
                     {
                         <p class="btn btn-primary">
-                            @Html.DisplayFor(modelItem => item.status)
+                            @item.status
                         </p>
                     }
                     else if (item.status == "Waiting" || item.status == "Delivering")
                     {
                         <p class="btn btn-warning">
-                            @Html.DisplayFor(modelItem => item.status)
+                            @item.status
                         </p>
                     }
                     else if (item.status == "Canceled")
                     {
                         <p class="btn btn-danger">
-                            @Html.DisplayFor(modelItem => item.status)
+                            @item.status
                         </p>
                     }
 
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> 
+                    <!--
+                        |
                     <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
                     <a asp-page="./Delete" asp-route-id="@item.id">Delete</a>
+                    -->
                 </td>
             </tr>
         }

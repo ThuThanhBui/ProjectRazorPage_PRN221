@@ -42,6 +42,8 @@ namespace Repository.Repository
             var o = await GetById(product.id);
             o.name = product.name;
             o.price = product.price;
+            o.brand = product.brand;
+            o.img = product.img;
             o.isDeleted = product.isDeleted;
             o.stockQuantity = product.stockQuantity;
             o.description = product.description;

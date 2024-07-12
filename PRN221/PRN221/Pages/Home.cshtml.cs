@@ -24,7 +24,7 @@ namespace PRN221.Pages
         public List<string> brands { get; set; }
         public async Task OnGetAsync()
         {
-            brands = await _productService.GetAllBrand();
+            brands = (await _productService.GetAllBrand()).Take(6).ToList();
             Blogs = (await _blogService.GetAllBlogs()).Take(4).ToList();
             if (chosenBrand != null)
             {

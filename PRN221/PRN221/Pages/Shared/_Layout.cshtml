@@ -33,19 +33,19 @@
             <div style="margin-left: 12px">
                 <ul class="navbar-nav flex-grow-1">
                     <li>
-                        <a asp-area="" asp-page="/Home">Home</a>
+                        <a asp-page="/Home">Home</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-page="/OrderPages/Index">Order Management</a>
+                        <a asp-page="/OrderPages/Index">Order Management</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-page="/ProductManagement/Index">Product Management</a>
+                        <a asp-page="/ProductManagement/Index">Product Management</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-page="/BlogPages/Index">Blog Management</a>
+                        <a asp-page="/BlogPages/Index">Blog Management</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-page="/VoucherPages/Index">Voucher Management</a>
+                        <a asp-page="/VoucherPages/Index">Voucher Management</a>
                     </li>
                 </ul>
             </div>
@@ -54,7 +54,7 @@
             </form>
         </nav>
     </header>
-    <div>
+    <div class="@(Context.Request.Path == "/Home" ? "" : "container")">
         @RenderBody()
     </div>
     <div style="height: 64px"></div>

@@ -97,7 +97,7 @@ namespace Service
         {
             try
             {
-                return await _repository.Add(_mapper.Map<OrderXProduct>(model));
+                return await _repository.Update(_mapper.Map<OrderXProduct>(model));
             }
             catch (Exception ex)
             {
