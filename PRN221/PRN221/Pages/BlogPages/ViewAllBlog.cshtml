@@ -1,0 +1,37 @@
+﻿@page
+@model PRN221.Pages.BlogPages.ViewAllBlogModel
+@{
+    ViewData["Title"] = "Blog";
+
+}
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/ViewAllBlog.css" asp-append-version="true" />
+</head>
+<h1>Community Mom And BaBies</h1>
+
+<div class="container mx-auto mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            @foreach (var post in Model.Blog)
+            {
+                <div class="post" style="width: 100%; color: black;">
+                    <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="https://i.imgur.com/ZTkt4I5.jpg" class="img-fluid h-100" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                                <h5 class="card-title">@post.User</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@post.title</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+          
+        </div>
+    </div>
+</div>
+
