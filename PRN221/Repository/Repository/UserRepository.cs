@@ -57,7 +57,13 @@ namespace Repository.Repository
 			}
 		}
 
-        //XuanViet
+        //XuanViet]
+        public async Task<bool> AddUser(User user)
+        {
+            await context.Users.AddAsync(user);
+            return await context.SaveChangesAsync() > 0;
+        }
+
         public async Task<bool> Update(User user)
         {
             var u = await GetById(user.id);

@@ -13,7 +13,7 @@ namespace Repository.Repository.Interface
 		Task<bool> Add(User user);
 
         //XuanViet
-        //Task<bool> Add(User user);
+        Task<bool> AddUser(User user);
         Task<bool> Update(User user);
         Task<bool> Delete(Guid id);
         Task<List<User>> GetAll();
