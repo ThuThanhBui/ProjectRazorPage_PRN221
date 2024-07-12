@@ -23,108 +23,115 @@
     </div>
 </div>
 
-<h2>User Management</h2>
+<div style="margin-left:25px; margin-right: 25px">
+    <h2>User Management</h2>
 
-<p>
-    <a asp-page="Create" class="btn btn-primary">Create New User</a>
-</p>
+    <p>
+        <a asp-page="Create" class="btn btn-primary">Create New User</a>
+    </p>
 
-<form method="get">
-    <div class="form-group">
-        <input type="text" name="searchTerm" class="form-control" placeholder="Search by name or email" value="@Model.SearchTerm" />
+    <form method="get" style="display:flex">
+        <div class="form-group">
+            <input type="text" style="width: 500px" name="searchTerm" class="form-control" placeholder="Search by name or email" value="@Model.SearchTerm" />
+        </div>
+        <button type="submit" style="margin-left:15px; margin-bottom: 7px" class="btn btn-primary">Search</button>
+    </form>
+
+    <div style="justify-content:center; display:flex">
+        <table class="table" style="width: 95%">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Telephone</th>
+                    <th>Gender</th>
+                    <th>Address</th>
+                    <th>Role Name</th>
+                    <th>Status</th>
+                    <th>Created Date</th>
+                    <th>Updated Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Users.Count; i++)
+                {
+                    var user = Model.Users[i];
+                    <tr>
+                        <td>@((Model.PageIndex - 1) * 5 + i + 1)</td>
+                        <td>@Html.DisplayFor(modelItem => user.FullName)</td>
+                        <td>@Html.DisplayFor(modelItem => user.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => user.Telephone)</td>
+                        <td>@Html.DisplayFor(modelItem => user.Gender)</td>
+                        <td>@Html.DisplayFor(modelItem => user.Address)</td>
+                        <td>@Html.DisplayFor(modelItem => user.Role.roleName)</td>
+                        <td>
+                            @if (user.IsDeleted)
+                            {
+                                <p style="color: red;">Inactive</p>
+                            }
+                            else
+                            {
+                                <p style="color: blue">Active</p>
+                            }
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => user.CreatedDate)</td>
+                        <td>@Html.DisplayFor(modelItem => user.UpdatedDate)</td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@user.Id" class="btn btn-primary btn-sm">Edit</a>
+                            <a asp-page="./Delete" asp-route-id="@user.Id" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Telephone</th>
-            <th>Gender</th>
-            <th>Address</th>
-            <th>Role Name</th>
-            <th>Status</th>
-            <th>Created Date</th>
-            <th>Updated Date</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model.Users)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => user.FullName)</td>
-                <td>@Html.DisplayFor(modelItem => user.Email)</td>
-                <td>@Html.DisplayFor(modelItem => user.Telephone)</td>
-                <td>@Html.DisplayFor(modelItem => user.Gender)</td>
-                <td>@Html.DisplayFor(modelItem => user.Address)</td>
-                <td>@Html.DisplayFor(modelItem => user.Role.roleName)</td>
-                <td>
-                    @if (user.IsDeleted)
-                    {
-                        <p style="color: red;">Inactive</p>
-                    }
-                    else
-                    {
-                        <p style="color: blue">Active</p>
-                    }
-                </td>
-                <td>@Html.DisplayFor(modelItem => user.CreatedDate)</td>
-                <td>@Html.DisplayFor(modelItem => user.UpdatedDate)</td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@user.Id" class="btn btn-primary btn-sm">Edit</a>
-                    <a asp-page="./Delete" asp-route-id="@user.Id" class="btn btn-danger btn-sm">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<nav aria-label="Page navigation">
-    <ul class="pagination">
-        @if (Model.PageIndex > 1)
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route-pageIndex="@(Model.PageIndex - 1)" asp-route-searchTerm="@Model.SearchTerm">Previous</a>
-            </li>
-        }
-
-        @for (int i = Model.StartPage; i <= Model.EndPage; i++)
-        {
-            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
-                <a class="page-link" asp-route-pageIndex="@i" asp-route-searchTerm="@Model.SearchTerm">@i</a>
-            </li>
-        }
-
-        @if (Model.PageIndex < Model.TotalPages)
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route-pageIndex="@(Model.PageIndex + 1)" asp-route-searchTerm="@Model.SearchTerm">Next</a>
-            </li>
-        }
-
-        @if (Model.PageIndex != Model.TotalPages)
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route-pageIndex="@Model.TotalPages" asp-route-searchTerm="@Model.SearchTerm">Last</a>
-            </li>
-        }
-    </ul>
-</nav>
-
-@section Scripts {
-    <script>
-        $(function () {
-            var message = '@TempData["Message"]';
-            if (message) {
-                $('#successModal .modal-body').text(message);
-                $('#successModal').modal('show');
-                setTimeout(function () {
-                    $('#successModal').modal('hide');
-                }, 3000);
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @if (Model.PageIndex > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-route-pageIndex="@(Model.PageIndex - 1)" asp-route-searchTerm="@Model.SearchTerm">Previous</a>
+                </li>
             }
-        });
-    </script>
-}
+
+            @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a class="page-link" asp-route-pageIndex="@i" asp-route-searchTerm="@Model.SearchTerm">@i</a>
+                </li>
+            }
+
+            @if (Model.PageIndex < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-route-pageIndex="@(Model.PageIndex + 1)" asp-route-searchTerm="@Model.SearchTerm">Next</a>
+                </li>
+            }
+
+            @if (Model.PageIndex != Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-route-pageIndex="@Model.TotalPages" asp-route-searchTerm="@Model.SearchTerm">Last</a>
+                </li>
+            }
+        </ul>
+    </nav>
+
+    @section Scripts {
+        <script>
+            $(function () {
+                var message = '@TempData["Message"]';
+                if (message) {
+                    $('#successModal .modal-body').text(message);
+                    $('#successModal').modal('show');
+                    setTimeout(function () {
+                        $('#successModal').modal('hide');
+                    }, 3000);
+                }
+            });
+        </script>
+    }
+</div>

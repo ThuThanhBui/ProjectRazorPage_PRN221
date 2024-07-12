@@ -39,6 +39,8 @@ namespace PRN221.Pages.UserManagement
                                       || u.Email.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
             }
 
+            users = users.OrderByDescending(u => u.UpdatedDate).ToList();
+
             TotalPages = (int)Math.Ceiling(users.Count / (double)pageSize);
             Users = users.Skip((PageIndex - 1) * pageSize).Take(pageSize).ToList();
 
