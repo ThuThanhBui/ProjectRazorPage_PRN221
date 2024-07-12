@@ -5,20 +5,27 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Add New Product</h1>
 
-<h4>Product</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form method="post">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label>Product type</label>
-                <select asp-for="@Model.Product.productTypeId">
+                <select asp-for="@Model.Product.productTypeId" class="w-100">
                     @foreach (var type in Model.ProductTypes)
                     {
                         <option value="@type.id">@type.productType</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Brand</label>
+                <select asp-for="@Model.Product.brand" class="w-100">
+                    @foreach (var brand in Model.Brands)
+                    {
+                        <option value="@brand">@brand</option>
                     }
                 </select>
             </div>
@@ -27,6 +34,11 @@
                 <input asp-for="Product.name" class="form-control" />
                 <span asp-validation-for="Product.name" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input type="file" id="fileInput" class="form-control-file" name="img" />
+            </div>
+            <div id="imageDisplay">No Image</div>
             <div class="form-group">
                 <label>Description</label>
                 <input asp-for="Product.description" class="form-control" />

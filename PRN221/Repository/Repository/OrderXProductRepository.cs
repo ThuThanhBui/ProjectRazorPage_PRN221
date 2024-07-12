@@ -57,8 +57,8 @@ namespace Repository.Repository
 
         public async Task<OrderXProduct> GetOne(Guid oId, Guid pId)
         {
-            return await _context.OrderXProducts.Where(op => 
-                        op.orderId == oId && op.productId ==pId).FirstOrDefaultAsync();
+            return await _context.OrderXProducts.Where(op => op.orderId == oId && op.productId ==pId)
+                .Include(op => op.Order).Include(op => op.Product).FirstOrDefaultAsync();
         }
 
         public async Task<bool> Update(OrderXProduct op)

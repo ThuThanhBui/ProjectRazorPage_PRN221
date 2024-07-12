@@ -12,6 +12,8 @@ namespace Service.Interface
     {
         Task<List<ProductModel>> GetAll();
         Task<List<ProductModel>> GetByTypeId(Guid id);
+        Task<List<string>> GetAllBrand();
+        Task<List<ProductModel>> GetByBrand(string brand);
         Task<ProductModel> GetById(Guid id);
         Task<bool> Add(ProductModel model);
         Task<bool> DeleteById(Guid id);

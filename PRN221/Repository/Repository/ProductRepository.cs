@@ -42,6 +42,8 @@ namespace Repository.Repository
             var o = await GetById(product.id);
             o.name = product.name;
             o.price = product.price;
+            o.brand = product.brand;
+            o.img = product.img;
             o.isDeleted = product.isDeleted;
             o.stockQuantity = product.stockQuantity;
             o.description = product.description;
@@ -61,6 +63,17 @@ namespace Repository.Repository
         public async Task<List<Product>> GetByTypeId(Guid id)
         {
             return await _context.Products.Include(o => o.productType).Where(o => o.productTypeId == id).ToListAsync();
+
+        }
+
+        public async Task<List<string>> GetAllBrand()
+        {
+            return await _context.Products.Select(p => p.brand).Distinct().ToListAsync();
+        }
+
+        public async Task<List<Product>> GetByBrand(string brand)
+        {
+            return await _context.Products.Where(p => p.brand == brand) .ToListAsync();
 
         }
     }

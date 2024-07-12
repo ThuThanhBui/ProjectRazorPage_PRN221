@@ -23,13 +23,17 @@ namespace PRN221.Pages.ProductManagement
         }
 
         public List<ProductTypeModel> ProductTypes { get; set; } = default!;
+        public List<string> Brands { get; set; } = default!;
 
         [BindProperty]
         public ProductModel Product { get; set; } = default!;
 
+        [BindProperty]
+        public IFormFile img { get; set; }
         public async Task OnGetAsync()
         {
             ProductTypes = await _productTypeService.GetAll();
+            Brands = await _productService.GetAllBrand();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -39,7 +43,22 @@ namespace PRN221.Pages.ProductManagement
             //    OnGetAsync();
             //    return Page();
             //}
+            // Xử lý chuyển đổi ảnh sang base64 trong Razor Page Model
+            string imageBase64 = null;
+            if (img != null && img.Length > 0)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await img.CopyToAsync(memoryStream);
+                        byte[] imageBytes = memoryStream.ToArray();
+                        imageBase64 = Convert.ToBase64String(imageBytes);
+                    }
+                }
+            }
 
+            Product.img = imageBase64;
             Product.isDeleted = false;
             Product.createdDate = DateTime.Now;
             Product.updatedDate = DateTime.Now;

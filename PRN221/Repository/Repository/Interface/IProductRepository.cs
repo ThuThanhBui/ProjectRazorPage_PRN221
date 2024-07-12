@@ -11,6 +11,8 @@ namespace Repository.Repository.Interface
     {
         Task<List<Product>> GetAll();
         Task<List<Product>> GetByTypeId(Guid id);
+        Task<List<string>> GetAllBrand();
+        Task<List<Product>> GetByBrand(string brand);
         Task<Product> GetById(Guid id);
         Task<bool> Add(Product product);
         Task<bool> DeleteById(Guid id);

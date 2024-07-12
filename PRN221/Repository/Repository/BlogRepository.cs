@@ -39,7 +39,7 @@ namespace Repository.Repository
 
         public async Task<List<Blog>> GetAll()
         {
-            List<Blog> list = await _context.Blogs.ToListAsync();
+            List<Blog> list = await _context.Blogs.Include(b => b.User).ToListAsync();
             return list;
         }
 

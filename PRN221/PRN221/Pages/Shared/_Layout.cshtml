@@ -4,8 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/js/site.js" asp-append-version="true" />
     <link rel="stylesheet" href="~/PRN221.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -29,19 +33,19 @@
             <div style="margin-left: 12px">
                 <ul class="navbar-nav flex-grow-1">
                     <li>
-                        <a asp-area="" asp-page="/Home">Home</a>
+                        <a asp-page="/Home">Home</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-page="/OrderPages/Index">Order Management</a>
+                        <a asp-page="/OrderPages/Index">Order Management</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-page="/ProductManagement/Index">Product Management</a>
+                        <a asp-page="/ProductManagement/Index">Product Management</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-page="/BlogPages/Index">Blog Management</a>
+                        <a asp-page="/BlogPages/Index">Blog Management</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-page="/VoucherPages/Index">Voucher Management</a>
+                        <a asp-page="/VoucherPages/Index">Voucher Management</a>
                     </li>
                     <li>
                         <a asp-area="" asp-page="/UserManagementPages/Index">User Management</a>
@@ -53,13 +57,13 @@
             </form>
         </nav>
     </header>
-    <div>
+    <div class="@(Context.Request.Path == "/Home" ? "" : "container")">
         @RenderBody()
     </div>
-
-    <footer class="border-top footer position-static text-muted">
+    <div style="height: 64px"></div>
+    <footer class="footer">
         <div class="container">
-            &copy; 2024 - PRN221 - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; Mom&Baby - FinalProject - PRN221 - 2024
         </div>
     </footer>
 

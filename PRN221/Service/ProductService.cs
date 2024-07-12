@@ -54,6 +54,30 @@ namespace Service
             }
         }
 
+        public async Task<List<string>> GetAllBrand()
+        {
+            try
+            {
+                return await _productRepository.GetAllBrand();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<ProductModel>> GetByBrand(string brand)
+        {
+            try
+            {
+                return _mapper.Map<List<ProductModel>>(await _productRepository.GetByBrand(brand));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<ProductModel> GetById(Guid id)
         {
             try
