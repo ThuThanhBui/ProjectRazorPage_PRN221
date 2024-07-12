@@ -98,6 +98,15 @@ namespace Repository.Repository
             return await context.Users.Include(u => u.Role).ToListAsync();
         }
 
+        public async Task<List<User>> GetPagedUsers(int pageIndex, int pageSize)
+        {
+            return await context.Users.Include(u => u.Role)
+                                      .OrderByDescending(u => u.updatedDate)
+                                      .Skip((pageIndex - 1) * pageSize)
+                                      .Take(pageSize)
+                                      .ToListAsync();
+        }
+
         public async Task<User> GetById(Guid id)
         {
             return await context.Users.Where(u => u.id == id).SingleOrDefaultAsync();
