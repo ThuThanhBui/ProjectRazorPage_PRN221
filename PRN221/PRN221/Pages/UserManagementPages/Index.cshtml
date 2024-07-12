@@ -29,6 +29,13 @@
     <a asp-page="Create" class="btn btn-primary">Create New User</a>
 </p>
 
+<form method="get">
+    <div class="form-group">
+        <input type="text" name="searchTerm" class="form-control" placeholder="Search by name or email" value="@Model.SearchTerm" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -80,28 +87,28 @@
         @if (Model.PageIndex > 1)
         {
             <li class="page-item">
-                <a class="page-link" asp-route-pageIndex="@(Model.PageIndex - 1)">Previous</a>
+                <a class="page-link" asp-route-pageIndex="@(Model.PageIndex - 1)" asp-route-searchTerm="@Model.SearchTerm">Previous</a>
             </li>
         }
 
         @for (int i = Model.StartPage; i <= Model.EndPage; i++)
         {
             <li class="page-item @(i == Model.PageIndex ? "active" : "")">
-                <a class="page-link" asp-route-pageIndex="@i">@i</a>
+                <a class="page-link" asp-route-pageIndex="@i" asp-route-searchTerm="@Model.SearchTerm">@i</a>
             </li>
         }
 
         @if (Model.PageIndex < Model.TotalPages)
         {
             <li class="page-item">
-                <a class="page-link" asp-route-pageIndex="@(Model.PageIndex + 1)">Next</a>
+                <a class="page-link" asp-route-pageIndex="@(Model.PageIndex + 1)" asp-route-searchTerm="@Model.SearchTerm">Next</a>
             </li>
         }
 
         @if (Model.PageIndex != Model.TotalPages)
         {
             <li class="page-item">
-                <a class="page-link" asp-route-pageIndex="@Model.TotalPages">Last</a>
+                <a class="page-link" asp-route-pageIndex="@Model.TotalPages" asp-route-searchTerm="@Model.SearchTerm">Last</a>
             </li>
         }
     </ul>
@@ -116,7 +123,7 @@
                 $('#successModal').modal('show');
                 setTimeout(function () {
                     $('#successModal').modal('hide');
-                }, 3000); 
+                }, 3000);
             }
         });
     </script>

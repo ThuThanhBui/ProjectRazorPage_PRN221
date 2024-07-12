@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -24,12 +25,22 @@ namespace PRN221.Pages.UserManagement
         public int StartPage { get; set; }
         public int EndPage { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
+
         public async Task OnGetAsync()
         {
-            int pageSize = 5; 
+            int pageSize = 5;
             var users = await _userService.GetAllUsers();
+
+            if (!string.IsNullOrEmpty(SearchTerm))
+            {
+                users = users.Where(u => u.FullName.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
+                                      || u.Email.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
             TotalPages = (int)Math.Ceiling(users.Count / (double)pageSize);
-            Users = await _userService.GetPagedUsers(PageIndex, pageSize);
+            Users = users.Skip((PageIndex - 1) * pageSize).Take(pageSize).ToList();
 
             StartPage = Math.Max(1, PageIndex - 1);
             EndPage = Math.Min(TotalPages, PageIndex + 1);
