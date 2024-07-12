@@ -35,6 +35,18 @@ namespace Service
 
 
         //XuanViet
+        public async Task<bool> AddUser(UserModel user)
+        {
+            try
+            {
+                return await _userRepository.Add(_mapper.Map<User>(user));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<bool> Update(UserModel user)
         {
             try
