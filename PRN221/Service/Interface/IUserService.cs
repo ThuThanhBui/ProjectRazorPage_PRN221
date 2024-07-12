@@ -18,7 +18,6 @@ namespace Service.Interface
         Task<bool> Update(UserModel user);
         Task<bool> DeleteUser(Guid id);
         Task<List<UserModel>> GetAllUsers();
-        Task<List<UserModel>> GetPagedUsers(int pageIndex, int pageSize);
         Task<UserModel> GetById(Guid id);
     }
 }
