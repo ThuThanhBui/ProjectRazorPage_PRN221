@@ -20,5 +20,10 @@ namespace Repository.Repository
         {
             return await _context.Roles.Where(r => r.roleName == roleName).FirstOrDefaultAsync();
         }
+
+        public async Task<List<Role>> GetAll()
+        {
+            return await _context.Roles.ToListAsync();
+        }
     }
 }

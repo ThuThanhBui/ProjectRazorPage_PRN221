@@ -7,9 +7,16 @@ using System.Threading.Tasks;
 
 namespace Repository.Repository.Interface
 {
-	public interface IUserReposiroty
+	public interface IUserRepository
 	{
 		Task<User> Login(string email, string password);
 		Task<bool> Add(User user);
-	}
+
+        //XuanViet
+        //Task<bool> Add(User user);
+        Task<bool> Update(User user);
+        Task<bool> Delete(Guid id);
+        Task<List<User>> GetAll();
+        Task<User> GetById(Guid id);
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data.Entities;
+using Repository.Repository;
 using Repository.Repository.Interface;
 using Service.Interface;
 using Service.Model;
@@ -27,6 +28,18 @@ namespace Service
             try
             {
                 return _mapper.Map<RoleModel>(await _roleRepository.getRoleByName(roleName));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<RoleModel>> GetAll()
+        {
+            try
+            {
+                return _mapper.Map<List<RoleModel>>(await _roleRepository.GetAll());
             }
             catch (Exception ex)
             {
