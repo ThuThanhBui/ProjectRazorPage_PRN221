@@ -15,14 +15,26 @@ namespace Repository.Repository
             _context = context;
         }
 
-        public async Task<int> GetTotalProducts()
+        public async Task<IList<ProductRevenueViewModel>> GetProductStatisticsAsync()
         {
-            return await _context.Products.CountAsync();
+            return await _context.Products
+                .Include(p => p.OrderXProducts)
+                .ThenInclude(op => op.Order)
+                .Where(p => !p.isDeleted)
+                .Select(p => new ProductRevenueViewModel
+                {
+                    ProductName = p.name,
+                    TotalRevenue = p.OrderXProducts.Sum(op => op.Order.totalPrice),
+                    StockQuantity = p.stockQuantity
+                })
+                .ToListAsync();
         }
+    }
 
-        public async Task<decimal> GetTotalRevenue()
-        {
-            return await _context.Orders.SumAsync(order => order.totalPrice);
-        }
+    public class ProductRevenueViewModel
+    {
+        public string ProductName { get; set; }
+        public decimal TotalRevenue { get; set; }
+        public int StockQuantity { get; set; }
     }
 }

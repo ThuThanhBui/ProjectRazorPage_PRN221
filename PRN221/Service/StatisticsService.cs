@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Service.Interface;
 using Repository.Repository.Interface;
+using Repository.Repository;
 
 namespace Service
 {
@@ -13,14 +15,9 @@ namespace Service
             _statisticsRepository = statisticsRepository;
         }
 
-        public async Task<int> GetTotalProducts()
+        public Task<IList<ProductRevenueViewModel>> GetProductStatisticsAsync()
         {
-            return await _statisticsRepository.GetTotalProducts();
-        }
-
-        public async Task<decimal> GetTotalRevenue()
-        {
-            return await _statisticsRepository.GetTotalRevenue();
+            return _statisticsRepository.GetProductStatisticsAsync();
         }
     }
 }

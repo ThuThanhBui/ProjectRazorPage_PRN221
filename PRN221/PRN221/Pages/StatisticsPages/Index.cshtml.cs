@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Repository.Repository;
 using Service.Interface;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PRN221.Pages.StatisticsPages
@@ -13,13 +15,11 @@ namespace PRN221.Pages.StatisticsPages
             _statisticsService = statisticsService;
         }
 
-        public int TotalProducts { get; set; }
-        public decimal TotalRevenue { get; set; }
+        public IList<ProductRevenueViewModel> ProductRevenues { get; set; }
 
         public async Task OnGetAsync()
         {
-            TotalProducts = await _statisticsService.GetTotalProducts();
-            TotalRevenue = await _statisticsService.GetTotalRevenue();
+            ProductRevenues = await _statisticsService.GetProductStatisticsAsync();
         }
     }
 }
