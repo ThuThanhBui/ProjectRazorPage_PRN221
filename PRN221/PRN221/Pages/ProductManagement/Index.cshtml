@@ -1,0 +1,107 @@
+﻿ @page
+@model PRN221.Pages.ProductManagement.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Product Management</h1>
+<div class="d-flex position-relative">
+    <div class="d-flex mb-3 mt-3" style="width: 40%">
+        <form method="get" class="d-flex" style="width:100%">
+            <input class="w-100" name="keyword" asp-for="keyword"/>
+            <button class="btn-pink" style="padding-inline:8px">Search</button>
+        </form>
+    </div>
+    <div>
+        <a asp-page="Create" class="aAdd position-absolute" style="right:0">Add new product</a>
+    </div>
+</div>
+
+<form method="get">
+    <label for="StatusFilter">Filter by Type:</label>
+    <select id="typeFilter" name="typeFilter" asp-for="typeFilter">
+        <option value="">All</option>
+        @foreach (var type in Model.ProductTypes)
+        {
+            <option value="@type.id">@type.productType</option>
+        }
+    </select>
+    <button type="submit" class="btn-pink">Filter</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Product type
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Stock quantity
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Created date
+            </th>
+            <th>
+                Updated date
+            </th>
+            <th>
+                Edit
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    @item.productType.productType
+                </td>
+                <td>
+                    @item.name
+                </td>
+                <td>
+                    @item.description
+                </td>
+                <td>
+                    @item.stockQuantity
+                </td>
+                <td>
+                    @item.price
+                </td>
+                <td>
+                    @if (item.isDeleted == true)
+                    {
+                        <p class="btn btn-danger">Inactive</p>
+                    }
+                    else if (item.isDeleted == false)
+                    {
+                        <p class="btn btn-success">Active</p>
+                    }
+                </td>
+                <td>
+                    @item.createdDate.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @item.updatedDate.ToString("dd/MM/yyyy")
+                </td>
+
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.id">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

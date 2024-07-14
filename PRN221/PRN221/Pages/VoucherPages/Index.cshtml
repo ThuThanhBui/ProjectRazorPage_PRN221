@@ -1,0 +1,89 @@
+﻿@page
+@model PRN221.Pages.VoucherPages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<form asp-page-handler="Search" method="post">
+    <div class="d-flex mb-3 mt-3" style="width: 40%">
+        <input class="w-100" type="text" value="@Model.txtSearch" name="txtSearch" placeholder="What do you want to search?" />
+        <button type="submit" class="btn-blue" style="padding-inline:8px">Search</button>
+    </div>
+</form>
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].vouchername)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].condition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].isDeleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].createdDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].updatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].voucherType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Voucher) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.vouchername)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.content)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.condition)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isDeleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createdDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.updatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.voucherType.typeName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

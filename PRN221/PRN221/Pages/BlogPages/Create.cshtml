@@ -1,0 +1,66 @@
+﻿@page
+@model PRN221.Pages.BlogPages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Blog</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Blog.title" class="control-label"></label>
+                <input asp-for="Blog.title" class="form-control" />
+                <span asp-validation-for="Blog.title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Blog.content" class="control-label"></label>
+                <input asp-for="Blog.content" class="form-control" />
+                <span asp-validation-for="Blog.content" class="text-danger"></span>
+                </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input type="file" id="fileInput" class="form-control-file" name="img" />
+            </div>
+            <!--       <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Blog.isDeleted" /> @Html.DisplayNameFor(model => model.Blog.isDeleted)
+                </label>
+            </div>
+          
+            <div class="form-group">
+                <label asp-for="Blog.createdDate" class="control-label"></label>
+                <input asp-for="Blog.createdDate" class="form-control" />
+                <span asp-validation-for="Blog.createdDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Blog.updatedDate" class="control-label"></label>
+                <input asp-for="Blog.updatedDate" class="form-control" />
+                <span asp-validation-for="Blog.updatedDate" class="text-danger"></span>
+            </div>
+                -->
+            <!--
+             <div class="form-group">
+                 <label asp-for="Blog.userId" class="control-label"></label>
+                 <select asp-for="Blog.userId" class ="form-control" asp-items="ViewBag.userId"></select>
+             </div>
+             -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
