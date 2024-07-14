@@ -31,6 +31,9 @@ namespace PRN221.Pages.ProductManagement
         [BindProperty(SupportsGet = true)]
         public string typeFilter { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string keyword {  get; set; }
+
         public async Task OnGetAsync()
         {
             ProductTypes = await _productTypeService.GetAll();
@@ -38,11 +41,17 @@ namespace PRN221.Pages.ProductManagement
             {
                 Products = await _productService.GetByTypeId(Guid.Parse(typeFilter));
             }
-            else
+            else if(!keyword.IsNullOrEmpty())
+            {
+                Products = await _productService.Search(keyword);
+            }else
             {
                 Products = await _productService.GetAll();
             }
-
         }
+
+        //public async Task<IActionResult> OnPostAsync()
+        //{
+        //}
     }
 }

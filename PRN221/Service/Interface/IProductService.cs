@@ -18,5 +18,7 @@ namespace Service.Interface
         Task<bool> Add(ProductModel model);
         Task<bool> DeleteById(Guid id);
         Task<bool> Update(ProductModel model);
+        Task<List<ProductModel>> Search(string keyword);
+
     }
 }
