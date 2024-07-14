@@ -19,32 +19,32 @@ namespace PRN221.Pages.AuthsPages
 
         public LoginModel(IUserService _userService)
         {
-			userService = _userService;
+            userService = _userService;
         }
         [BindProperty]
-		public string email { get; set; }
-		[BindProperty]
-		public string password { get; set; }
-		public string Message { get; set; }
-		public void OnGet()
+        public string email { get; set; }
+        [BindProperty]
+        public string password { get; set; }
+        public string Message { get; set; }
+        public void OnGet()
         {
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await userService.Login(email, password);
-			if (user == null)
-			{
-				Message = "Invalid username or password.";
-				return Page();
-			}
-			else
-			{
-				Session.email=user.email;
-				HttpContext.Session.SetString("role", user.Role.roleName);
-				HttpContext.Session.SetString("email", user.email);
-				return RedirectToPage("/Home");
-			}
-		}
+            if (user == null)
+            {
+                Message = "Invalid username or password.";
+                return Page();
+            }
+            else
+            {
+                Session.email = user.Email;
+                HttpContext.Session.SetString("role", user.Role.RoleName);
+                HttpContext.Session.SetString("email", user.Email);
+                return RedirectToPage("/Home");
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                <h5 class="modal-Title" id="successModalLabel">Success</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -65,9 +65,9 @@
                         <td>@Html.DisplayFor(modelItem => user.Telephone)</td>
                         <td>@Html.DisplayFor(modelItem => user.Gender)</td>
                         <td>@Html.DisplayFor(modelItem => user.Address)</td>
-                        <td>@Html.DisplayFor(modelItem => user.Role.roleName)</td>
+                        <td>@Html.DisplayFor(modelItem => user.Role.RoleName)</td>
                         <td>
-                            @if (user.IsDeleted)
+                            @if (user.IsDeleted.Value)
                             {
                                 <p style="color: red;">Inactive</p>
                             }
@@ -77,7 +77,7 @@
                             }
                         </td>
                         <td>@Html.DisplayFor(modelItem => user.CreatedDate)</td>
-                        <td>@Html.DisplayFor(modelItem => user.UpdatedDate)</td>
+                        <td>@Html.DisplayFor(modelItem => user.LastUpdatedDate)</td>
                         <td>
                             <a asp-page="./Edit" asp-route-id="@user.Id" class="btn btn-primary btn-sm">Edit</a>
                             <a asp-page="./Delete" asp-route-id="@user.Id" class="btn btn-danger btn-sm">Delete</a>

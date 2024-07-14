@@ -13,33 +13,34 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Blog.id" />
-            <input type="hidden" asp-for="Blog.userId" />
+            <input type="hidden" asp-for="Blog.Id" />
+            <input type="hidden" asp-for="Blog.UserId" />
             <div class="form-group">
-                <label asp-for="Blog.title" class="control-label"></label>
-                <input asp-for="Blog.title" class="form-control" />
-                <span asp-validation-for="Blog.title" class="text-danger"></span>
+                <label asp-for="Blog.Title" class="control-label"></label>
+                <input asp-for="Blog.Title" class="form-control" />
+                <span asp-validation-for="Blog.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Blog.content" class="control-label"></label>
-                <input asp-for="Blog.content" class="form-control" />
-                <span asp-validation-for="Blog.content" class="text-danger"></span>
+                <label asp-for="Blog.Content" class="control-label"></label>
+                <input asp-for="Blog.Content" class="form-control" />
+                <span asp-validation-for="Blog.Content" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Blog.isDeleted" /> @Html.DisplayNameFor(model => model.Blog.isDeleted)
+                    <input class="form-check-input" asp-for="Blog.IsDeleted" /> @Html.DisplayNameFor(model => model.Blog.IsDeleted)
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="Blog.createdDate" class="control-label"></label>
-                <input asp-for="Blog.createdDate" class="form-control" />
-                <span asp-validation-for="Blog.createdDate" class="text-danger"></span>
+                <label asp-for="Blog.CreatedDate" class="control-label"></label>
+                <input asp-for="Blog.CreatedDate" class="form-control" />
+                <span asp-validation-for="Blog.CreatedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Blog.updatedDate" class="control-label"></label>
-                <input asp-for="Blog.updatedDate" class="form-control" />
-                <span asp-validation-for="Blog.updatedDate" class="text-danger"></span>
+                <label asp-for="Blog.LastUpdatedDate" class="control-label"></label>
+                <input asp-for="Blog.LastUpdatedDate" class="form-control" />
+                <span asp-validation-for="Blog.LastUpdatedDate" class="text-danger"></span>
             </div>
+
       <!--     <div class="form-group">
                 <label asp-for="Blog.userId" class="control-label"></label>
                 <select asp-for="Blog.userId" class="form-control" asp-items="ViewBag.userId"></select>

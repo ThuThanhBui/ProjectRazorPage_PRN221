@@ -12,22 +12,22 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Voucher.vouchername)
+            @Html.DisplayNameFor(model => model.Voucher.VoucherName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Voucher.vouchername)
+            @Html.DisplayFor(model => model.Voucher.VoucherName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Voucher.content)
+            @Html.DisplayNameFor(model => model.Voucher.Content)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Voucher.content)
+            @Html.DisplayFor(model => model.Voucher.Content)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Voucher.condition)
+            @Html.DisplayNameFor(model => model.Voucher.Condition)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Voucher.condition)
+            @Html.DisplayFor(model => model.Voucher.Condition)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Voucher.StartDate)
@@ -42,32 +42,32 @@
             @Html.DisplayFor(model => model.Voucher.EndDate)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Voucher.isDeleted)
+            @Html.DisplayNameFor(model => model.Voucher.IsDeleted)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Voucher.isDeleted)
+            @Html.DisplayFor(model => model.Voucher.IsDeleted)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Voucher.createdDate)
+            @Html.DisplayNameFor(model => model.Voucher.CreatedDate)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Voucher.createdDate)
+            @Html.DisplayFor(model => model.Voucher.CreatedDate)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Voucher.updatedDate)
+            @Html.DisplayNameFor(model => model.Voucher.LastUpdatedDate)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Voucher.updatedDate)
+            @Html.DisplayFor(model => model.Voucher.LastUpdatedDate)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Voucher.voucherType)
+            @Html.DisplayNameFor(model => model.Voucher.VoucherType)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Voucher.voucherType.typeName)
+            @Html.DisplayFor(model => model.Voucher.VoucherType.VoucherTypeName)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Voucher?.id">Edit</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.Voucher?.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>

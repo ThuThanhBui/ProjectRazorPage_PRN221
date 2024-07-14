@@ -57,8 +57,8 @@ namespace PRN221.Pages.ProductManagement
                 }
             }
 
-            Product.img = imageBase64;
-            Product.updatedDate = DateTime.Now;
+            Product.Image = imageBase64;
+            Product.LastUpdatedDate = DateTime.Now;
 
             var addSuccess = await _productService.Update(Product);
             if (addSuccess)
@@ -67,7 +67,7 @@ namespace PRN221.Pages.ProductManagement
             }
             else
             {
-                await OnGetAsync(Product.id);
+                await OnGetAsync(Product.Id.Value);
                 return Page();
             }
         }

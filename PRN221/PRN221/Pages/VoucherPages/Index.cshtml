@@ -19,13 +19,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Voucher[0].vouchername)
+                @Html.DisplayNameFor(model => model.Voucher[0].VoucherName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Voucher[0].content)
+                @Html.DisplayNameFor(model => model.Voucher[0].Content)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Voucher[0].condition)
+                @Html.DisplayNameFor(model => model.Voucher[0].Condition)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Voucher[0].StartDate)
@@ -34,56 +34,57 @@
                 @Html.DisplayNameFor(model => model.Voucher[0].EndDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Voucher[0].isDeleted)
+                @Html.DisplayNameFor(model => model.Voucher[0].IsDeleted)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Voucher[0].createdDate)
+                @Html.DisplayNameFor(model => model.Voucher[0].CreatedDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Voucher[0].updatedDate)
+                @Html.DisplayNameFor(model => model.Voucher[0].LastUpdatedDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Voucher[0].voucherType)
+                @Html.DisplayNameFor(model => model.Voucher[0].VoucherType)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Voucher) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.vouchername)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.content)
-            </td>
-             <td>
-                @Html.DisplayFor(modelItem => item.condition)
-            </td>
-             <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-             <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isDeleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.createdDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.updatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.voucherType.typeName)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Voucher)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VoucherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Condition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDeleted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VoucherType.VoucherTypeName)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

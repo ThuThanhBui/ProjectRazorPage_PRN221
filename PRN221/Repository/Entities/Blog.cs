@@ -1,22 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Repository.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entities
 {
     [Table("Blog")]
-    public class Blog
+    public class Blog : BaseEntity
     {
-        [Key]
-        public Guid id { get; set; }
-        public string? img { get; set; }
+        public string? Image { get; set; }
+        public string? Title { get; set; }
+        public string? Content { get; set; }
 
-        public string title { get; set; }
-        public string content { get; set; }
-        public bool isDeleted { get; set; }
-        public DateTime createdDate { get; set; }
-        public DateTime updatedDate { get; set; }
-
-        public Guid userId { get; set; }
-        public virtual User User { get; set; }
+        public Guid? UserId { get; set; }
+        public virtual User? User { get; set; }
     }
+
 }

@@ -8,19 +8,16 @@ using System.Threading.Tasks;
 
 namespace Service.Model
 {
-    public class VoucherModel
+    public class VoucherModel : BaseModel
     {
-        public Guid id { get; set; }
-        public string vouchername { get; set; }
-        public int content { get; set; }
-        public int condition { get; set; }
+        public string VoucherName { get; set; }
+        public int Content { get; set; }
+        public int? Condition { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public bool isDeleted { get; set; }
-        public DateTime createdDate { get; set; }
-        public DateTime updatedDate { get; set; }
-        public Guid voucherTypeId { get; set; }
-        public VoucherTypeModel? voucherType { get; set; }
+        public Guid? VoucherTypeId { get; set; }
 
+        public VoucherTypeModel? VoucherType { get; set; }
     }
+
 }

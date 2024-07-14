@@ -23,7 +23,7 @@ namespace PRN221.Pages.BlogPages
         private readonly PRNDbContext _context;
         private readonly IUserService _user;
 
-        public CreateModel(IBlogService service, PRNDbContext context )
+        public CreateModel(IBlogService service, PRNDbContext context)
         {
             _service = service;
             _context = context;
@@ -38,7 +38,7 @@ namespace PRN221.Pages.BlogPages
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-         
+
             string imageBase64 = null;
             if (img != null && img.Length > 0)
             {
@@ -53,13 +53,13 @@ namespace PRN221.Pages.BlogPages
                 }
             }
 
-            Blog.img = imageBase64;
-            User u = await _context.Users.Where(t=>t.email == Session.email).FirstOrDefaultAsync();
-                Blog.userId = u.id;
-                Blog.createdDate = DateTime.Now;
-                Blog.updatedDate = DateTime.Now;
-                Blog.isDeleted = false;
-            var add =await _service.AddBlog(Blog);
+            Blog.Image = imageBase64;
+            User u = await _context.Users.Where(t => t.Email == Session.email).FirstOrDefaultAsync();
+            Blog.UserId = u.Id;
+            Blog.CreatedDate = DateTime.Now;
+            Blog.LastUpdatedDate = DateTime.Now;
+            Blog.IsDeleted = false;
+            var add = await _service.AddBlog(Blog);
             if (add)
             {
                 TempData["Message"] = "Added Successfully.";

@@ -58,10 +58,10 @@ namespace PRN221.Pages.ProductManagement
                 }
             }
 
-            Product.img = imageBase64;
-            Product.isDeleted = false;
-            Product.createdDate = DateTime.Now;
-            Product.updatedDate = DateTime.Now;
+            Product.Image = imageBase64;
+            Product.IsDeleted = false;
+            Product.CreatedDate = DateTime.Now;
+            Product.LastUpdatedDate = DateTime.Now;
 
             var addSuccess = await _productService.Add(Product);
             if (addSuccess)

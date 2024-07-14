@@ -24,325 +24,338 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Data.Entities.Blog", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWId()");
+                        .HasDefaultValueSql("NEWID()");
 
-                    b.Property<string>("content")
+                    b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("createdDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("img")
+                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isDeleted")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("title")
+                    b.Property<DateTime?>("LastUpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("updatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("userId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Blog", (string)null);
                 });
 
             modelBuilder.Entity("Data.Entities.Order", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWId()");
+                        .HasDefaultValueSql("NEWID()");
 
-                    b.Property<DateTime>("createdDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("description")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("status")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastUpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("totalPrice")
+                    b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("updatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("userId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("voucherId")
+                    b.Property<Guid?>("VoucherId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("UserId");
 
-                    b.HasIndex("voucherId");
+                    b.HasIndex("VoucherId");
 
                     b.ToTable("Order", (string)null);
                 });
 
             modelBuilder.Entity("Data.Entities.OrderXProduct", b =>
                 {
-                    b.Property<Guid>("orderId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastUpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("productId")
+                    b.Property<Guid?>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("orderId", "productId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("productId");
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderXProduct", (string)null);
                 });
 
             modelBuilder.Entity("Data.Entities.Product", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWId()");
+                        .HasDefaultValueSql("NEWID()");
 
-                    b.Property<string>("brand")
-                        .IsRequired()
+                    b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("createdDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("description")
-                        .IsRequired()
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("img")
+                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isDeleted")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("name")
+                    b.Property<DateTime?>("LastUpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid>("productTypeId")
+                    b.Property<Guid?>("ProductTypeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("stockQuantity")
+                    b.Property<int>("StockQuantity")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("updatedDate")
-                        .HasColumnType("datetime2");
+                    b.HasKey("Id");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("productTypeId");
+                    b.HasIndex("ProductTypeId");
 
                     b.ToTable("Product", (string)null);
                 });
 
             modelBuilder.Entity("Data.Entities.ProductFeedback", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWId()");
+                        .HasDefaultValueSql("NEWID()");
 
-                    b.Property<string>("comment")
-                        .IsRequired()
+                    b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("createdDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("isDeleted")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("productId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("rating")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("updatedDate")
+                    b.Property<DateTime?>("LastUpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("userId")
+                    b.Property<Guid?>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("id");
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
-                    b.HasIndex("productId");
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("userId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ProductFeedback", (string)null);
                 });
 
             modelBuilder.Entity("Data.Entities.ProductType", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWId()");
+                        .HasDefaultValueSql("NEWID()");
 
-                    b.Property<string>("productType")
+                    b.Property<string>("ProductTypeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("ProductType", (string)null);
                 });
 
             modelBuilder.Entity("Data.Entities.Role", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWId()");
 
-                    b.Property<string>("roleName")
+                    b.Property<string>("RoleName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Role", (string)null);
                 });
 
             modelBuilder.Entity("Data.Entities.User", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWId()");
+                        .HasDefaultValueSql("NEWID()");
 
-                    b.Property<DateTime>("DOB")
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("createdDate")
+                    b.Property<DateTime>("Dob")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("email")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("fullName")
+                    b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("gender")
-                        .IsRequired()
+                    b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("img")
+                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isDeleted")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("roleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("telephone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("updatedDate")
+                    b.Property<DateTime?>("LastUpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("roleId");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Telephone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("Data.Entities.Voucher", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWId()");
+                        .HasDefaultValueSql("NEWID()");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("condition")
+                    b.Property<int?>("Condition")
                         .HasColumnType("int");
 
-                    b.Property<int>("content")
+                    b.Property<int>("Content")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("createdDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("isDeleted")
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("updatedDate")
+                    b.Property<DateTime?>("LastUpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("voucherTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("vouchername")
+                    b.Property<string>("VoucherName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.Property<Guid?>("VoucherTypeId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("voucherTypeId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("VoucherTypeId");
 
                     b.ToTable("Voucher", (string)null);
                 });
 
             modelBuilder.Entity("Data.Entities.VoucherType", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWId()");
+                        .HasDefaultValueSql("NEWID()");
 
-                    b.Property<string>("typeName")
+                    b.Property<string>("VoucherTypeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("VoucherType", (string)null);
                 });
@@ -351,9 +364,7 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Data.Entities.User", "User")
                         .WithMany("Blogs")
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
+                        .HasForeignKey("UserId")
                         .HasConstraintName("FK_Blog_User");
 
                     b.Navigation("User");
@@ -363,14 +374,12 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Data.Entities.User", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
+                        .HasForeignKey("UserId")
                         .HasConstraintName("FK_Order_User");
 
                     b.HasOne("Data.Entities.Voucher", "Voucher")
-                        .WithMany("orders")
-                        .HasForeignKey("voucherId")
+                        .WithMany("Orders")
+                        .HasForeignKey("VoucherId")
                         .HasConstraintName("FK_Order_Voucher");
 
                     b.Navigation("User");
@@ -382,16 +391,12 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Data.Entities.Order", "Order")
                         .WithMany("OrderXProducts")
-                        .HasForeignKey("orderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
+                        .HasForeignKey("OrderId")
                         .HasConstraintName("FK_OrderXProduct_Order");
 
                     b.HasOne("Data.Entities.Product", "Product")
                         .WithMany("OrderXProducts")
-                        .HasForeignKey("productId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
+                        .HasForeignKey("ProductId")
                         .HasConstraintName("FK_OrderXProduct_Product");
 
                     b.Navigation("Order");
@@ -401,42 +406,36 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Data.Entities.Product", b =>
                 {
-                    b.HasOne("Data.Entities.ProductType", "productType")
-                        .WithMany("products")
-                        .HasForeignKey("productTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
+                    b.HasOne("Data.Entities.ProductType", "ProductType")
+                        .WithMany("Products")
+                        .HasForeignKey("ProductTypeId")
                         .HasConstraintName("FK_Product_ProductType");
 
-                    b.Navigation("productType");
+                    b.Navigation("ProductType");
                 });
 
             modelBuilder.Entity("Data.Entities.ProductFeedback", b =>
                 {
-                    b.HasOne("Data.Entities.Product", "product")
+                    b.HasOne("Data.Entities.Product", "Product")
                         .WithMany("ProductFeedbacks")
-                        .HasForeignKey("productId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
+                        .HasForeignKey("ProductId")
                         .HasConstraintName("FK_ProductFeedback_Product");
 
-                    b.HasOne("Data.Entities.User", "user")
+                    b.HasOne("Data.Entities.User", "User")
                         .WithMany("ProductFeedbacks")
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
+                        .HasForeignKey("UserId")
                         .HasConstraintName("FK_ProductFeedback_User");
 
-                    b.Navigation("product");
+                    b.Navigation("Product");
 
-                    b.Navigation("user");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Data.Entities.User", b =>
                 {
                     b.HasOne("Data.Entities.Role", "Role")
                         .WithMany("Users")
-                        .HasForeignKey("roleId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_User_Role");
@@ -446,14 +445,12 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Data.Entities.Voucher", b =>
                 {
-                    b.HasOne("Data.Entities.VoucherType", "voucherType")
+                    b.HasOne("Data.Entities.VoucherType", "VoucherType")
                         .WithMany("Vouchers")
-                        .HasForeignKey("voucherTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
+                        .HasForeignKey("VoucherTypeId")
                         .HasConstraintName("FK_Voucher_VoucherType");
 
-                    b.Navigation("voucherType");
+                    b.Navigation("VoucherType");
                 });
 
             modelBuilder.Entity("Data.Entities.Order", b =>
@@ -470,7 +467,7 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Data.Entities.ProductType", b =>
                 {
-                    b.Navigation("products");
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Data.Entities.Role", b =>
@@ -489,7 +486,7 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Data.Entities.Voucher", b =>
                 {
-                    b.Navigation("orders");
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Data.Entities.VoucherType", b =>
