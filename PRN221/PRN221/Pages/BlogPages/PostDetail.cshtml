@@ -1,0 +1,70 @@
+﻿@page
+@model PRN221.Pages.BlogPages.PostDetailModel
+@{
+    ViewData["Title"] = "PostDetail";
+}
+
+<h1 class="text-center">Post Details</h1>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="post-card">
+                <div class="row no-gutters">
+                    <div class="col-12">
+                        <div class="d-flex align-items-center post-header">
+                            <div class="text-center mr-3">
+                                <img src="https://i.imgur.com/ZTkt4I5.jpg" class="rounded-circle avatar-img" alt="User Avatar">
+                            </div>
+                            <div class="ml-3">
+                                <strong>@Html.DisplayFor(model => model.Blog.User.fullName)</strong><br>
+                                <small class="text-muted">@Html.DisplayFor(model => model.Blog.createdDate)</small>
+                            </div>
+                        </div>
+                        <div class="post-body mt-3">
+                            <h5>@Html.DisplayFor(model => model.Blog.title)</h5>
+                            <p>@Html.DisplayFor(model => model.Blog.content)</p>
+                            <img src="https://i.imgur.com/ZTkt4I5.jpg" class="img-fluid h-100"
+                                 alt="Blog Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .post-card {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: white;
+    }
+
+    .post-header {
+        display: flex;
+        align-items: center;
+    }
+
+    .avatar-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .post-body {
+        margin-top: 10px;
+    }
+
+    .ml-3 {
+        margin-left: 1rem; /* 16px */
+    }
+
+    .post-img {
+        width: 100%; /* Adjust this value as needed */
+        max-width: 300px; /* Example max width */
+        height: auto; /* Maintain aspect ratio */
+    }
+</style>
