@@ -9,6 +9,7 @@ using Data.Entities;
 using Repository.Repository.Interface;
 using Service.Model;
 using Service.Interface;
+using PRN221.Service.Model;
 
 namespace PRN221.Pages.AuthsPages
 {
@@ -39,6 +40,7 @@ namespace PRN221.Pages.AuthsPages
 			}
 			else
 			{
+				Session.email=user.email;
 				HttpContext.Session.SetString("role", user.Role.roleName);
 				HttpContext.Session.SetString("email", user.email);
 				return RedirectToPage("/Home");

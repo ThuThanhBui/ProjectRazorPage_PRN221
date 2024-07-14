@@ -11,7 +11,7 @@
 <div class="header ">
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
-    <h1 class="w-100">Community Mom And BaBies</h1>
+            <h1 class="w-100">Community Mom And BaBies</h1>
         </div>
     </div>
 </div>
@@ -21,24 +21,31 @@
         <div class="col-md-8">
             @foreach (var post in Model.Blog)
             {
-                <a href="/target-url" class="text-decoration-none">
-                <div class="post" style="width: 100%; color: black;">
-                  <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="https://i.imgur.com/ZTkt4I5.jpg" class="img-fluid h-100" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                                <h5 class="card-title">@post.User.FullName</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">@post.createdDate</h6>
-                            <p class="card-text">@post.title</p>
+                <a asp-page="./PostDetail" asp-route-id="@post.id" class="text-decoration-none">
+                    <div class="post" style="width: 100%; color: black;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="https://i.imgur.com/ZTkt4I5.jpg" class="img-fluid h-100" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center post-header">
+                                        <div class="text-center mr-3">
+                                            <img src="https://i.imgur.com/ZTkt4I5.jpg" class="rounded-circle avatar-img" alt="User Avatar">
+                                        </div>
+                                        <div class="ml-3">
+                                            <strong>@post.User.FullName</strong><br>
+                                            <small class="text-muted">@post.createdDate</small>
+                                        </div>
+                                    </div>
+                                    <p class="post-title">@post.title</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                  </div>
-               </div>
                 </a>
             }
-          
+
         </div>
     </div>
 </div>
