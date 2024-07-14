@@ -10,6 +10,8 @@ using Service.Interface;
 using Service.Model;
 using System.Runtime.InteropServices;
 using PRN221.Service.Model;
+using PRN221.Pages.UserManagementPages;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace PRN221.Pages.BlogPages
@@ -18,10 +20,13 @@ namespace PRN221.Pages.BlogPages
     {
 
         private readonly IBlogService _service;
+        private readonly PRNDbContext _context;
+        private readonly IUserService _user;
 
-        public CreateModel(IBlogService service)
+        public CreateModel(IBlogService service, PRNDbContext context )
         {
             _service = service;
+            _context = context;
         }
 
         [BindProperty]
@@ -35,9 +40,8 @@ namespace PRN221.Pages.BlogPages
             {
                 return Page();
             }
-            //     HttpContent.Session.GetString("userId");
-          
-                Blog.userId = Session.userid;
+          User u = await _context.Users.Where(t=>t.email == Session.email).FirstOrDefaultAsync();
+                Blog.userId = u.id;
                 Blog.createdDate = DateTime.Now;
                 Blog.updatedDate = DateTime.Now;
                 Blog.isDeleted = false;

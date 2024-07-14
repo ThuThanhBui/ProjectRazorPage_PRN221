@@ -1,0 +1,64 @@
+﻿@page
+@model PRN221.Pages.StatisticsPages.IndexModel
+
+@{
+    ViewData["Title"] = "Statistics";
+}
+
+<h1>Product and Revenue Statistics</h1>
+
+<canvas id="revenueChart" width="400" height="200"></canvas>
+<canvas id="stockChart" width="400" height="200"></canvas>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var productNames = @Html.Raw(Json.Serialize(Model.ProductRevenues.Select(p => p.ProductName)));
+        var totalRevenues = @Html.Raw(Json.Serialize(Model.ProductRevenues.Select(p => p.TotalRevenue)));
+        var stockQuantities = @Html.Raw(Json.Serialize(Model.ProductRevenues.Select(p => p.StockQuantity)));
+
+        var ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+        var revenueChart = new Chart(ctxRevenue, {
+            type: 'bar',
+            data: {
+                labels: productNames,
+                datasets: [{
+                    label: 'Total Revenue',
+                    data: totalRevenues,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        var ctxStock = document.getElementById('stockChart').getContext('2d');
+        var stockChart = new Chart(ctxStock, {
+            type: 'bar',
+            data: {
+                labels: productNames,
+                datasets: [{
+                    label: 'Stock Quantity',
+                    data: stockQuantities,
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}
