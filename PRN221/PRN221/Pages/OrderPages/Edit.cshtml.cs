@@ -29,6 +29,8 @@ namespace PRN221.Pages.OrderPages
         public OrderModel Order { get; set; } = default!;
 
         public List<VoucherModel> vouchers { get; set; } = default!;
+
+        [BindProperty]
         public List<OrderXProductModel> orderXProducts { get; set; }
 
         public async Task OnGetAsync(Guid id)
@@ -42,15 +44,30 @@ namespace PRN221.Pages.OrderPages
 
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid id, List<OrderXProductModel> orderXProduct)
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
             var order = await _orderService.GetById(id);
             //orderXProducts = await _orderXProductService.GetByOrderId(Order.id);
             decimal total = 0;
-            foreach (var item in orderXProduct)
+            List<OrderXProductModel> list = new List<OrderXProductModel>();
+            foreach (var item in orderXProducts)
             {
-                total += item.Product.price * item.quantity;
+                list.Add(await _orderXProductService.GetOne(item.orderId, item.productId));
             }
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i].quantity = orderXProducts[i].quantity;
+                await _orderXProductService.Update(list[i]);
+                total += list[i].Product.price * list[i].quantity;
+                //var op = await _orderXProductService.GetOne(item.orderId, item.productId);
+                //if (op != null)
+                //{
+                //    op.quantity = item.quantity;
+                //    await _orderXProductService.Update(op);
+                //    total += item.Product.price * item.quantity;
+                //}
+            }
+
             if (Order.voucherId.HasValue)
             {
                 VoucherModel voucher = await _voucherService.GetById((Guid)Order.voucherId);
@@ -65,6 +82,7 @@ namespace PRN221.Pages.OrderPages
             }
             Order.totalPrice = total;
             order = Order;
+            order.updatedDate = DateTime.Now;
 
             bool updateSuccess = await _orderService.Update(order);
             if (updateSuccess)

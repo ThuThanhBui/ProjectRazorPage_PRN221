@@ -6,10 +6,15 @@
 }
 
 <h1>Product Management</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+<div class="d-flex position-relative">
+    <div class="d-flex mb-3 mt-3" style="width: 40%">
+        <input class="w-100"/>
+        <button class="btn-pink" style="padding-inline:8px">Search</button>
+    </div>
+    <div>
+        <a asp-page="Create" class="aAdd position-absolute" style="right:0">Add new product</a>
+    </div>
+</div>
 
 <form method="get">
     <label for="StatusFilter">Filter by Type:</label>
@@ -20,7 +25,7 @@
             <option value="@type.id">@type.productType</option>
         }
     </select>
-    <button type="submit" class="btn btn-primary">Filter</button>
+    <button type="submit" class="btn-pink">Filter</button>
 </form>
 
 <table class="table">
@@ -50,7 +55,9 @@
             <th>
                 Updated date
             </th>
-            <th></th>
+            <th>
+                Edit
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -58,39 +65,39 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.productType.productType)
+                    @item.productType.productType
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.name)
+                    @item.name
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.description)
+                    @item.description
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.stockQuantity)
+                    @item.stockQuantity
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.price)
+                    @item.price
                 </td>
                 <td>
-                    @if(item.isDeleted == true)
+                    @if (item.isDeleted == true)
                     {
-                        <p>Inactive</p>
-                    } else if (item.isDeleted == false)
+                        <p class="btn btn-danger">Inactive</p>
+                    }
+                    else if (item.isDeleted == false)
                     {
-                        <p>Active</p>
+                        <p class="btn btn-success">Active</p>
                     }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.createdDate)
+                    @item.createdDate.ToString("dd/MM/yyyy")
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.updatedDate)
+                    @item.updatedDate.ToString("dd/MM/yyyy")
                 </td>
 
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.id">Edit</a>
                 </td>
             </tr>
         }

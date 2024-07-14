@@ -14,7 +14,7 @@ namespace Service.Interface
 		Task<bool> Add(User user);
 
         //XuanViet
-        //Task<bool> AddUser(UserModel user);
+        Task<bool> AddUser(UserModel user);
         Task<bool> Update(UserModel user);
         Task<bool> DeleteUser(Guid id);
         Task<List<UserModel>> GetAllUsers();
