@@ -43,7 +43,7 @@ namespace PRN221.Pages.AuthsPages
                 return Page();
             }
             var addingUser = _mapper.Map<User>(UserModel);
-            addingUser.roleId = (await _roleService.getRoleByName("Member")).id;
+            addingUser.RoleId = (await _roleService.getRoleByName("Member")).Id;
             var user = await _userService.Add(addingUser);
             if (user == null)
             {

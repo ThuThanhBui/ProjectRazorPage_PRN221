@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace Service.Model
 {
-    public class OrderXProductModel
+    public class OrderXProductModel : BaseModel
     {
-        public Guid orderId { get; set; }
-        public Guid productId { get; set; }
-        public int quantity { get; set; }
+        public Guid OrderId { get; set; }
+        public Guid ProductId { get; set; }
+        public int Quantity { get; set; }
 
-        public OrderModel Order { get; set; }
-        public ProductModel Product { get; set; }
+        public OrderModel? Order { get; set; }
+        public ProductModel? Product { get; set; }
     }
+
 }

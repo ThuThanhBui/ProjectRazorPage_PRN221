@@ -66,11 +66,11 @@ namespace Service
             }
         }
 
-        public async Task<List<OrderModel>> GetByStatus(string status)
+        public async Task<List<OrderModel>> GetByStatus(string Status)
         {
             try
             {
-                return _mapper.Map<List<OrderModel>>(await _orderRepository.GetByStatus(status));
+                return _mapper.Map<List<OrderModel>>(await _orderRepository.GetByStatus(Status));
             }
             catch (Exception ex)
             {

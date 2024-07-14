@@ -18,7 +18,7 @@
 </div>
 
 <div class="product-list align-items-center">
-    <p class="title" style="color: #707070">ORGANIC COW'S MILK FORMULA</p>
+    <p class="Title" style="color: #707070">ORGANIC COW'S MILK FORMULA</p>
     <p style="width:50%; font-weight:400">
         When it comes to <span style="font-weight:700; text-decoration-line:underline">Organic Cow's Milk formula</span>, we’ve chosen the best for your baby. These brands are sweetened with lactose,
         the life-giving carbohydrate present in breastmilk. All cows from these farms roam pesticide-free pastures managed by gentle farmers.
@@ -50,9 +50,9 @@
                                     <div class="thumb-wrapper">
                                         <p class="wish-icon"><i class="fa fa-heart-o"></i></p>
                                         <div class="img-box">
-                                            @if (!string.IsNullOrEmpty(Model.Products[j].img))
+                                            @if (!string.IsNullOrEmpty(Model.Products[j].Image))
                                             {
-                                                <img src="data:image/jpg;base64,@Model.Products[j].img" alt="Image" />
+                                                <img src="data:image/jpg;base64,@Model.Products[j].Image" alt="Image" />
                                             }
                                             else
                                             {
@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="thumb-content">
                                             <div class="product-name">
-                                                <h4>@Model.Products[j].name</h4>
+                                                <h4>@Model.Products[j].ProductName</h4>
                                             </div>
                                             <div class="star-rating">
                                                 <ul class="m-0 p-0">
@@ -89,7 +89,7 @@
                                             <div class="item-price">
                                                 <span>Only from</span>
                                                 <span class="price">
-                                                    $@Model.Products[j].price
+                                                    $@Model.Products[j].Price
                                                 </span>
                                             </div>
                                         </div>
@@ -112,7 +112,7 @@
 </div>
 
 <div class="blog-list">
-    <div class="title pt-5 pb-5">Why Thousands of Parents Trust Us</div>
+    <div class="Title pt-5 pb-5">Why Thousands of Parents Trust Us</div>
     <div class="row why-6">
         <div class="col-md-2 col-6">
             <div class="icon-box d-flex flex-column justify-content-center">
@@ -160,12 +160,12 @@
                         <img class="d-flex" src="https://i.pinimg.com/564x/4a/cd/15/4acd1567ad46c191e24db156a14766e6.jpg" alt="Generic placeholder image">
                     </div>
                     <div class="media-body">
-                        <a><h5 class="mt-0 limited-lines-1">@item.title</h5></a>
-                        <p class="limited-lines-3">@item.content</p>
+                        <a><h5 class="mt-0 limited-lines-1">@item.Title</h5></a>
+                        <p class="limited-lines-3">@item.Content</p>
                         <a class="post-link">Read More</a>
                         <ul>
                             <li>By: @item.User.FullName</li>
-                            <li style="right:0">@item.createdDate.ToString("dd/MM/yyyy")</li>
+                            <li style="right:0">@item.CreatedDate?.ToString("dd/MM/yyyy")</li>
                         </ul>
                     </div>
                 </div>
@@ -178,7 +178,7 @@
 </div>
 
 <div class="parent-say">
-    <div class="title pb-5 mt-5">What Parents Have to Say</div>
+    <div class="Title pb-5 mt-5">What Parents Have to Say</div>
     <div class="container">
         <div id="mycarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">

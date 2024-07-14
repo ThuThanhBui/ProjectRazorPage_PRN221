@@ -11,9 +11,6 @@ namespace Repository.Repository.Interface
 	{
 		Task<User> Login(string email, string password);
 		Task<bool> Add(User user);
-
-        //XuanViet
-        Task<bool> AddUser(User user);
         Task<bool> Update(User user);
         Task<bool> Delete(Guid id);
         Task<List<User>> GetAll();

@@ -27,7 +27,7 @@ namespace PRN221.Pages.OrderPages
                 return NotFound();
             }
 
-            var order = await _context.Orders.FirstOrDefaultAsync(m => m.id == id);
+            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
                 return NotFound();

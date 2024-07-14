@@ -37,7 +37,7 @@ namespace PRN221.Pages.BlogPages
                 return Page();
             }
 
-            Blog = _context.Blogs.Where(x => x.title.StartsWith(txtSearch)).ToList();
+            Blog = _context.Blogs.Where(x => x.Title.StartsWith(txtSearch)).ToList();
             return Page();
 
 

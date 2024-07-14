@@ -24,7 +24,7 @@
         <option value="">All</option>
         @foreach (var type in Model.ProductTypes)
         {
-            <option value="@type.id">@type.productType</option>
+            <option value="@type.Id">@type.ProductTypeName</option>
         }
     </select>
     <button type="submit" class="btn-pink">Filter</button>
@@ -67,39 +67,39 @@
         {
             <tr>
                 <td>
-                    @item.productType.productType
+                    @item.ProductType.ProductTypeName
                 </td>
                 <td>
-                    @item.name
+                    @item.ProductName
                 </td>
                 <td>
-                    @item.description
+                    @item.Description
                 </td>
                 <td>
-                    @item.stockQuantity
+                    @item.StockQuantity
                 </td>
                 <td>
-                    @item.price
+                    @item.Price
                 </td>
                 <td>
-                    @if (item.isDeleted == true)
+                    @if (item.IsDeleted == true)
                     {
                         <p class="btn btn-danger">Inactive</p>
                     }
-                    else if (item.isDeleted == false)
+                    else if (item.IsDeleted == false)
                     {
                         <p class="btn btn-success">Active</p>
                     }
                 </td>
                 <td>
-                    @item.createdDate.ToString("dd/MM/yyyy")
+                    @item.CreatedDate?.ToString("dd/MM/yyyy")
                 </td>
                 <td>
-                    @item.updatedDate.ToString("dd/MM/yyyy")
+                    @item.LastUpdatedDate?.ToString("dd/MM/yyyy")
                 </td>
 
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.id">Edit</a>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
                 </td>
             </tr>
         }

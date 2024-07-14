@@ -12,21 +12,21 @@
 <div class="row">
     <div class="col-md-6">
         <form method="post" enctype="multipart/form-data">
-            <input type="hidden" asp-for="Product.id" />
+            <input type="hidden" asp-for="Product.Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
                 <label>Product type</label>
-                <select asp-for="@Model.Product.productTypeId" class="w-100">
+                <select asp-for="@Model.Product.ProductTypeId" class="w-100">
                     @foreach (var type in Model.ProductTypes)
                     {
-                        <option value="@type.id">@type.productType</option>
+                        <option value="@type.Id">@type.ProductTypeName</option>
                     }
                 </select>
             </div>
             <div class="form-group">
                 <label>Brand</label>
-                <select asp-for="@Model.Product.brand" class="w-100">
+                <select asp-for="@Model.Product.Brand" class="w-100">
                     @foreach (var brand in Model.Brands)
                     {
                         <option value="@brand">@brand</option>
@@ -35,8 +35,8 @@
             </div>
             <div class="form-group">
                 <label>Name</label>
-                <input asp-for="Product.name" class="form-control" />
-                <span asp-validation-for="Product.name" class="text-danger"></span>
+                <input asp-for="Product.ProductName" class="form-control" />
+                <span asp-validation-for="Product.ProductName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label>Image</label>
@@ -45,18 +45,18 @@
             <div id="imageDisplay">No Image</div>
             <div class="form-group">
                 <label>Description</label>
-                <input asp-for="Product.description" class="form-control" />
-                <span asp-validation-for="Product.description" class="text-danger"></span>
+                <input asp-for="Product.Description" class="form-control" />
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label>Stock quantity</label>
-                <input asp-for="Product.stockQuantity" class="form-control" />
-                <span asp-validation-for="Product.stockQuantity" class="text-danger"></span>
+                <input asp-for="Product.StockQuantity" class="form-control" />
+                <span asp-validation-for="Product.StockQuantity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label>Price</label>
-                <input asp-for="Product.price" class="form-control" />
-                <span asp-validation-for="Product.price" class="text-danger"></span>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -26,7 +26,7 @@ namespace PRN221.Pages.VoucherPages
             if (_context.Vouchers != null)
             {
                 Voucher = await _context.Vouchers
-                .Include(v => v.voucherType).ToListAsync();
+                .Include(v => v.VoucherType).ToListAsync();
             }
         }
         public async Task<IActionResult> OnPostAsync(string txtSearch)
@@ -37,7 +37,7 @@ namespace PRN221.Pages.VoucherPages
                 return Page();
             }
 
-            Voucher = await _context.Vouchers.Where(x => x.vouchername.StartsWith(txtSearch)).ToListAsync();
+            Voucher = await _context.Vouchers.Where(x => x.VoucherName.StartsWith(txtSearch)).ToListAsync();
             return Page();
         }
     }

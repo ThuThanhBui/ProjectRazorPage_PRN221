@@ -20,18 +20,18 @@ namespace Repository.Repository
 
         public async Task<List<Product>> GetAll()
         {
-            return await _context.Products.Include(o => o.productType).ToListAsync();
+            return await _context.Products.Include(o => o.ProductType).ToListAsync();
         }
 
         public async Task<Product> GetById(Guid id)
         {
-            return await _context.Products.Where(o => o.id == id).SingleOrDefaultAsync();
+            return await _context.Products.Where(o => o.Id == id).SingleOrDefaultAsync();
         }
 
         public async Task<bool> DeleteById(Guid id)
         {
             var o = await GetById(id);
-            o.isDeleted = true;
+            o.IsDeleted = true;
 
             return await _context.SaveChangesAsync() > 0;
         }
@@ -39,17 +39,17 @@ namespace Repository.Repository
 
         public async Task<bool> Update(Product product)
         {
-            var o = await GetById(product.id);
-            o.name = product.name;
-            o.price = product.price;
-            o.brand = product.brand;
-            o.img = product.img;
-            o.isDeleted = product.isDeleted;
-            o.stockQuantity = product.stockQuantity;
-            o.description = product.description;
-            o.createdDate = product.createdDate;
-            o.updatedDate = product.updatedDate;
-            o.productTypeId = product.productTypeId;
+            var o = await GetById(product.Id);
+            o.ProductName = product.ProductName;
+            o.Price = product.Price;
+            o.Brand = product.Brand;
+            o.Image = product.Image;
+            o.IsDeleted = product.IsDeleted;
+            o.StockQuantity = product.StockQuantity;
+            o.Description = product.Description;
+            o.CreatedDate = product.CreatedDate;
+            o.LastUpdatedDate = product.LastUpdatedDate;
+            o.ProductTypeId = product.ProductTypeId;
 
             return await _context.SaveChangesAsync() > 0;
         }
@@ -62,24 +62,24 @@ namespace Repository.Repository
 
         public async Task<List<Product>> GetByTypeId(Guid id)
         {
-            return await _context.Products.Include(o => o.productType).Where(o => o.productTypeId == id).ToListAsync();
+            return await _context.Products.Include(o => o.ProductType).Where(o => o.ProductTypeId == id).ToListAsync();
 
         }
 
         public async Task<List<string>> GetAllBrand()
         {
-            return await _context.Products.Select(p => p.brand).Distinct().ToListAsync();
+            return await _context.Products.Select(p => p.Brand).Distinct().ToListAsync();
         }
 
         public async Task<List<Product>> GetByBrand(string brand)
         {
-            return await _context.Products.Where(p => p.brand == brand) .ToListAsync();
+            return await _context.Products.Where(p => p.Brand == brand) .ToListAsync();
 
         }
 
         public async Task<List<Product>> Search(string keyword)
         {
-            return await _context.Products.Where(p => p.name.ToLower().Contains(keyword.ToLower())).ToListAsync();
+            return await _context.Products.Where(p => p.ProductName.ToLower().Contains(keyword.ToLower())).ToListAsync();
         }
     }
 }

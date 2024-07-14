@@ -7,9 +7,10 @@ namespace Data.Entities
     public class VoucherType
     {
         [Key]
-        public Guid id { get; set; }
-        public string typeName { get; set; }
+        public Guid Id { get; set; }
 
-        public virtual ICollection<Voucher> Vouchers { get; set; }
+        public string VoucherTypeName { get; set; }
+
+        public virtual ICollection<Voucher>? Vouchers { get; set; }
     }
 }

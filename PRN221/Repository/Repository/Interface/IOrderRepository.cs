@@ -14,6 +14,6 @@ namespace Repository.Repository.Interface
         Task<bool> Add(Order order);
         Task<bool> DeleteById(Guid id);
         Task<bool> Update(Order order);
-        Task<List<Order>> GetByStatus(string status);
+        Task<List<Order>> GetByStatus(string Status);
     }
 }

@@ -20,12 +20,12 @@ namespace Repository.Repository
             return await _context.Products
                 .Include(p => p.OrderXProducts)
                 .ThenInclude(op => op.Order)
-                .Where(p => !p.isDeleted)
+                .Where(p => !p.IsDeleted)
                 .Select(p => new ProductRevenueViewModel
                 {
-                    ProductName = p.name,
-                    TotalRevenue = p.OrderXProducts.Sum(op => op.Order.totalPrice),
-                    StockQuantity = p.stockQuantity
+                    ProductName = p.ProductName,
+                    TotalRevenue = p.OrderXProducts.Sum(op => op.Order.TotalPrice),
+                    StockQuantity = p.StockQuantity
                 })
                 .ToListAsync();
         }

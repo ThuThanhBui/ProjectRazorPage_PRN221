@@ -8,8 +8,8 @@ namespace Service.Model
 {
     public class VoucherTypeModel
     {
-        public Guid id { get; set; }
-        public string typeName { get; set; }
+        public Guid Id { get; set; }
+        public string VoucherTypeName { get; set; }
 
     }
 }

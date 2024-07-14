@@ -59,15 +59,15 @@
         {
             <tr>
                 <td>
-                    @item.User.fullName
+                    @item.User.FullName
                 </td>
                 <td style="width:25%">
-                    @item.description
+                    @item.Description
                 </td>
                 <td>
                     @if (item.Voucher != null)
                     {
-                        @item.Voucher.vouchername
+                        @item.Voucher.VoucherName
                     }
                     else
                     {
@@ -75,49 +75,49 @@
                     }
                 </td>
                 <td>
-                    @item.totalPrice
+                    @item.TotalPrice
                     $
                 </td>
                 <td>
-                    @item.createdDate.ToString("dd/MM/yyyy")
+                    @item.CreatedDate?.ToString("dd/MM/yyyy")
                 </td>
                 <td>
-                    @item.updatedDate.ToString("dd/MM/yyyy")
+                    @item.LastUpdatedDate?.ToString("dd/MM/yyyy")
 
                 </td>
                 <td>
-                    @if (item.status == "Completed")
+                    @if (item.Status == "Completed")
                     {
                         <p class="btn btn-success">
-                            @item.status
+                            @item.Status
                         </p>
                     }
-                    else if (item.status == "Approved")
+                    else if (item.Status == "Approved")
                     {
                         <p class="btn btn-primary">
-                            @item.status
+                            @item.Status
                         </p>
                     }
-                    else if (item.status == "Waiting" || item.status == "Delivering")
+                    else if (item.Status == "Waiting" || item.Status == "Delivering")
                     {
                         <p class="btn btn-warning">
-                            @item.status
+                            @item.Status
                         </p>
                     }
-                    else if (item.status == "Canceled")
+                    else if (item.Status == "Canceled")
                     {
                         <p class="btn btn-danger">
-                            @item.status
+                            @item.Status
                         </p>
                     }
 
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> 
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> 
                     <!--
                         |
-                    <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.id">Delete</a>
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                     -->
                 </td>
             </tr>

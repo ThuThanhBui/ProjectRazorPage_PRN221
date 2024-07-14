@@ -27,9 +27,9 @@
             </form>
             @foreach (var post in Model.Blog)
             {
-                if (post != null && post.id != null)
+                if (post != null && post.Id != null)
                 {
-                    <a asp-page="./PostDetail" asp-route-id="@post.id" class="text-decoration-none">
+                    <a asp-page="./PostDetail" asp-route-id="@post.Id" class="text-decoration-none">
                         <div class="post" style="width: 100%; color: black;">
                         <div class="row no-gutters">
                             <div class="col-md-4">
@@ -43,10 +43,10 @@
                                         </div>
                                         <div class="ml-3">
                                             <strong>@(post.User?.FullName ?? "Anonymous")</strong><br>
-                                            <small class="text-muted">@post.createdDate</small>
+                                            <small class="text-muted">@post.CreatedDate</small>
                                         </div>
                                     </div>
-                                    <p class="post-title">@post.title</p>
+                                    <p class="post-Title">@post.Title</p>
                                 </div>
                             </div>
                         </div>

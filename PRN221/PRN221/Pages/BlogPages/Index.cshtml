@@ -6,12 +6,14 @@
 }
 
 <h1>Index</h1>
+
 <form asp-page-handler="Search" method="post">
     <div class="d-flex mb-3 mt-3" style="width: 40%">
         <input class="w-100" type="text" value="@Model.txtSearch" name="txtSearch" placeholder="What do you want to search?" />
-        <button type="submit" class="btn-blue" style="padding-inline:8px">Search</button>
+        <button type="submit" class="btn btn-blue" style="padding-inline: 8px">Search</button>
     </div>
 </form>
+
 <div class="link-container">
     <a asp-page="Create" class="custom-link">Create New</a>
 </div>
@@ -20,19 +22,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Blog[0].title)
+                @Html.DisplayNameFor(model => model.Blog[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Blog[0].content)
+                @Html.DisplayNameFor(model => model.Blog[0].Content)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Blog[0].isDeleted)
+                Status
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Blog[0].createdDate)
+                @Html.DisplayNameFor(model => model.Blog[0].CreatedDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Blog[0].updatedDate)
+                @Html.DisplayNameFor(model => model.Blog[0].LastUpdatedDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Blog[0].User)
@@ -41,60 +43,93 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Blog) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.content)
-            </td>
-            <td>
-                    @if (item.isDeleted == true)
+        @foreach (var item in Model.Blog)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @if (item.IsDeleted)
                     {
-                        <p>Inactive</p>
+                        <span class="badge badge-danger">Inactive</span>
                     }
-                    else if (item.isDeleted == false)
+                    else
                     {
-                        <p>Active</p>
+                        <span class="badge badge-success">Active</span>
                     }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.createdDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.updatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.email)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Email)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
 <style>
-    .btn-blue{
-        background-color: #007bff; /* Màu xanh */
-    }
-    .link-container {
-        background-color: #007bff; /* Màu xanh */
-        padding: 10px 20px;
+    .btn-blue {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 12px;
         border-radius: 5px;
-        display: inline-block;
+        cursor: pointer;
+    }
+
+        .btn-blue:hover {
+            background-color: #0056b3;
+        }
+
+    .link-container {
+        margin-top: 20px;
     }
 
     .custom-link {
-        color: white; /* Màu chữ trắng */
-        text-decoration: none; /* Xóa gạch chân */
+        color: white;
+        text-decoration: none;
+        padding: 8px 12px;
+        background-color: #007bff;
+        border-radius: 5px;
     }
 
         .custom-link:hover {
-            text-decoration: underline; /* Thêm gạch chân khi hover nếu muốn */
+            text-decoration: underline;
+            background-color: #0056b3;
         }
+
+    .badge {
+        display: inline-block;
+        padding: 6px 12px;
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        border-radius: 10px;
+    }
+
+    .badge-success {
+        background-color: #28a745;
+    }
+
+    .badge-danger {
+        background-color: #dc3545;
+    }
 </style>

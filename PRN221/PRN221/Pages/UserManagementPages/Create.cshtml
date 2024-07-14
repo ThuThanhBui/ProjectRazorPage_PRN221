@@ -62,7 +62,7 @@
                     <select asp-for="@Model.User.RoleId" class="form-control">
                         @foreach (var role in Model.Roles)
                         {
-                            <option value="@role.id">@role.roleName</option>
+                            <option value="@role.Id">@role.RoleName</option>
                         }
                     </select>
                     <span asp-validation-for="@Model.User.RoleId" class="text-danger"></span>

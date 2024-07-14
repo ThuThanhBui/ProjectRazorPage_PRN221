@@ -13,55 +13,57 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Voucher.id" />
+            <input type="hidden" asp-for="Voucher.Id" />
             <div class="form-group">
-                <label asp-for="Voucher.vouchername" class="control-label"></label>
-                <input asp-for="Voucher.vouchername" class="form-control" />
-                <span asp-validation-for="Voucher.vouchername" class="text-danger"></span>
+                <label asp-for="Voucher.VoucherName" class="control-label"></label>
+                <input asp-for="Voucher.VoucherName" class="form-control" />
+                <span asp-validation-for="Voucher.VoucherName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Voucher.content" class="control-label"></label>
-                <input asp-for="Voucher.content" class="form-control" />
-                <span asp-validation-for="Voucher.content" class="text-danger"></span>
+                <label asp-for="Voucher.Content" class="control-label"></label>
+                <input asp-for="Voucher.Content" class="form-control" />
+                <span asp-validation-for="Voucher.Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Voucher.condition" class="control-label"></label>
-                <input asp-for="Voucher.condition" class="form-control" />
-                <span asp-validation-for="Voucher.condition" class="text-danger"></span>
+                <label asp-for="Voucher.Condition" class="control-label"></label>
+                <input asp-for="Voucher.Condition" class="form-control" />
+                <span asp-validation-for="Voucher.Condition" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Voucher.StartDate" class="control-label"></label>
                 <input asp-for="Voucher.StartDate" class="form-control" />
                 <span asp-validation-for="Voucher.StartDate" class="text-danger"></span>
-            </div>  <div class="form-group">
+            </div>
+            <div class="form-group">
                 <label asp-for="Voucher.EndDate" class="control-label"></label>
                 <input asp-for="Voucher.EndDate" class="form-control" />
                 <span asp-validation-for="Voucher.EndDate" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Voucher.isDeleted" /> @Html.DisplayNameFor(model => model.Voucher.isDeleted)
+                    <input class="form-check-input" asp-for="Voucher.IsDeleted" /> @Html.DisplayNameFor(model => model.Voucher.IsDeleted)
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="Voucher.createdDate" class="control-label"></label>
-                <input asp-for="Voucher.createdDate" class="form-control" />
-                <span asp-validation-for="Voucher.createdDate" class="text-danger"></span>
+                <label asp-for="Voucher.CreatedDate" class="control-label"></label>
+                <input asp-for="Voucher.CreatedDate" class="form-control" />
+                <span asp-validation-for="Voucher.CreatedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Voucher.updatedDate" class="control-label"></label>
-                <input asp-for="Voucher.updatedDate" class="form-control" />
-                <span asp-validation-for="Voucher.updatedDate" class="text-danger"></span>
+                <label asp-for="Voucher.LastUpdatedDate" class="control-label"></label>
+                <input asp-for="Voucher.LastUpdatedDate" class="form-control" />
+                <span asp-validation-for="Voucher.LastUpdatedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label>Voucher type</label>
-                <select asp-for="Voucher.voucherTypeId">
+                <select asp-for="Voucher.VoucherTypeId" class="form-control">
                     @foreach (var type in Model.VoucherTypes)
                     {
-                        <option value="@type.id">@type.typeName</option>
+                        <option value="@type.Id">@type.VoucherTypeName</option>
                     }
                 </select>
             </div>
+
         <!--    <div class="form-group">
                 <label asp-for="Voucher.voucherTypeId" class="control-label"></label>
                 <select asp-for="Voucher.voucherTypeId" class="form-control" asp-items="ViewBag.voucherTypeId"></select>
