@@ -31,16 +31,30 @@ namespace PRN221.Pages.BlogPages
 
         [BindProperty]
         public BlogModel Blog { get; set; } = default!;
-        
+
+        [BindProperty]
+        public IFormFile img { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || Blog == null)
+         
+            string imageBase64 = null;
+            if (img != null && img.Length > 0)
             {
-                return Page();
+                using (var ms = new MemoryStream())
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await img.CopyToAsync(memoryStream);
+                        byte[] imageBytes = memoryStream.ToArray();
+                        imageBase64 = Convert.ToBase64String(imageBytes);
+                    }
+                }
             }
-          User u = await _context.Users.Where(t=>t.email == Session.email).FirstOrDefaultAsync();
+
+            Blog.img = imageBase64;
+            User u = await _context.Users.Where(t=>t.email == Session.email).FirstOrDefaultAsync();
                 Blog.userId = u.id;
                 Blog.createdDate = DateTime.Now;
                 Blog.updatedDate = DateTime.Now;

@@ -17,6 +17,6 @@ namespace Service.Model
         public DateTime createdDate { get; set; }
         public DateTime updatedDate { get; set; }
         public Guid userId { get; set; }
-        public  UserModel User { get; set; }
+        public  UserModel? User { get; set; }
     }
 }

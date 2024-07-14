@@ -54,6 +54,11 @@ namespace Repository.Repository
             return await _context.Blogs.FindAsync(id);
         }
 
+        public async Task<List<Blog>> Search(string txtsearch)
+        {
+          return await  _context.Blogs.Where(x => x.title.StartsWith(txtsearch)).ToListAsync();
+        }
+
         public async Task<bool> Update(Blog blog)
         {
             _context.Blogs.Update(blog);

@@ -63,6 +63,12 @@ namespace Service
             return _mapper.Map<BlogModel>(b);
         }
 
+        public async Task<List<BlogModel>> Search(string txtSearch)
+        {
+          var b = await _repository.Search(txtSearch);
+            return _mapper.Map<List<BlogModel>>(b);
+        }
+
         public async Task<bool> UpdateBlog(BlogModel blog)
         {
             Blog bg = _mapper.Map<Blog>(blog);
