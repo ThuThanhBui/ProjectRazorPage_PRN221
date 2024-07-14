@@ -23,6 +23,10 @@
                 <input asp-for="Blog.content" class="form-control" />
                 <span asp-validation-for="Blog.content" class="text-danger"></span>
                 </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input type="file" id="fileInput" class="form-control-file" name="img" />
+            </div>
             <!--       <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Blog.isDeleted" /> @Html.DisplayNameFor(model => model.Blog.isDeleted)

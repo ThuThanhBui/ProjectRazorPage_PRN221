@@ -19,10 +19,18 @@
 <div class="container mx-auto mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
+           <form asp-page-handler="Search" method="post">
+            <div class="d-flex mb-3 mt-3" style="width: 100%; height: 40px">
+                    <input class="w-100" value="@Model.txtSearch" name="txtSearch" />
+                <button class="btn-blue" type="submit" style="padding-inline:8px ; width: 20%">Search</button>
+            </div>
+            </form>
             @foreach (var post in Model.Blog)
             {
-                <a asp-page="./PostDetail" asp-route-id="@post.id" class="text-decoration-none">
-                    <div class="post" style="width: 100%; color: black;">
+                if (post != null && post.id != null)
+                {
+                    <a asp-page="./PostDetail" asp-route-id="@post.id" class="text-decoration-none">
+                        <div class="post" style="width: 100%; color: black;">
                         <div class="row no-gutters">
                             <div class="col-md-4">
                                 <img src="https://i.imgur.com/ZTkt4I5.jpg" class="img-fluid h-100" alt="...">
@@ -34,7 +42,7 @@
                                             <img src="https://i.imgur.com/ZTkt4I5.jpg" class="rounded-circle avatar-img" alt="User Avatar">
                                         </div>
                                         <div class="ml-3">
-                                            <strong>@post.User.FullName</strong><br>
+                                            <strong>@(post.User?.FullName ?? "Anonymous")</strong><br>
                                             <small class="text-muted">@post.createdDate</small>
                                         </div>
                                     </div>
@@ -44,9 +52,13 @@
                         </div>
                     </div>
                 </a>
+                }
             }
+
 
         </div>
     </div>
 </div>
+
+
 

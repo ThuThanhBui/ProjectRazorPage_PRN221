@@ -15,5 +15,6 @@ namespace Service.Interface
         public Task<List<BlogModel>> GetAllBlogs();
         public Task<List<BlogModel>> GetAllBlogsById(Guid userid);
         public Task<BlogModel> GetBlogById(Guid id);
+        public Task<List<BlogModel>> Search(string txtSearch);
     }
 }

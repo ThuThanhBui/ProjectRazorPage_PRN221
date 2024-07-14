@@ -41,8 +41,9 @@ namespace PRN221.Pages.VoucherPages
             {
                 return Page();
             }
-         
-        var v =  await _service.Add(Voucher);
+         Voucher.createdDate = DateTime.Now;
+            Voucher.updatedDate = DateTime.Now;
+            var v =  await _service.Add(Voucher);
             if (v)
             {
                 TempData["Message"] = "Added Successfully.";
