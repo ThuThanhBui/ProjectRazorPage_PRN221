@@ -76,5 +76,10 @@ namespace Repository.Repository
             return await _context.Products.Where(p => p.brand == brand) .ToListAsync();
 
         }
+
+        public async Task<List<Product>> Search(string keyword)
+        {
+            return await _context.Products.Where(p => p.name.ToLower().Contains(keyword.ToLower())).ToListAsync();
+        }
     }
 }

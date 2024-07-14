@@ -3,6 +3,7 @@ using Data.Entities;
 using Repository.Repository.Interface;
 using Service.Interface;
 using Service.Model;
+using System.Collections.Generic;
 using System.Security.Principal;
 
 namespace Service
@@ -24,7 +25,7 @@ namespace Service
             {
                 return await _productRepository.Add(_mapper.Map<Product>(model));
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -82,7 +83,7 @@ namespace Service
         {
             try
             {
-                return  _mapper.Map<ProductModel>(await _productRepository.GetById(id));
+                return _mapper.Map<ProductModel>(await _productRepository.GetById(id));
             }
             catch (Exception ex)
             {
@@ -95,6 +96,18 @@ namespace Service
             try
             {
                 return _mapper.Map<List<ProductModel>>(await _productRepository.GetByTypeId(id));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<ProductModel>> Search(string keyword)
+        {
+            try
+            {
+                return  _mapper.Map<List<ProductModel>>(await _productRepository.Search(keyword));
             }
             catch (Exception ex)
             {

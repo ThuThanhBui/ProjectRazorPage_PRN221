@@ -17,5 +17,6 @@ namespace Repository.Repository.Interface
         Task<bool> Add(Product product);
         Task<bool> DeleteById(Guid id);
         Task<bool> Update(Product product);
+        Task<List<Product>> Search(string keyword);
     }
 }
