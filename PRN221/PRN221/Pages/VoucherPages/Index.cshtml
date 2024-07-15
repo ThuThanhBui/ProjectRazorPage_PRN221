@@ -13,7 +13,7 @@
     </div>
 </form>
 <p>
-    <a asp-page="Create">Create New</a>
+    <a class="custom-link" asp-page="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -88,3 +88,37 @@
         }
     </tbody>
 </table>
+
+<style>
+    .btn-blue {
+        background-color: rgb(252, 200, 209);
+        color: rgb(209, 77, 114);
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .btn-blue:hover {
+            background-color: rgb(209, 77, 114);
+        }
+
+    .link-container {
+        margin-top: 20px;
+    }
+
+    .custom-link {
+        color: rgb(209, 77, 114);
+        text-decoration: none;
+        padding: 8px 12px;
+        background-color: rgb(252, 200, 209);
+        border-radius: 5px;
+    }
+
+        .custom-link:hover {
+            text-decoration: underline;
+            background-color: rgb(209, 77, 114);
+        }
+
+   
+</style>

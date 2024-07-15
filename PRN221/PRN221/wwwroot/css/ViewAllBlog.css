@@ -49,3 +49,15 @@ body {
     font-size: 1.5rem; /* Adjust the font size as needed */
     font-weight: bold;
 }
+.btn-blue {
+    background-color: rgb(252, 200, 209);
+    color: rgb(209, 77, 114);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .btn-blue:hover {
+        background-color: aliceblue;
+    }
