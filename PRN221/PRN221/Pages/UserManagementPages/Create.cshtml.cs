@@ -33,7 +33,7 @@ namespace PRN221.Pages.UserManagement
         {
             User.IsDeleted = false;
             User.CreatedDate = DateTime.Now;
-            User.UpdatedDate = DateTime.Now;
+            User.LastUpdatedDate = DateTime.Now;
 
             var addSuccess = await _userService.AddUser(User);
             if (addSuccess)

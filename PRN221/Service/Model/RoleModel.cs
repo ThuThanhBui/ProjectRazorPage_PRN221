@@ -8,7 +8,7 @@ namespace Service.Model
 {
     public class RoleModel
     {
-        public Guid id { get; set; }
-        public string roleName { get; set; }
+        public Guid Id { get; set; }
+        public string RoleName { get; set; }
     }
 }

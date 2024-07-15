@@ -4,104 +4,132 @@ using Repository.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository.Repository
 {
-	public class UserRepository : IUserRepository
-	{
-		private readonly PRNDbContext context;
+    public class UserRepository : IUserRepository
+    {
+        private readonly PRNDbContext _context;
 
-		public UserRepository(PRNDbContext _context) 
-		{
-			context = _context;
-		}
+        public UserRepository(PRNDbContext context)
+        {
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+        }
 
-		public async Task<bool> Add(User user)
-		{
-			try
-			{
+        public async Task<bool> Add(User user)
+        {
+            try
+            {
                 if (user == null)
                 {
                     throw new ArgumentNullException(nameof(user));
                 }
-                var existingUser = await context.Users.FirstOrDefaultAsync(u => u.email == user.email);
+
+                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
                 if (existingUser != null)
                 {
-                    return false;
+                    return false; // User already exists
                 }
 
-                await context.Users.AddAsync(user);
-				return await context.SaveChangesAsync() > 0;
+                await _context.Users.AddAsync(user);
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error adding user", ex);
+            }
+        }
 
-				return true;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-
-		}
-
-		public async Task<User> Login(string email, string password)
-		{
-			try
-			{
-				var user = await context.Users.Where(u => u.email == email && u.password == password).Include(m => m.Role).FirstOrDefaultAsync();
-
-				return user;
-			} catch (Exception ex)
-			{
-				throw new Exception(ex.Message);
-			}
-		}
-
-        //XuanViet]
-        public async Task<bool> AddUser(User user)
+        public async Task<User> Login(string email, string password)
         {
-            await context.Users.AddAsync(user);
-            return await context.SaveChangesAsync() > 0;
+            try
+            {
+                var user = await _context.Users
+                    .Where(u => u.Email == email && u.Password == password)
+                    .Include(u => u.Role)
+                    .FirstOrDefaultAsync();
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error during login", ex);
+            }
         }
 
         public async Task<bool> Update(User user)
         {
-            var u = await GetById(user.id);
-            u.fullName = user.fullName;
-            u.email = user.email;
-            u.isDeleted = user.isDeleted;
-            u.telephone = user.telephone;
-            u.gender = user.gender;
-            u.address = user.address;
-            u.roleId = user.roleId;
-            u.createdDate = user.createdDate;
-            u.updatedDate = user.updatedDate;
+            try
+            {
+                var existingUser = await GetById(user.Id);
+                if (existingUser == null)
+                {
+                    return false; // User not found
+                }
 
-            return await context.SaveChangesAsync() > 0;
+                // Update properties
+                existingUser.FullName = user.FullName;
+                existingUser.Email = user.Email;
+                existingUser.IsDeleted = user.IsDeleted;
+                existingUser.Telephone = user.Telephone;
+                existingUser.Gender = user.Gender;
+                existingUser.Address = user.Address;
+                existingUser.RoleId = user.RoleId;
+                existingUser.CreatedDate = user.CreatedDate;
+                existingUser.LastUpdatedDate = user.LastUpdatedDate;
+
+                _context.Users.Update(existingUser);
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error updating user", ex);
+            }
         }
 
         public async Task<bool> Delete(Guid id)
         {
-            var user = await GetById(id);
-            if (user == null)
+            try
             {
-                return false;
-            }
+                var user = await GetById(id);
+                if (user == null)
+                {
+                    return false; // User not found
+                }
 
-            user.isDeleted = true;
-            context.Users.Update(user);
-            return await context.SaveChangesAsync() > 0;
+                user.IsDeleted = true;
+                _context.Users.Update(user);
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error deleting user", ex);
+            }
         }
-            
+
         public async Task<List<User>> GetAll()
         {
-            return await context.Users.Include(u => u.Role).ToListAsync();
+            try
+            {
+                return await _context.Users.Include(u => u.Role).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error retrieving all users", ex);
+            }
         }
 
         public async Task<User> GetById(Guid id)
         {
-            return await context.Users.Where(u => u.id == id).SingleOrDefaultAsync();
+            try
+            {
+                return await _context.Users.Where(u => u.Id == id).SingleOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException($"Error retrieving user by Id: {id}", ex);
+            }
         }
-
     }
 }

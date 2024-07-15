@@ -4,7 +4,6 @@ using Repository.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository.Repository
@@ -15,7 +14,7 @@ namespace Repository.Repository
 
         public OrderXProductRepository(PRNDbContext context)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public async Task<bool> Add(OrderXProduct op)
@@ -24,49 +23,94 @@ namespace Repository.Repository
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> DeleteAllByOrderId(Guid id)
+        public async Task<bool> DeleteAllByOrderId(Guid orderId)
         {
-            foreach (var op in _context.OrderXProducts)
+            try
             {
-                if(op.orderId == id)
+                var orderProducts = await _context.OrderXProducts
+                    .Where(op => op.OrderId == orderId)
+                    .ToListAsync();
+
+                if (orderProducts != null && orderProducts.Any())
+                {
+                    _context.OrderXProducts.RemoveRange(orderProducts);
+                    return await _context.SaveChangesAsync() > 0;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // Handle or log the exception
+                throw new ApplicationException("Error deleting order products", ex);
+            }
+        }
+
+        public async Task<bool> DeleteOne(Guid orderId, Guid productId)
+        {
+            try
+            {
+                var op = await _context.OrderXProducts
+                    .FirstOrDefaultAsync(op => op.OrderId == orderId && op.ProductId == productId);
+
+                if (op != null)
                 {
                     _context.OrderXProducts.Remove(op);
+                    return await _context.SaveChangesAsync() > 0;
                 }
+
+                return false;
             }
-            return await _context.SaveChangesAsync() > 0;
+            catch (Exception ex)
+            {
+                // Handle or log the exception
+                throw new ApplicationException("Error deleting order product", ex);
+            }
         }
 
-        public async Task<bool> DeleteOne(Guid oId, Guid pId)
+        public async Task<List<OrderXProduct>> GetByOrderId(Guid orderId)
         {
-            var op = await _context.OrderXProducts.Where(op => 
-                                op.orderId == oId && op.productId == pId).FirstOrDefaultAsync();
-            _context.OrderXProducts.Remove(op);
-            return await _context.SaveChangesAsync() > 0;
-
+            return await _context.OrderXProducts
+                .Where(op => op.OrderId == orderId)
+                .Include(op => op.Product)
+                .ToListAsync();
         }
 
-        public async Task<List<OrderXProduct>> GetByOrderId(Guid id)
+        public async Task<List<OrderXProduct>> GetByProductId(Guid productId)
         {
-            return await _context.OrderXProducts.Where(op => op.orderId == id).Include(op => op.Product).ToListAsync();
+            return await _context.OrderXProducts
+                .Where(op => op.ProductId == productId)
+                .ToListAsync();
         }
 
-        public async Task<List<OrderXProduct>> GetByProductId(Guid id)
+        public async Task<OrderXProduct> GetOne(Guid orderId, Guid productId)
         {
-            return await _context.OrderXProducts.Where(op => op.productId == id).ToListAsync();
-        }
-
-        public async Task<OrderXProduct> GetOne(Guid oId, Guid pId)
-        {
-            return await _context.OrderXProducts.Where(op => op.orderId == oId && op.productId ==pId)
-                .Include(op => op.Order).Include(op => op.Product).FirstOrDefaultAsync();
+            return await _context.OrderXProducts
+                .Where(op => op.OrderId == orderId && op.ProductId == productId)
+                .Include(op => op.Order)
+                .Include(op => op.Product)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<bool> Update(OrderXProduct op)
         {
-            var getOp = await GetOne(op.orderId, op.productId);
-            getOp.quantity = op.quantity;
+            try
+            {
+                var existingOp = await GetOne(op.OrderId.Value, op.ProductId.Value);
 
-            return await _context.SaveChangesAsync() > 0;
+                if (existingOp != null)
+                {
+                    existingOp.Quantity = op.Quantity;
+                    return await _context.SaveChangesAsync() > 0;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // Handle or log the exception
+                throw new ApplicationException("Error updating order product", ex);
+            }
         }
     }
 }

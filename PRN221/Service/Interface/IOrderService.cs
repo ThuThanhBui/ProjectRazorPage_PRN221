@@ -15,7 +15,7 @@ namespace Service.Interface
         Task<bool> Add(OrderModel model);
         Task<bool> DeleteById(Guid id);
         Task<bool> Update(OrderModel model);
-        Task<List<OrderModel>> GetByStatus(string status);
+        Task<List<OrderModel>> GetByStatus(string Status);
 
     }
 }

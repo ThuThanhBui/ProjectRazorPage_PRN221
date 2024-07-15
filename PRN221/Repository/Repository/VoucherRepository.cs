@@ -27,7 +27,7 @@ namespace Repository.Repository
         public async Task<bool> DeleteById(Guid id)
         {
             Voucher voucher = await GetById(id);
-            voucher.isDeleted = true;
+            voucher.IsDeleted = true;
             _context.Vouchers.Update(voucher);
             return await _context.SaveChangesAsync() > 0;
         }
@@ -46,7 +46,7 @@ namespace Repository.Repository
 
         public async Task<Voucher> GetById(Guid id)
         {
-            return await _context.Vouchers.Where(m => m.id == id).Include(m => m.voucherType).SingleOrDefaultAsync();
+            return await _context.Vouchers.Where(m => m.Id == id).Include(m => m.VoucherType).SingleOrDefaultAsync();
         }
 
         public async Task<bool> Update(Voucher voucher)

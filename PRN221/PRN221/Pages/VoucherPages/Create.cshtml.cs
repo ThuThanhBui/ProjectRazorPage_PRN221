@@ -26,23 +26,24 @@ namespace PRN221.Pages.VoucherPages
         public List<VoucherType> VoucherTypes { get; set; } = default;
         public async Task OnGetAsync()
         {
-            VoucherTypes = await _context.VoucherTypes.ToListAsync();   
-       
+            VoucherTypes = await _context.VoucherTypes.ToListAsync();
+
         }
 
         [BindProperty]
         public VoucherModel Voucher { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || Voucher == null)
+            if (!ModelState.IsValid || Voucher == null)
             {
                 return Page();
             }
-         
-        var v =  await _service.Add(Voucher);
+            Voucher.CreatedDate = DateTime.Now;
+            Voucher.LastUpdatedDate = DateTime.Now;
+            var v = await _service.Add(Voucher);
             if (v)
             {
                 TempData["Message"] = "Added Successfully.";

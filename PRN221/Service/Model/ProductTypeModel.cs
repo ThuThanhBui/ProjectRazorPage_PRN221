@@ -8,7 +8,7 @@ namespace Service.Model
 {
     public class ProductTypeModel
     {
-        public Guid id { get; set; }
-        public string productType { get; set; }
+        public Guid Id { get; set; }
+        public string ProductTypeName { get; set; }
     }
 }

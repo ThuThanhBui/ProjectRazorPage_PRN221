@@ -17,7 +17,8 @@ namespace PRN221.Pages.VoucherPages
         {
             _context = context;
         }
-
+        [BindProperty]
+        public string txtSearch { get; set; }
         public IList<Voucher> Voucher { get;set; } = default!;
 
         public async Task OnGetAsync()
@@ -25,8 +26,19 @@ namespace PRN221.Pages.VoucherPages
             if (_context.Vouchers != null)
             {
                 Voucher = await _context.Vouchers
-                .Include(v => v.voucherType).ToListAsync();
+                .Include(v => v.VoucherType).ToListAsync();
             }
+        }
+        public async Task<IActionResult> OnPostAsync(string txtSearch)
+        {
+            if (string.IsNullOrEmpty(txtSearch))
+            {
+                await OnGetAsync();
+                return Page();
+            }
+
+            Voucher = await _context.Vouchers.Where(x => x.VoucherName.StartsWith(txtSearch)).ToListAsync();
+            return Page();
         }
     }
 }

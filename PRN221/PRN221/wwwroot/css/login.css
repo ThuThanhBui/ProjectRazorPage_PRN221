@@ -1,4 +1,4 @@
-﻿.login-container {
+﻿/*.login-container {
     max-width: 400px;
     margin: auto;
     padding: 20px;
@@ -38,3 +38,108 @@
 .login-logo img {
     max-width: 150px;
 }
+*/
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fef2f4;
+}
+
+.login-container {
+    display: flex;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.login-left {
+    flex: 1;
+    padding: 2rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-logo img {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+.login-left h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.login-left p {
+    margin: 20px 0;
+    color: #666;
+}
+
+.login-left .form-group {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+    .login-left .form-group input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+.login-left .btn-login {
+    width: 100%;
+    padding: 0.5rem;
+    background: linear-gradient(90deg, #d14d72, #ffabab);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+    .login-left .btn-login:hover {
+        background: linear-gradient(90deg, #ffabab, #d14d72);
+    }
+
+.login-left .create-account {
+    margin-top: 1rem;
+    color: #d14d72;
+}
+
+    .login-left .create-account a {
+        color: #d14d72;
+        text-decoration: none;
+        padding: 0.5rem;
+        border-radius: 5px;
+        /* Remove border */
+        border: none;
+    }
+
+.login-right {
+    flex: 1;
+    background: linear-gradient(90deg, #d14d72, #ffabab);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+    .login-right h3 {
+        margin: 0 0 1rem;
+        font-size: 1.5rem;
+    }
+
+    .login-right p {
+        margin: 0;
+    }

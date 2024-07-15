@@ -32,7 +32,7 @@ namespace Repository.Repository
                 return false;
             }
 
-            blog.isDeleted = true;
+            blog.IsDeleted = true;
             _context.Blogs.Update(blog); ;
             return await _context.SaveChangesAsync() > 0;
         }
@@ -45,13 +45,18 @@ namespace Repository.Repository
 
         public async Task<List<Blog>> GetAllById(Guid userid)
         {
-            List<Blog> list = await _context.Blogs.Where(x => x.userId == userid).ToListAsync();
+            List<Blog> list = await _context.Blogs.Where(x => x.Id == userid).ToListAsync();
             return list;
         }
 
         public async Task<Blog> GetById(Guid id)
         {
             return await _context.Blogs.FindAsync(id);
+        }
+
+        public async Task<List<Blog>> Search(string txtsearch)
+        {
+          return await  _context.Blogs.Where(x => x.Title.StartsWith(txtsearch)).ToListAsync();
         }
 
         public async Task<bool> Update(Blog blog)

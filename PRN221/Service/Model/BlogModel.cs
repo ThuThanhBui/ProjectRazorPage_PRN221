@@ -7,16 +7,14 @@ using System.Threading.Tasks;
 
 namespace Service.Model
 {
-    public class BlogModel
+    public class BlogModel : BaseModel
     {
-        public Guid id { get; set; }
-        public string? img { get; set; }
-        public string title { get; set; }
-        public string content { get; set; }
-        public bool isDeleted { get; set; }
-        public DateTime createdDate { get; set; }
-        public DateTime updatedDate { get; set; }
-        public Guid userId { get; set; }
-        public  UserModel User { get; set; }
+        public string? Image { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+
+        public Guid UserId { get; set; }
+        public UserModel? User { get; set; }
     }
+
 }

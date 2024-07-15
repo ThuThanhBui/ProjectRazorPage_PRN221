@@ -54,7 +54,7 @@ namespace PRN221.Pages.BlogPages
 
            if(Blog != null)
             {
-                Blog.updatedDate = DateTime.UtcNow;
+                Blog.LastUpdatedDate = DateTime.UtcNow;
              var up =   await _service.UpdateBlog(Blog);
                 if (up)
                 {
@@ -69,7 +69,7 @@ namespace PRN221.Pages.BlogPages
 
         //private bool BlogExists(Guid id)
         //{
-        //  return (_context.Blogs?.Any(e => e.id == id)).GetValueOrDefault();
+        //  return (_context.Blogs?.Any(e => e.Id == id)).GetValueOrDefault();
         //}
     }
 }

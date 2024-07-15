@@ -18,8 +18,9 @@ namespace PRN221.Pages.BlogPages
             _context = context;
         }
 
-        public IList<Blog> Blog { get;set; } = default!;
-
+        public IList<Blog> Blog { get; set; } = default!;
+        [BindProperty]
+        public string txtSearch { get; set; }
         public async Task OnGetAsync()
         {
             if (_context.Blogs != null)
@@ -27,6 +28,19 @@ namespace PRN221.Pages.BlogPages
                 Blog = await _context.Blogs
                 .Include(b => b.User).ToListAsync();
             }
+        }
+        public async Task<IActionResult> OnPostAsync(string txtSearch)
+        {
+            if (string.IsNullOrEmpty(txtSearch))
+            {
+                await OnGetAsync();
+                return Page();
+            }
+
+            Blog = _context.Blogs.Where(x => x.Title.StartsWith(txtSearch)).ToList();
+            return Page();
+
+
         }
     }
 }

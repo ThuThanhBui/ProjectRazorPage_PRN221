@@ -40,51 +40,55 @@ namespace PRN221.Pages.OrderPages
 
             vouchers = await _voucherService.GetAll();
 
-            orderXProducts = await _orderXProductService.GetByOrderId(Order.id);
+            orderXProducts = await _orderXProductService.GetByOrderId(Order.Id.Value);
 
         }
 
         public async Task<IActionResult> OnPostAsync(Guid id)
         {
             var order = await _orderService.GetById(id);
-            //orderXProducts = await _orderXProductService.GetByOrderId(Order.id);
+            // orderXProducts = await _orderXProductService.GetByOrderId(Order.Id);
             decimal total = 0;
             List<OrderXProductModel> list = new List<OrderXProductModel>();
+
             foreach (var item in orderXProducts)
             {
-                list.Add(await _orderXProductService.GetOne(item.orderId, item.productId));
+                list.Add(await _orderXProductService.GetOne(item.OrderId, item.ProductId));
             }
+
             for (int i = 0; i < list.Count; i++)
             {
-                list[i].quantity = orderXProducts[i].quantity;
+                list[i].Quantity = orderXProducts[i].Quantity;
                 await _orderXProductService.Update(list[i]);
-                total += list[i].Product.price * list[i].quantity;
-                //var op = await _orderXProductService.GetOne(item.orderId, item.productId);
-                //if (op != null)
-                //{
-                //    op.quantity = item.quantity;
-                //    await _orderXProductService.Update(op);
-                //    total += item.Product.price * item.quantity;
-                //}
+                total += list[i].Product.Price * list[i].Quantity;
+                // var op = await _orderXProductService.GetOne(item.orderId, item.productId);
+                // if (op != null)
+                // {
+                //     op.Quantity = item.Quantity;
+                //     await _orderXProductService.Update(op);
+                //     total += item.Product.Price * item.Quantity;
+                // }
             }
 
-            if (Order.voucherId.HasValue)
+            if (Order.VoucherId.HasValue)
             {
-                VoucherModel voucher = await _voucherService.GetById((Guid)Order.voucherId);
-                if (voucher.voucherType.typeName == "Percentage Discount Voucher")
+                VoucherModel voucher = await _voucherService.GetById((Guid)Order.VoucherId);
+                if (voucher.VoucherType.VoucherTypeName == "Percentage Discount Voucher")
                 {
-                    total = total / 100 * (100 - voucher.content);
+                    total = total / 100 * (100 - voucher.Content);
                 }
-                else if (voucher.voucherType.typeName == "Fixed Discount Voucher")
+                else if (voucher.VoucherType.VoucherTypeName == "Fixed Discount Voucher")
                 {
-                    total = total - voucher.content;
+                    total = total - voucher.Content;
                 }
             }
-            Order.totalPrice = total;
+
+            Order.TotalPrice = total;
             order = Order;
-            order.updatedDate = DateTime.Now;
+            order.LastUpdatedDate = DateTime.Now;
 
             bool updateSuccess = await _orderService.Update(order);
+
             if (updateSuccess)
             {
                 return RedirectToPage("/OrderPages/Index");
@@ -94,5 +98,6 @@ namespace PRN221.Pages.OrderPages
                 return Page();
             }
         }
+
     }
 }

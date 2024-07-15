@@ -25,13 +25,13 @@ namespace Repository.Repository
 
         public async Task<ProductType> GetById(Guid id)
         {
-            return await _context.ProductTypes.Where(o => o.id == id).SingleOrDefaultAsync();
+            return await _context.ProductTypes.Where(o => o.Id == id).SingleOrDefaultAsync();
         }
 
         public async Task<bool> Update(ProductType productType)
         {
-            var o = await GetById(productType.id);
-            o.productType = productType.productType;
+            var o = await GetById(productType.Id);
+            o.ProductTypeName = productType.ProductTypeName;
 
             return await _context.SaveChangesAsync() > 0;
         }

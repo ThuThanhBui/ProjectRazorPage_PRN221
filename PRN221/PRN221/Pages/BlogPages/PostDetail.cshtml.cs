@@ -21,7 +21,7 @@ namespace PRN221.Pages.BlogPages
                 return NotFound();
             }
 
-            var blog = await _context.Blogs.Include(b => b.User).FirstOrDefaultAsync(m => m.id == id);
+            var blog = await _context.Blogs.Include(b => b.User).FirstOrDefaultAsync(m => m.Id == id);
             if (blog == null)
             {
                 return NotFound();

@@ -32,7 +32,7 @@ namespace PRN221.Pages.UserManagement
 
         public async Task<IActionResult> OnPostAsync()
         {
-            User.UpdatedDate = DateTime.Now;
+            User.LastUpdatedDate = DateTime.Now;
 
             var updateSuccess = await _userService.Update(User);
             if (updateSuccess)
@@ -42,7 +42,7 @@ namespace PRN221.Pages.UserManagement
             }
             else
             {
-                await OnGetAsync(User.Id);
+                await OnGetAsync(User.Id.Value);
                 return Page();
             }
         }

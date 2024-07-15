@@ -2,54 +2,58 @@
 @model PRN221.Pages.BlogPages.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Blog Details";
 }
 
 <h1>Details</h1>
 
+@if (Model.Blog != null)
+{
+    <div>
+        <h4>Blog</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Blog.Title)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Blog.Title)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Blog.Content)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Blog.Content)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Blog.IsDeleted)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Blog.IsDeleted)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Blog.CreatedDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Blog.CreatedDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Blog.LastUpdatedDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Blog.LastUpdatedDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Blog.User)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Blog.User != null ? model.Blog.User.Email : "")
+            </dd>
+        </dl>
+    </div>
+}
+
 <div>
-    <h4>Blog</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Blog.title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Blog.title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Blog.content)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Blog.content)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Blog.isDeleted)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Blog.isDeleted)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Blog.createdDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Blog.createdDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Blog.updatedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Blog.updatedDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Blog.User)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Blog.User.email)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Blog?.id">Edit</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.Blog?.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>

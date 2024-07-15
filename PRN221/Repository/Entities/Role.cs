@@ -7,8 +7,8 @@ namespace Data.Entities
     public class Role
     {
         [Key]
-        public Guid id { get; set; }
-        public string roleName { get; set; }
+        public Guid Id { get; set; }
+        public string RoleName { get; set; }
 
         public virtual ICollection<User>? Users { get; set; }
     }

@@ -14,18 +14,22 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Blog.title" class="control-label"></label>
-                <input asp-for="Blog.title" class="form-control" />
-                <span asp-validation-for="Blog.title" class="text-danger"></span>
+                <label asp-for="Blog.Title" class="control-label"></label>
+                <input asp-for="Blog.Title" class="form-control" />
+                <span asp-validation-for="Blog.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Blog.content" class="control-label"></label>
-                <input asp-for="Blog.content" class="form-control" />
-                <span asp-validation-for="Blog.content" class="text-danger"></span>
+                <label asp-for="Blog.Content" class="control-label"></label>
+                <input asp-for="Blog.Content" class="form-control" />
+                <span asp-validation-for="Blog.Content" class="text-danger"></span>
                 </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input type="file" id="fileInput" class="form-control-file" name="img" />
+            </div>
             <!--       <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Blog.isDeleted" /> @Html.DisplayNameFor(model => model.Blog.isDeleted)
+                    <input class="form-check-input" asp-for="Blog.IsDeleted" /> @Html.DisplayNameFor(model => model.Blog.IsDeleted)
                 </label>
             </div>
           

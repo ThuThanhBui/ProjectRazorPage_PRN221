@@ -18,7 +18,7 @@ namespace Repository.Repository
         }
         public async Task<Role> getRoleByName(string roleName)
         {
-            return await _context.Roles.Where(r => r.roleName == roleName).FirstOrDefaultAsync();
+            return await _context.Roles.Where(r => r.RoleName == roleName).FirstOrDefaultAsync();
         }
 
         public async Task<List<Role>> GetAll()
