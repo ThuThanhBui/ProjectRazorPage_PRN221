@@ -25,7 +25,7 @@
                         <div class="post-body mt-3">
                             <h5>@Html.DisplayFor(model => model.Blog.Title)</h5>
                             <p>@Html.DisplayFor(model => model.Blog.Content)</p>
-                            <img src="https://i.imgur.com/ZTkt4I5.jpg" class="img-fluid h-100"
+                            <img src="data:image/png;base64,@Model.Blog.Image" class="img-fluid h-100"
                                  alt="Blog Image">
                         </div>
                     </div>
