@@ -33,13 +33,13 @@
                         <div class="post" style="width: 100%; color: black;">
                         <div class="row no-gutters">
                             <div class="col-md-4">
-                                <img src="https://i.imgur.com/ZTkt4I5.jpg" class="img-fluid h-100" alt="...">
+                                    <img src="data:image/png;base64,@post.Image" class="img-fluid fixed-size-img" alt="image-blog">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center post-header">
                                         <div class="text-center mr-3">
-                                            <img src="https://i.imgur.com/ZTkt4I5.jpg" class="rounded-circle avatar-img" alt="User Avatar">
+                                                <img src="https://i.imgur.com/ZTkt4I5.jpg" class="rounded-circle avatar-img" alt="User Avatar">
                                         </div>
                                         <div class="ml-3">
                                             <strong>@(post.User?.FullName ?? "Anonymous")</strong><br>
@@ -58,7 +58,31 @@
 
         </div>
     </div>
+    <div class="page-size">
+        @if (Model.CurrentPage > 1)
+        {
+            <a asp-page="./ViewAllBlog" asp-route-pageNumber="@(Model.CurrentPage - 1)" class="btn btn-primary">Previous</a>
+        }
+        else
+        {
+            <a class="btn btn-primary disabled" aria-disabled="true">Previous</a>
+        }
+
+        <span>Page @Model.CurrentPage to @Model.TotalPages</span>
+
+        @if (Model.CurrentPage < Model.TotalPages)
+        {
+            <a asp-page="./ViewAllBlog" asp-route-pageNumber="@(Model.CurrentPage + 1)" class="btn btn-primary">Next</a>
+        }
+        else
+        {
+            <a class="btn btn-primary disabled" aria-disabled="true">Next</a>
+        }
+    </div>
+
+
 </div>
+
 
 
 

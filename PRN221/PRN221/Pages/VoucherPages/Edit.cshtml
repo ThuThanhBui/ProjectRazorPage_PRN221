@@ -14,6 +14,7 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Voucher.Id" />
+            <input type="hidden" asp-for="Voucher.IsDeleted" />
             <div class="form-group">
                 <label asp-for="Voucher.VoucherName" class="control-label"></label>
                 <input asp-for="Voucher.VoucherName" class="form-control" />
@@ -38,11 +39,6 @@
                 <label asp-for="Voucher.EndDate" class="control-label"></label>
                 <input asp-for="Voucher.EndDate" class="form-control" />
                 <span asp-validation-for="Voucher.EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Voucher.IsDeleted" /> @Html.DisplayNameFor(model => model.Voucher.IsDeleted)
-                </label>
             </div>
             <div class="form-group">
                 <label asp-for="Voucher.CreatedDate" class="control-label"></label>

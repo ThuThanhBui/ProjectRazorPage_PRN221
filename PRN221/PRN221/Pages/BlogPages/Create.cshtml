@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Blog.Title" class="control-label"></label>
@@ -25,8 +25,10 @@
                 </div>
             <div class="form-group">
                 <label>Image</label>
-                <input type="file" id="fileInput" class="form-control-file" name="img" />
+                <input type="file" id="fileInput" class="form-control-file" name="Img" />
             </div>
+
+         
             <!--       <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Blog.IsDeleted" /> @Html.DisplayNameFor(model => model.Blog.IsDeleted)

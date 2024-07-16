@@ -61,3 +61,14 @@ body {
     .btn-blue:hover {
         background-color: aliceblue;
     }
+
+.fixed-size-img {
+    width: 100%; /* Adjust width as needed */
+    height: 200px; /* Adjust height as needed */
+    object-fit: cover; /* This ensures the image covers the specified dimensions without distortion */
+}
+.page-size {
+    margin-bottom: 100px; /* Adjust the value as needed */
+    text-align: center; /* Center align pagination controls */
+}
+

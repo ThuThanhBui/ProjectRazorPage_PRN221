@@ -23,9 +23,22 @@ namespace PRN221.Pages.BlogPages
         public IList<BlogModel> Blog { get; set; } = new List<BlogModel>();
         [BindProperty]
         public string txtSearch { get; set; }
-        public async Task OnGetAsync()
+        public int CurrentPage { get; set; }
+        public int TotalPages { get; set; }
+        public async Task OnGetAsync(int pagenumber = 1)
         {
+            CurrentPage = pagenumber;
+            int pagesize = 5;
             Blog = await _service.GetAllBlogs();
+            if (Blog == null)
+            {
+                TotalPages = 1;
+            }
+            else
+            {
+                TotalPages = (int)Math.Ceiling(Blog.Count() / (double)pagesize);
+                Blog = Blog.Skip((CurrentPage - 1) * pagesize).Take(pagesize).ToList();
+            }
         }
 
         public async Task<IActionResult> OnPostAsync(string txtSearch)
