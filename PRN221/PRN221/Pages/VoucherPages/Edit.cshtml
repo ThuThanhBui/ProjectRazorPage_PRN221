@@ -14,7 +14,6 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Voucher.Id" />
-            <input type="hidden" asp-for="Voucher.IsDeleted" />
             <div class="form-group">
                 <label asp-for="Voucher.VoucherName" class="control-label"></label>
                 <input asp-for="Voucher.VoucherName" class="form-control" />
@@ -49,6 +48,14 @@
                 <label asp-for="Voucher.LastUpdatedDate" class="control-label"></label>
                 <input asp-for="Voucher.LastUpdatedDate" class="form-control" />
                 <span asp-validation-for="Voucher.LastUpdatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Status</label>
+                <select asp-for="Voucher.IsDeleted" class="form-control">
+                    <option value="false">Active</option>
+                    <option value="true">Inactive</option>
+                </select>
+                <span asp-validation-for="Voucher.IsDeleted" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label>Voucher type</label>
