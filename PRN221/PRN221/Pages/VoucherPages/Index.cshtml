@@ -2,10 +2,10 @@
 @model PRN221.Pages.VoucherPages.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Voucher Management";
 }
 
-<h1>Index</h1>
+<h1>Voucher Management</h1>
 <form asp-page-handler="Search" method="post">
     <div class="d-flex mb-3 mt-3" style="width: 40%">
         <input class="w-100" type="text" value="@Model.txtSearch" name="txtSearch" placeholder="What do you want to search?" />
@@ -13,7 +13,7 @@
     </div>
 </form>
 <p>
-    <a asp-page="Create">Create New</a>
+    <a class="custom-link" asp-page="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -88,3 +88,37 @@
         }
     </tbody>
 </table>
+
+<style>
+    .btn-blue {
+        background-color: rgb(252, 200, 209);
+        color: rgb(209, 77, 114);
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .btn-blue:hover {
+            background-color: rgb(209, 77, 114);
+        }
+
+    .link-container {
+        margin-top: 20px;
+    }
+
+    .custom-link {
+        color: rgb(209, 77, 114);
+        text-decoration: none;
+        padding: 8px 12px;
+        background-color: rgb(252, 200, 209);
+        border-radius: 5px;
+    }
+
+        .custom-link:hover {
+            text-decoration: underline;
+            background-color: rgb(209, 77, 114);
+        }
+
+   
+</style>

@@ -11,10 +11,11 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Blog.Id" />
             <input type="hidden" asp-for="Blog.UserId" />
+           
             <div class="form-group">
                 <label asp-for="Blog.Title" class="control-label"></label>
                 <input asp-for="Blog.Title" class="form-control" />
@@ -25,11 +26,6 @@
                 <input asp-for="Blog.Content" class="form-control" />
                 <span asp-validation-for="Blog.Content" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Blog.IsDeleted" /> @Html.DisplayNameFor(model => model.Blog.IsDeleted)
-                </label>
-            </div>
             <div class="form-group">
                 <label asp-for="Blog.CreatedDate" class="control-label"></label>
                 <input asp-for="Blog.CreatedDate" class="form-control" />
@@ -39,6 +35,18 @@
                 <label asp-for="Blog.LastUpdatedDate" class="control-label"></label>
                 <input asp-for="Blog.LastUpdatedDate" class="form-control" />
                 <span asp-validation-for="Blog.LastUpdatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Status</label>
+                <select asp-for="Blog.IsDeleted" class="form-control">
+                    <option value="false">Active</option>
+                    <option value="true">Inactive</option>
+                </select>
+                <span asp-validation-for="Blog.IsDeleted" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input type="file" id="fileInput" class="form-control-file" name="Img" />
             </div>
 
       <!--     <div class="form-group">

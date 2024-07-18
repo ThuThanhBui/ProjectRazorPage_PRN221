@@ -49,3 +49,26 @@ body {
     font-size: 1.5rem; /* Adjust the font size as needed */
     font-weight: bold;
 }
+.btn-blue {
+    background-color: rgb(252, 200, 209);
+    color: rgb(209, 77, 114);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .btn-blue:hover {
+        background-color: aliceblue;
+    }
+
+.fixed-size-img {
+    width: 100%; /* Adjust width as needed */
+    height: 200px; /* Adjust height as needed */
+    object-fit: cover; /* This ensures the image covers the specified dimensions without distortion */
+}
+.page-size {
+    margin-bottom: 100px; /* Adjust the value as needed */
+    text-align: center; /* Center align pagination controls */
+}
+
