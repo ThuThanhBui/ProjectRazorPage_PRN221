@@ -6,54 +6,45 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Data.Entities;
+using Repository.Repository.Interface;
 
 namespace PRN221.Pages.ProductManagement
 {
     public class DeleteModel : PageModel
     {
-        private readonly Data.Entities.PRNDbContext _context;
+        private readonly IProductRepository _productRepository;
 
-        public DeleteModel(Data.Entities.PRNDbContext context)
+        public DeleteModel(IProductRepository productRepository)
         {
-            _context = context;
+            _productRepository = productRepository;
         }
 
         [BindProperty]
-      public Product Product { get; set; } = default!;
+        public Product Product { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == null || _context.Products == null)
-            {
-                return NotFound();
-            }
-
-            var product = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _productRepository.GetById(id);
 
             if (product == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Product = product;
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid? id)
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
-            if (id == null || _context.Products == null)
-            {
-                return NotFound();
-            }
-            var product = await _context.Products.FindAsync(id);
+            var product = await _productRepository.GetById(id);
 
             if (product != null)
             {
                 Product = product;
-                _context.Products.Remove(Product);
-                await _context.SaveChangesAsync();
+                await _productRepository.DeleteById(id);
             }
 
             return RedirectToPage("./Index");

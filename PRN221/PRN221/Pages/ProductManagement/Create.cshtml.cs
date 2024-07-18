@@ -43,6 +43,7 @@ namespace PRN221.Pages.ProductManagement
             //    OnGetAsync();
             //    return Page();
             //}
+
             // Xử lý chuyển đổi ảnh sang base64 trong Razor Page Model
             string imageBase64 = null;
             if (img != null && img.Length > 0)

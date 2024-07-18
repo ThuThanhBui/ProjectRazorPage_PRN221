@@ -89,7 +89,7 @@ app.MapRazorPages();
 // Chuyển hướng đến Index.cshtml hoặc trang cụ thể khác
 app.MapGet("/", context =>
 {
-    context.Response.Redirect("/Home");
+    context.Response.Redirect("/AuthsPages/Login");
     return Task.CompletedTask;
 });
 
