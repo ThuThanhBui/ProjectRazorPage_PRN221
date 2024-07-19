@@ -17,21 +17,7 @@ buttons.forEach(function (button) {
         localStorage.setItem('chosenBrand', button.id);
     });
 });
-//----------------------------------------------------------
-//document.getElementById('fileInput').addEventListener('change', function (event) {
-//    const file = event.target.files[0];
-//    if (file) {
-//        const reader = new FileReader();
-//        reader.onload = function (e) {
-//            const img = document.createElement('img');
-//            img.src = e.target.result;
-//            const imageDisplay = document.getElementById('imageDisplay');
-//            imageDisplay.innerHTML = '';
-//            imageDisplay.appendChild(img);
-//        }
-//        reader.readAsDataURL(file);
-//    }
-//});
+
 document.getElementById('fileInput').addEventListener('change', function (event) {
     const file = event.target.files[0];
     if (file) {
@@ -46,5 +32,20 @@ document.getElementById('fileInput').addEventListener('change', function (event)
             imageDisplay.appendChild(img);
         }
         reader.readAsDataURL(file);
+    }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    var base64Image = "@Model.Product.Image";
+    if (base64Image) {
+        fetch("data:image;base64," + base64Image)
+            .then(res => res.blob())
+            .then(blob => {
+                var file = new File([blob], "productImage.jpg", { type: blob.type });
+                var dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                document.getElementById("fileInput").files = dataTransfer.files;
+            });
     }
 });

@@ -81,6 +81,18 @@ namespace Service
                 throw new Exception(ex.Message);
             }
         }
-        
+
+        //ThanhThu
+        public Task<bool> UpdateProfile(UserModel user)
+        {
+            try
+            {
+                return _userRepository.UpdateProfile(_mapper.Map<User>(user));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

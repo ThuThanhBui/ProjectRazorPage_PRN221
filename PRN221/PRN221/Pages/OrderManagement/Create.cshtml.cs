@@ -13,8 +13,8 @@ namespace PRN221.Pages.OrderPages
 {
     public class CreateModel : PageModel
     {
-        
-        
+
+
         //public async Task<IActionResult> OnPostAsync()
         //{
         //    if (!ModelState.IsValid || _context.Orders == null || Order == null)

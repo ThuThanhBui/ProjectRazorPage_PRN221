@@ -93,5 +93,11 @@ app.MapGet("/", context =>
     return Task.CompletedTask;
 });
 
+//app.MapGet("/", context =>
+//{
+//    context.Response.Redirect("/ProductManagement/Index");
+//    return Task.CompletedTask;
+//});
+
 
 app.Run();

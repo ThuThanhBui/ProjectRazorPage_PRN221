@@ -15,5 +15,7 @@ namespace Repository.Repository.Interface
         Task<bool> Delete(Guid id);
         Task<List<User>> GetAll();
         Task<User> GetById(Guid id);
+
+        Task<bool> UpdateProfile(User user);
     }
 }

@@ -131,5 +131,31 @@ namespace Repository.Repository
                 throw new ApplicationException($"Error retrieving user by Id: {id}", ex);
             }
         }
+
+        public async Task<bool> UpdateProfile(User user)
+        {
+            try
+            {
+                var o = await GetById(user.Id);
+                if (user.Image != null)
+                {
+                    o.Image = user.Image;
+                }
+                o.FullName = user.FullName;
+                o.Telephone = user.Telephone;
+                o.Address = user.Address;
+                o.Dob = user.Dob;
+                o.Gender = user.Gender;
+                o.Email = user.Email;
+                o.Password = user.Password;
+                o.LastUpdatedDate = user.LastUpdatedDate;
+
+                return await _context.SaveChangesAsync() > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
