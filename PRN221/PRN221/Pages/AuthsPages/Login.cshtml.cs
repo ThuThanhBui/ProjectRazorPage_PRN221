@@ -45,8 +45,6 @@ namespace PRN221.Pages.AuthsPages
             }
             else
             {
-                Session.email = user.Email;
-
                 if (user.Image != null)
                 {
                     HttpContext.Session.SetString("image",user.Image);

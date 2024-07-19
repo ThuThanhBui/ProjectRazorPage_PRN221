@@ -15,6 +15,8 @@
 </head>
 @{
     var role = Context.Session.GetString("role");
+    var image = Context.Session.GetString("image");
+    var name = Context.Session.GetString("name");
 }
 <body>
     <header>
@@ -38,8 +40,8 @@
         <nav id="sidebar" style="width:20%">
             <div class="img bg-wrap text-center p-4" style="background-image: url(/img/bgSideBar.png)">
                 <div class="user-logo">
-                    <div class="img" style="background-image: url(/img/userImg.jpg);"></div>
-                    <h4>Catriona Henderson</h4>
+                    <div class="img" style="background-image: url('data:image;base64,@image');"></div>
+                    <h4>@name</h4>
                 </div>
             </div>
             <ul class="list-unstyled components mb-5">

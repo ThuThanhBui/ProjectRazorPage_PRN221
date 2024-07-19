@@ -49,9 +49,8 @@ namespace PRN221.Pages.ProfilePages
             var updateSuccess = await _userService.UpdateProfile(User);
             if (updateSuccess)
             {
-                TempData["Message"] = "Edit successful.";
                 await OnGetAsync();
-                return Page();
+                return RedirectToPage("/ProfilePages/Index");
             }
             else
             {
