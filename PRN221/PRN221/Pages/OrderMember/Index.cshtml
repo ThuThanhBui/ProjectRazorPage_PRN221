@@ -3,8 +3,11 @@
 
 @{
     ViewData["Title"] = "Index";
-}
+    Layout = "~/Pages/Shared/_LayoutManage.cshtml";
 
+}
+<h1>Order List</h1>
+<hr/>
 <form method="get">
     <label for="StatusFilter">Filter by Status:</label>
     <select id="StatusFilter" name="StatusFilter" asp-for="StatusFilter">
