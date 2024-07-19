@@ -13,6 +13,8 @@ using PRN221.Service.Model;
 using Microsoft.AspNetCore.Http;
 using System.Buffers.Text;
 using System.Net.NetworkInformation;
+using NuGet.Protocol;
+using System.Text.Json;
 
 namespace PRN221.Pages.AuthsPages
 {
@@ -43,8 +45,6 @@ namespace PRN221.Pages.AuthsPages
             }
             else
             {
-                Session.email = user.Email;
-
                 if (user.Image != null)
                 {
                     HttpContext.Session.SetString("image",user.Image);
@@ -58,7 +58,7 @@ namespace PRN221.Pages.AuthsPages
                 HttpContext.Session.SetString("role", user.Role.RoleName);
                 HttpContext.Session.SetString("email", user.Email);
                 HttpContext.Session.SetString("userId", user.Id.ToString());
-                return RedirectToPage("/Home");
+                return RedirectToPage("/ProfilePages/Index");
             }
         }
     }

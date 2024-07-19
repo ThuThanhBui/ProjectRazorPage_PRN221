@@ -9,7 +9,7 @@ namespace Service.Model
 {
     public class UserModel : BaseModel
     {
-        public string? Imgage { get; set; }
+        public string? Image { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }

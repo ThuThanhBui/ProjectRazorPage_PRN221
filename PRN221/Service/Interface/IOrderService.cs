@@ -11,6 +11,7 @@ namespace Service.Interface
     public interface IOrderService
     {
         Task<List<OrderModel>> GetAll();
+        Task<List<OrderModel>> GetByUserId(Guid id);
         Task<OrderModel> GetById(Guid id);
         Task<bool> Add(OrderModel model);
         Task<bool> DeleteById(Guid id);

@@ -1,0 +1,59 @@
+﻿:root {
+    --dark-pink: #D14D72;
+    --med-pink: #ffabab;
+    --light-pink: #fcc8d1;
+    --light-color: #fef2f4;
+}
+h4{
+    color: black
+}
+
+.edit-form {
+    border: 1px solid #e3e6e8;
+    border-radius: 8px;
+    background-color: var(--light-color);
+    margin: 52px;
+}
+
+#sidebar{
+    background-color: var(--light-color)
+}
+.bg-wrap {
+    width: 100%;
+    position: relative;
+    z-index: 0;
+}
+.img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.bg-wrap .user-logo .img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+#sidebar ul li a span {
+    margin-right: 8px;
+}
+#sidebar ul li a {
+    text-decoration: none;
+    font-size: 16px;
+    padding: 16px 42px;
+    display: block;
+    color: var(--dark-pink);
+    border-bottom: 1px solid var(--light-pink);
+}
+
+.footer {
+    border-top: solid;
+    border-color: #dddddd;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--dark-pink);
+    background-color: var(--light-color);
+    padding: 24px
+}

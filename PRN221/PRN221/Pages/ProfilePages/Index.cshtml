@@ -1,0 +1,79 @@
+﻿@page
+@model PRN221.Pages.ProfilePages.IndexModel
+@{
+    Layout = "~/Pages/Shared/_LayoutManage.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="~/css/profile.css" asp-append-version="true" />
+</head>
+
+<h1>Edit Profile</h1>
+<hr/>
+<div class="d-flex">
+    <form method="post" class="w-100 d-flex" enctype="multipart/form-data">
+        <div class="col-md-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="User.Id" />
+            <div class="form-group">
+                <label asp-for="User.FullName" class="control-label"></label>
+                <input asp-for="User.FullName" class="form-control" />
+                <span asp-validation-for="User.FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.DOB" class="control-label"></label>
+                <input asp-for="User.DOB" class="form-control" type="date" />
+                <span asp-validation-for="User.DOB" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Email" class="control-label"></label>
+                <input asp-for="User.Email" class="form-control" />
+                <span asp-validation-for="User.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Telephone" class="control-label"></label>
+                <input asp-for="User.Telephone" class="form-control" />
+                <span asp-validation-for="User.Telephone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Gender" class="control-label"></label>
+                <select asp-for="User.Gender" class="form-control">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <span asp-validation-for="User.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Address" class="control-label"></label>
+                <input asp-for="User.Address" class="form-control" />
+                <span asp-validation-for="User.Address" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="User.Password" class="control-label"></label>
+                <input asp-for="User.Password" class="form-control" />
+                <span asp-validation-for="User.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Image</label>
+                <div>
+                    <input type="file" id="fileInput" class="form-control-file" name="img" />
+                </div>
+                <div id="imageDisplay">
+                    @if (!string.IsNullOrEmpty(Model.User.Image))
+                    {
+                        <img src="data:image;base64,@Model.User.Image" alt="User Image" style="max-width: 100%; height: auto;" />
+                    }
+                    else
+                    {
+                        <div>No Image</div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

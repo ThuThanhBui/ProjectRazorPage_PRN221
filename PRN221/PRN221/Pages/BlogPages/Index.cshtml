@@ -2,10 +2,13 @@
 @model PRN221.Pages.BlogPages.IndexModel
 
 @{
-    ViewData["Title"] = "Post Management";
+    ViewData["Title"] = "Blog Management";
+    Layout = "~/Pages/Shared/_LayoutManage.cshtml";
+
 }
 
-<h1>Post Management</h1>
+<h1>Blog Management</h1>
+<hr />
 
 <form asp-page-handler="Search" method="post">
     <div class="d-flex mb-3 mt-3" style="width: 40%">

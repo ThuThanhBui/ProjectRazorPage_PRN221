@@ -43,7 +43,9 @@ namespace Repository.Repository
             o.ProductName = product.ProductName;
             o.Price = product.Price;
             o.Brand = product.Brand;
+            if(product.Image != null) { 
             o.Image = product.Image;
+            }
             o.IsDeleted = product.IsDeleted;
             o.StockQuantity = product.StockQuantity;
             o.Description = product.Description;
