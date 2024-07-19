@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/js/site.js" asp-append-version="true" />
     <link rel="stylesheet" href="~/PRN221.styles.css" asp-append-version="true" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         .logout-btn {
             margin-left: 15px;
@@ -28,10 +29,34 @@
             <div class="d-flex align-items-center" style="margin-inline: 24px" ;>
                 <svg class="icon_head" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="16" viewBox="0 0 22 15">
                     <image id="Vector_Smart_Object" data-name="Vector Smart Object" width="22" height="15" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAPCAYAAADgbT9oAAABTklEQVQ4ja2UPy9DYRSHn1IMJbauZkkHQwWdrLZ+AEn7HcTCYpMYDT6AL2AhNgwG/xIGTbr5Bg21aJBHrhzJdV2iTU9ylnN+v+e+73nf+6I21WeHF09qo6B2gSngGtgGZLAoABtAFegS6zxU39UDtaTSZ5bC+x4sv8B1dSW2cavO9AFOtHfqYzASliOpTR8DC8AkcAXU/jGQWmhLwGIwPmMkI2wHvAWcAo0/oM3QtMLT/tZNjSK9vaK6F70ddTTVG42aoSlmvPXsjLOzG1PPU4c7HXkUtfPQZH0/ZpyOubh+88AusAQ8RC5GbT40c7mEzIon1C31Vb1RK1Evq2uR5ahVQvManvHfRlFV79Weupkzu7wshrYX3moWfKK+qRfq7AA/SLL6y2CcpMEv6nrm9PvNxJswEpbJW9EBzoD9Ad+IvPu9nHypMeTXraOufgCuphEkKuS8NwAAAABJRU5ErkJggg=="></image>
-                </svg><span class="text-white" style="font-size: 16px; margin-left:4px">Momandbaby@email.com</span>
-                <form class="logout-btn" method="post" asp-page="/authspages/logout">
-                    <button type="submit" class="btn btn-sm" style="background-color: #FCC8D1; color: red;"><i class="fa fa-sign-out" aria-hidden="true"></i>Log out</button>
-                </form>
+                </svg>
+                <span class="text-white" style="font-size: 16px; margin-left:4px">Momandbaby@email.com</span>
+                @if (Context.Session.GetString("email") != null){
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="@Context.Session.GetString("image")" class="rounded-circle avatar-img" style="height: 38px; width: 38px" alt="User Avatar">
+                            <span class="text-white" style="font-size: 16px; margin-left:4px">@Context.Session.GetString("name")</span>
+                        </a>
+                        <div class="dropdown-menu w-100" aria-labelledby="navbarDropdownMenuLink">
+                            @if (Context.Session.GetString("role") != null)
+                            {
+                                <form method="post" asp-page="/UserManagementPages/Edit" asp-route-id="@Context.Session.GetString("userId")">
+                                    <button type="submit" class="dropdown-item">Profile</button>
+                                </form>
+                            }
+                            <form method="post" asp-page="/authspages/LogOut">
+                                <button type="submit" class="dropdown-item">Log out</button>
+                            </form>
+                        </div>
+                    </div>
+                }else
+                {
+                    <form class="logout-btn" method="post" asp-page="/authspages/login">
+                        <button type="submit" class="btn btn-sm" style="background-color: #FCC8D1; color: red;"><i class="fa fa-sign-out" aria-hidden="true"></i>Log in</button>
+                    </form>
+                }
+               
+
             </div>
         </div>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow" style="margin-left: 24px">
