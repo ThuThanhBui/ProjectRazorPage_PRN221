@@ -29,9 +29,8 @@ namespace Repository.Repository
 
         public async Task<Order> GetById(Guid id)
         {
-            return await _context.Orders
-                .Where(o => o.Id == id)
-                .SingleOrDefaultAsync();
+            return await _context.Orders.Where(o => o.Id == id).
+                Include(o => o.User).Include(o => o.Voucher).SingleOrDefaultAsync();
         }
 
         public async Task<Order> FindOne(Expression<Func<Order, bool>> predicate)
@@ -39,7 +38,7 @@ namespace Repository.Repository
             Order order = null;
             try
             {
-                order = await _context.Orders.Where(predicate).Include( m=> m.Voucher).SingleOrDefaultAsync();
+                order = await _context.Orders.Where(predicate).Include(m => m.Voucher).SingleOrDefaultAsync();
             }
             catch (Exception ex)
             {

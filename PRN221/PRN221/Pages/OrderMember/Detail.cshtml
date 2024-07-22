@@ -1,0 +1,65 @@
+﻿@page
+@model PRN221.Pages.OrderMember.DetailModel
+@{
+    Layout = "~/Pages/Shared/_LayoutManage.cshtml";
+}
+<section class="h-100 gradient-custom">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-12">
+                <div class="card" style="border-radius: 10px;">
+                    <div class="card-header px-4 py-5">
+                        <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #D14D72;">@HttpContext.Session.GetString("name")</span>!</h5>
+                    </div>
+                    <div class="card-body p-5">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <p class="lead fw-normal mb-0" style="color: #D14D72;">Order details</p>
+                            <p class="small text-muted mb-0">Date : @Model.order.CreatedDate</p>
+                        </div>
+                        @foreach (var item in Model.orderXproducts)
+                        {
+                            <div class="card shadow-0 border mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <img src="data:image/jpg;base64,@item.Product.Image"
+                                                 class="img-fluid" alt="Phone">
+                                        </div>
+                                        <div class="col-md-6 text-center d-flex justify-content-center align-items-center">
+                                            <p class="text-muted mb-0">Name: @item.Product.ProductName</p>
+                                        </div>
+                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                            <p class="text-muted mb-0 small">Quantity: @item.Quantity</p>
+                                        </div>
+                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                            <p class="text-muted mb-0 small">Unit price: $@item.Product.Price</p>
+                                        </div>
+                                    </div>
+                                    <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                                </div>
+                            </div>
+                        }
+
+                        <div class="d-flex justify-content-between pt-2">
+                            <p class="fw-bold mb-0">Order Details</p>
+                            <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> $@Model.total</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between pt-2">
+                            <p class="text-muted mb-0">Voucher: @Model.order.Voucher.VoucherName </p>
+                            <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> $@Model.discount</p>
+                        </div>
+
+                    </div>
+                    <div class="card-footer border-0 px-4 py-5"
+                         style="background-color: #D14D72; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                        <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
+                            Total
+                            paid: <span class="h2 mb-0 ms-2">$@Model.totalPaid</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

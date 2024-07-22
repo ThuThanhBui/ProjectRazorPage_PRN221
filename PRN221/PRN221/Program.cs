@@ -104,7 +104,7 @@ app.MapGet("/", context =>
 
 //app.MapGet("/", context =>
 //{
-//    context.Response.Redirect("/Home");
+//    context.Response.Redirect("/OrderMember/Detail");
 //    return Task.CompletedTask;
 //});
 
