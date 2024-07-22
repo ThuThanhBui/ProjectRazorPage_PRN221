@@ -50,9 +50,10 @@
         @foreach (var p in Model.Products)
         {
             <div class="col-md-3 box-product-outer">
+               
                 <div class="box-product">
                     <div class="img-wrapper">
-                        <a href="detail.html">
+                        <a style="text-decoration: none" asp-page="/Shop/ViewProductDetail" asp-route-id="@p.Id">
                             <img alt="Product" src="data:image/jpg;base64,@p.Image">
                         </a>
                         <div class="tags">
@@ -95,6 +96,7 @@
                     </div>
                 </div>
             </div>
+          
         }
     </div>
 </div>
