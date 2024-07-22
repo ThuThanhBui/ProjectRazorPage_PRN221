@@ -132,6 +132,7 @@ namespace Data.Entities
                 e.Property(e => e.Id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWID()");
 
                 e.Property(e => e.Brand);
+                e.Property(e => e.AverageRating);
                 e.Property(e => e.Image);
                 e.Property(e => e.ProductName).IsRequired();
                 e.Property(e => e.Description);

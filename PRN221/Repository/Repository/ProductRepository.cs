@@ -43,6 +43,7 @@ namespace Repository.Repository
             o.ProductName = product.ProductName;
             o.Price = product.Price;
             o.Brand = product.Brand;
+            o.AverageRating = product.AverageRating;
             if(product.Image != null) { 
             o.Image = product.Image;
             }
