@@ -1,0 +1,87 @@
+﻿@page
+@model PRN221.Pages.Shop.IndexModel
+@{
+}
+<head>
+    <link rel="stylesheet" href="~/css/shop.css" asp-append-version="true" />
+</head>
+<div class="d-flex w-100" style="margin: 32px 0px;">
+    <nav id="sidebar" style="width:20%;">
+        <div class="label-type text-center p-4">
+            <p class="type">
+                <span class="fa fa-list-alt" style="margin-right:16px"></span>
+                Type of products
+            </p>
+        </div>
+        <ul class="list-unstyled components mb-5">
+            @foreach (var item in Model.ProductTypes)
+            {
+                <li class="active">
+                    <form method="get">
+                        <a asp-page="/Shop/Index" asp-route-id="@item.Id">@item.ProductTypeName</a>
+                    </form>
+                </li>
+            }
+
+        </ul>
+    </nav>
+
+    <div class="row d-flex" style="width:80%; padding-left: 32px">
+        <div class="col-md-12 img-bg" style="background-image: url(/img/bgHome.jpg)">
+        </div>
+
+        @*Search*@
+        <div class="col-md-12">
+            <input type="text" asp-for="keyword"/>
+            <button>Search</button>
+        </div>
+
+        @*Products*@
+        @foreach (var p in Model.Products)
+        {
+            <div class="col-md-3 box-product-outer">
+                <div class="box-product">
+                    <div class="img-wrapper">
+                        <a href="detail.html">
+                            <img alt="Product" src="data:image/jpg;base64,@p.Image">
+                        </a>
+                        <div class="tags">
+                            <span class="label-tags"><span class="label label-danger">@p.Brand</span></span>
+                        </div>
+                        <div class="option">
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Add to Cart"><i class="ace-icon fa fa-shopping-cart"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Compare"><i class="ace-icon fa fa-align-left"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Wishlist"><i class="ace-icon fa fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <h6><a href="detail.html">@p.ProductName</a></h6>
+                    <div class="price">
+                        <div>$@p.Price</div>
+                    </div>
+                    <div class="star-rating">
+                        <ul class="m-0 p-0">
+                            @{
+                                int fullStars = (int)Math.Floor(Convert.ToDecimal(p.AverageRating));
+                                for (int star = 0; star < 5; star++)
+                                {
+                                    if (star < fullStars)
+                                    {
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                    }
+                                    else if (star < 4.5)
+                                    {
+                                        <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                    }
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
