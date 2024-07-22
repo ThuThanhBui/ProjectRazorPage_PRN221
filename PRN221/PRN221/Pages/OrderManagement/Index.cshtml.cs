@@ -29,7 +29,7 @@ namespace PRN221.Pages.OrderPages
         public string StatusFilter { get; set; }
         public JsonResult OnGetSignalR()
         {
-            OnGetAsync().Wait();
+            OnGetAsync(null).Wait();
             var options = new JsonSerializerOptions
             {
                 ReferenceHandler = ReferenceHandler.IgnoreCycles,
