@@ -1,5 +1,4 @@
 ﻿
-global using CurrieTechnologies.Razor.SweetAlert2;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using PRN221.Tools;
