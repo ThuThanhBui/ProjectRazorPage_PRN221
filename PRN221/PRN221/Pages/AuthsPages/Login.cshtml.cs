@@ -31,6 +31,7 @@ namespace PRN221.Pages.AuthsPages
         [BindProperty]
         public string password { get; set; }
         public string Message { get; set; }
+
         public void OnGet()
         {
         }
@@ -38,28 +39,42 @@ namespace PRN221.Pages.AuthsPages
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await userService.Login(email, password);
-            if (user == null)
+            if (user == null || user.IsDeleted == true)
             {
                 Message = "Invalid username or password.";
                 return Page();
             }
-            else
+
+            else 
             {
+                //set img
                 if (user.Image != null)
                 {
                     HttpContext.Session.SetString("image",user.Image);
                 }
                 else
                 {
-                    // Optional: Set a default image or handle this case
                     HttpContext.Session.SetString("image", "https://i.imgur.com/ZTkt4I5.jpg");
                 }
+                //set info
                 HttpContext.Session.SetString("name", user.FullName);
                 HttpContext.Session.SetString("role", user.Role.RoleName);
                 HttpContext.Session.SetString("email", user.Email);
                 HttpContext.Session.SetString("userId", user.Id.ToString());
-                return RedirectToPage("/ProfilePages/Index");
+
+                //check role chuyen trang
+                if (user.Role.RoleName == "Staff" || user.Role.RoleName == "Admin")
+                {
+                    return RedirectToPage("/ProfilePages/Index");
+                }
+                else if (user.Role.RoleName == "Member")
+                {
+                    return RedirectToPage("/Home");
+
+                }
             }
+
+            return Page();
         }
     }
 }
