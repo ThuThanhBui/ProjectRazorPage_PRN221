@@ -10,6 +10,8 @@ using Service.Interface;
 using Service.Model;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Microsoft.IdentityModel.Tokens;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace PRN221.Pages.OrderPages
 {
@@ -25,7 +27,17 @@ namespace PRN221.Pages.OrderPages
 
         [BindProperty(SupportsGet = true)]
         public string StatusFilter { get; set; }
+        public JsonResult OnGetSignalR()
+        {
+            OnGetAsync().Wait();
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                WriteIndented = true
+            };
 
+            return new JsonResult(Orders, options);
+        }
         public async Task OnGetAsync()
         {
             if (!StatusFilter.IsNullOrEmpty())

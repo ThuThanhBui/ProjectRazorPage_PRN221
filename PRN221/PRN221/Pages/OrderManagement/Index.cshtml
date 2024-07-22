@@ -57,73 +57,76 @@
             </th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model.Orders)
-        {
-            <tr>
-                <td>
-                    @item.User.FullName
-                </td>
-                <td style="width:25%">
-                    @item.Description
-                </td>
-                <td>
-                    @if (item.Voucher != null)
-                    {
-                        @item.Voucher.VoucherName
-                    }
-                    else
-                    {
-                        <p>No voucher</p>
-                    }
-                </td>
-                <td>
-                    @item.TotalPrice
-                    $
-                </td>
-                <td>
-                    @item.CreatedDate?.ToString("dd/MM/yyyy")
-                </td>
-                <td>
-                    @item.LastUpdatedDate?.ToString("dd/MM/yyyy")
+    <tbody id="tableBody">
+         @* @foreach (var item in Model.Orders)
+         {
+             <tr>
+                 <td>
+                     @item.User.FullName
+                 </td>
+                 <td style="width:25%">
+                     @item.Description
+                 </td>
+                 <td>
+                     @if (item.Voucher != null)
+                     {
+                         @item.Voucher.VoucherName
+                     }
+                     else
+                     {
+                         <p>No voucher</p>
+                     }
+                 </td>
+                 <td>
+                     @item.TotalPrice
+                     $
+                 </td>
+                 <td>
+                     @item.CreatedDate?.ToString("dd/MM/yyyy")
+                 </td>
+                 <td>
+                     @item.LastUpdatedDate?.ToString("dd/MM/yyyy")
 
-                </td>
-                <td>
-                    @if (item.Status == "Completed")
-                    {
-                        <p class="btn btn-success">
-                            @item.Status
-                        </p>
-                    }
-                    else if (item.Status == "Approved")
-                    {
-                        <p class="btn btn-primary">
-                            @item.Status
-                        </p>
-                    }
-                    else if (item.Status == "Waiting" || item.Status == "Delivering")
-                    {
-                        <p class="btn btn-warning">
-                            @item.Status
-                        </p>
-                    }
-                    else if (item.Status == "Canceled")
-                    {
-                        <p class="btn btn-danger">
-                            @item.Status
-                        </p>
-                    }
+                 </td>
+                 <td>
+                     @if (item.Status == "Completed")
+                     {
+                         <p class="btn btn-success">
+                             @item.Status
+                         </p>
+                     }
+                     else if (item.Status == "Approved")
+                     {
+                         <p class="btn btn-primary">
+                             @item.Status
+                         </p>
+                     }
+                     else if (item.Status == "Waiting" || item.Status == "Delivering")
+                     {
+                         <p class="btn btn-warning">
+                             @item.Status
+                         </p>
+                     }
+                     else if (item.Status == "Canceled")
+                     {
+                         <p class="btn btn-danger">
+                             @item.Status
+                         </p>
+                     }
 
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> 
-                    <!--
-                        |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                    -->
-                </td>
-            </tr>
-        }
+                 </td>
+                 <td>
+                     <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> 
+                     <!--
+                         |
+                     <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                     <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                     -->
+                 </td>
+             </tr>
+         } *@
     </tbody>
 </table>
+
+<script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
