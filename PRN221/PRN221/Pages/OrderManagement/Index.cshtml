@@ -116,7 +116,7 @@
 
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> 
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="edit">Edit</a> 
                     <!--
                         |
                     <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
@@ -127,3 +127,21 @@
         }
     </tbody>
 </table>
+<div class="d-flex justify-content-center">
+    <div class="pagination">
+        @if (Model.Orders.HasPreviousPage)
+        {
+            <a asp-page="/OrderManagement/Index" asp-route-pageIndex="@(Model.Orders.PageIndex-1)"> Previous </a>
+        }
+
+        @for (int i = 1; i <= Model.Orders.TotalPages; i++)
+        {
+            <a asp-page="/OrderManagement/Index" asp-route-pageIndex="@i"> @i </a>
+        }
+
+        @if (Model.Orders.HasNextPage)
+        {
+            <a asp-page="/OrderManagement/Index" asp-route-pageIndex="@(Model.Orders.PageIndex + 1)"> Next </a>
+        }
+    </div>
+</div>
