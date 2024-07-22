@@ -35,7 +35,25 @@
                     <image id="Vector_Smart_Object" data-name="Vector Smart Object" width="22" height="15" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAPCAYAAADgbT9oAAABTklEQVQ4ja2UPy9DYRSHn1IMJbauZkkHQwWdrLZ+AEn7HcTCYpMYDT6AL2AhNgwG/xIGTbr5Bg21aJBHrhzJdV2iTU9ylnN+v+e+73nf+6I21WeHF09qo6B2gSngGtgGZLAoABtAFegS6zxU39UDtaTSZ5bC+x4sv8B1dSW2cavO9AFOtHfqYzASliOpTR8DC8AkcAXU/jGQWmhLwGIwPmMkI2wHvAWcAo0/oM3QtMLT/tZNjSK9vaK6F70ddTTVG42aoSlmvPXsjLOzG1PPU4c7HXkUtfPQZH0/ZpyOubh+88AusAQ8RC5GbT40c7mEzIon1C31Vb1RK1Evq2uR5ahVQvManvHfRlFV79Weupkzu7wshrYX3moWfKK+qRfq7AA/SLL6y2CcpMEv6nrm9PvNxJswEpbJW9EBzoD9Ad+IvPu9nHypMeTXraOufgCuphEkKuS8NwAAAABJRU5ErkJggg=="></image>
                 </svg>
                 <span class="text-white" style="font-size: 16px; margin-left:4px">Momandbaby@email.com</span>
-                @if (Context.Session.GetString("email") != null){
+                <form method="get" action="/Cart/Index" style="display:inline;">
+                    <button type="submit" class="button" style="border: none; background: none;">
+                        <img style="height: 30px; width: 30px; filter: invert(100%);" src="~/images/shopping-cart.png" alt="Shopping Cart">
+                        <div class="badge" id="cartCount"></div>
+                    </button>
+                </form>
+
+                <form method="get" action="/bookingreservations/index" style="display:inline;">
+
+                    <button type="submit" class="button" style="border: none; background: none;">
+                        
+                        <img style="height: 30px;
+        width: 30px;
+        filter: invert(100%);" src="~/images/history.png" alt="History">
+                    </button>
+
+                </form>
+                @if (Context.Session.GetString("email") != null)
+                {
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="@Context.Session.GetString("image")" class="rounded-circle avatar-img" style="height: 38px; width: 38px" alt="User Avatar">
@@ -48,9 +66,9 @@
                                     <button type="submit" class="dropdown-item">Profile</button>
                                 </form>
                             }
-                            <form method="post" asp-page="/authspages/LogOut">
-                                <button type="submit" class="dropdown-item">Log out</button>
-                            </form>
+                                <form method="post" asp-page="/authspages/LogOut">
+                                    <button type="submit" class="dropdown-item">Log out</button>
+                                </form>
                         </div>
                     </div>
                 }else
@@ -90,10 +108,10 @@
         </div>
     </footer>
 
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

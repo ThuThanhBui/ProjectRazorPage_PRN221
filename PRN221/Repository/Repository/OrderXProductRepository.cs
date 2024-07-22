@@ -4,6 +4,7 @@ using Repository.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Repository.Repository
@@ -21,6 +22,36 @@ namespace Repository.Repository
         {
             await _context.OrderXProducts.AddAsync(op);
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<OrderXProduct> FindOne(Expression<Func<OrderXProduct, bool>> predicate)
+        {
+            OrderXProduct x = null;
+            try
+            {
+                x = await _context.OrderXProducts.SingleOrDefaultAsync(predicate);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+
+            }
+            return x;
+        }
+
+        public async Task<List<OrderXProduct>> FindAll(Expression<Func<OrderXProduct, bool>> predicate)
+        {
+            List<OrderXProduct> list = new List<OrderXProduct>();
+            try
+            {
+                list = await _context.OrderXProducts.Where(predicate).Include(m => m.Product).Include(m => m.Order).ToListAsync();
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return list;
         }
 
         public async Task<bool> DeleteAllByOrderId(Guid orderId)

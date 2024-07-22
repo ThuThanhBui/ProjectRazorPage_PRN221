@@ -3,6 +3,7 @@ using Data.Entities;
 using Repository.Repository.Interface;
 using Service.Interface;
 using Service.Model;
+using System.Linq.Expressions;
 using System.Security.Principal;
 
 namespace Service
@@ -24,7 +25,7 @@ namespace Service
             {
                 return await _orderRepository.Add(_mapper.Map<Order>(model));
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -58,7 +59,7 @@ namespace Service
         {
             try
             {
-                return  _mapper.Map<OrderModel>(await _orderRepository.GetById(id));
+                return _mapper.Map<OrderModel>(await _orderRepository.GetById(id));
             }
             catch (Exception ex)
             {
@@ -83,6 +84,30 @@ namespace Service
             try
             {
                 return _mapper.Map<List<OrderModel>>(await _orderRepository.GetByUserId(id));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        
+        public async Task<OrderModel> FindOne(Expression<Func<Order, bool>> predicate)
+        {
+            try
+            {
+                return _mapper.Map<OrderModel>(await _orderRepository.FindOne(predicate));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        
+        public async Task<List<OrderModel>> FindAll(Expression<Func<Order, bool>> predicate)
+        {
+            try
+            {
+                return _mapper.Map<List<OrderModel>>(await _orderRepository.FindAll(predicate));
             }
             catch (Exception ex)
             {
