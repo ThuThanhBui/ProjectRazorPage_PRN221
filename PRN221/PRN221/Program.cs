@@ -1,6 +1,7 @@
 ﻿
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using PRN221.Hubs;
 using PRN221.Tools;
 using Repository.Repository;
 using Repository.Repository.Interface;
@@ -12,11 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-    
+builder.Services.AddSignalR();
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = null;
-    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
 });
 builder.Services.AddDbContext<PRNDbContext>(options =>
 {
@@ -93,6 +94,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapHub<SignalRServer>("/signalRServer");
+
+
 app.MapRazorPages();
 
 //Chuyển hướng đến Index.cshtml hoặc trang cụ thể khác
@@ -101,12 +105,6 @@ app.MapGet("/", context =>
     context.Response.Redirect("/AuthsPages/Login");
     return Task.CompletedTask;
 });
-
-//app.MapGet("/", context =>
-//{
-//    context.Response.Redirect("/OrderMember/Detail");
-//    return Task.CompletedTask;
-//});
 
 
 app.Run();
