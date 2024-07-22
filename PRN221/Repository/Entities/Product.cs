@@ -14,7 +14,6 @@ namespace Data.Entities
         public decimal Price { get; set; }
         public string? Brand { get; set; }
         public double? AverageRating { get; set; }
-
         public Guid? ProductTypeId { get; set; }
         public virtual ProductType? ProductType { get; set; }
         public virtual ICollection<OrderXProduct>? OrderXProducts { get; set; }
