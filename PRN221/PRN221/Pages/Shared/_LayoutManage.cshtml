@@ -47,44 +47,48 @@
             </div>
             <ul class="list-unstyled components mb-5">
                 <li class="active">
+                    <a asp-page="/Home"><span class="fa fa-user"></span>Home</a>
+                </li>
+                <li class="active">
                     <a asp-page="/ProfilePages/Index"><span class="fa fa-user"></span>Profile</a>
                 </li>
-                @if (role == "Staff")
+                @if (role == "Staff" || role == "Admin")
                 {
-
-                }
-                @if (role == "Admin")
-                {
-
+                    <li class="active">
+                        <a asp-page="/OrderMember/Index"><span class="fa fa-list-alt"></span>Order</a>
+                    </li>
+                    <li>
+                        <a asp-page="/UserManagementPages/Index"><span class="fa fa-users "></span>User</a>
+                    </li>
+                    <li class="active">
+                        <a asp-page="/ProductManagement/Index"><span class="fa fa-product-hunt "></span>Product</a>
+                    </li>
+                    <li class="active">
+                        <a asp-page="/VoucherPages/Index"><span class="fa fa-vimeo-square"></span>Voucher</a>
+                    </li>
+                    <li class="active">
+                        <a asp-page="/OrderManagement/Index"><span class="fa fa-list-alt"></span>Order</a>
+                    </li>
+                    <li>
+                        <a asp-page="/BlogPages/Index"><span class="fa fa-newspaper-o"></span>Blog</a>
+                    </li>
+                    <li>
+                        <a asp-page="/StatisticsPages/Index"><span class="fa fa-bar-chart"></span>Statistic</a>
+                    </li>
+                    <li>
+                        <a asp-page="/AuthsPages/Login"><span class="fa fa-sign-out "></span>Sign Out</a>
+                    </li>
                 }
                 @if (role == "Member")
                 {
-                    
+                    <li class="active">
+                        <a asp-page="/OrderMember/Index"><span class="fa fa-list-alt"></span>Order</a>
+                    </li>
+                    <li>
+                        <a asp-page="/AuthsPages/Login"><span class="fa fa-sign-out "></span>Sign Out</a>
+                    </li>
                 }
-                <li class="active">
-                    <a asp-page="/OrderMember/Index"><span class="fa fa-list-alt"></span>Order</a>
-                </li>
-                <li>
-                    <a asp-page="/UserManagementPages/Index"><span class="fa fa-users "></span>User</a>
-                </li>
-                <li class="active">
-                    <a asp-page="/ProductManagement/Index"><span class="fa fa-product-hunt "></span>Product</a>
-                </li>
-                <li class="active">
-                    <a asp-page="/VoucherPages/Index"><span class="fa fa-vimeo-square"></span>Voucher</a>
-                </li>
-                <li class="active">
-                    <a asp-page="/OrderManagement/Index"><span class="fa fa-list-alt"></span>Order</a>
-                </li>
-                <li>
-                    <a asp-page="/BlogPages/Index"><span class="fa fa-newspaper-o"></span>Blog</a>
-                </li>
-                <li>
-                    <a asp-page="/StatisticsPages/Index"><span class="fa fa-bar-chart"></span>Statistic</a>
-                </li>
-                <li>
-                    <a asp-page="/AuthsPages/Login"><span class="fa fa-sign-out "></span>Sign Out</a>
-                </li>
+               
             </ul>
         </nav>
 
