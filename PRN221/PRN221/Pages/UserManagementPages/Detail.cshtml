@@ -3,14 +3,14 @@
 
 @{
     ViewData["Title"] = "User Details";
+    Layout = "~/Pages/Shared/_LayoutManage.cshtml";
 }
 
 <div>
     <h2>User Details</h2>
-
+    <hr />
     <div>
         <h4>User</h4>
-        <hr />
         <dl class="row">
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.User.FullName)
@@ -54,11 +54,11 @@
             <dd class="col-sm-10">
                 @if (Model.User.IsDeleted.Value)
                 {
-                    <p style="color: red;">Inactive</p>
+                    <p class="btn btn-danger">Inactive</p>
                 }
                 else
                 {
-                    <p style="color: blue">Active</p>
+                    <p class="btn btn-success">Active</p>
                 }
             </dd>
             <dt class="col-sm-2">

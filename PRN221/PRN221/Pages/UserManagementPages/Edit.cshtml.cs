@@ -34,13 +34,20 @@ namespace PRN221.Pages.UserManagement
             Roles = await _roleService.GetAll();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
             User.LastUpdatedDate = DateTime.Now;
 
             // Handle file upload
             if (ImageUpload != null)
             {
+                // Delete old image if a new image is uploaded
+                var oldImagePath = Path.Combine(_uploadsFolder, Path.GetFileName(User.Image ?? string.Empty));
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+
                 var fileName = Path.GetFileName(ImageUpload.FileName);
                 var filePath = Path.Combine(_uploadsFolder, fileName);
 
@@ -50,6 +57,12 @@ namespace PRN221.Pages.UserManagement
                 }
 
                 User.Image = $"/uploads/{fileName}";
+            }
+            else
+            {
+                // Keep the old image if no new image is uploaded
+                var existingUser = await _userService.GetById(id);
+                User.Image = existingUser.Image;
             }
 
             try
@@ -81,5 +94,6 @@ namespace PRN221.Pages.UserManagement
                 return Page();
             }
         }
+
     }
 }

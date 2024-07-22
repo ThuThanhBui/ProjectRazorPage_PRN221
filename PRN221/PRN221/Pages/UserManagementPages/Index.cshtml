@@ -4,14 +4,13 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_LayoutManage.cshtml";
-
 }
 
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-Title" id="successModalLabel">Success</h5>
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -27,17 +26,19 @@
 
 <div>
     <h2>User Management</h2>
+    <hr />
 
-    <p>
-        <a asp-page="Create" class="btn btn-primary">Create New User</a>
-    </p>
+    <!-- Flex container for search and create button -->
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+        <form method="get" style="display: flex; align-items: center; flex-grow: 1;">
+            <div class="form-group">
+                <input type="text" style="width: 400px; margin-right: 15px;" name="searchTerm" class="form-control" placeholder="Search by name or email" value="@Model.SearchTerm" />
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
 
-    <form method="get" style="display:flex">
-        <div class="form-group">
-            <input type="text" style="width: 400px" name="searchTerm" class="form-control" placeholder="Search by name or email" value="@Model.SearchTerm" />
-        </div>
-        <button type="submit" style="margin-left:15px; margin-bottom: 7px" class="btn btn-primary">Search</button>
-    </form>
+        <a asp-page="Create" class="btn btn-primary" style="margin-left: 15px;">Create New User</a>
+    </div>
 
     <div style="justify-content:center; display:flex">
         <table class="table">
@@ -75,11 +76,11 @@
                         <td>
                             @if (user.IsDeleted.Value)
                             {
-                                <p style="color: red;">Inactive</p>
+                                <p class="btn btn-danger">Inactive</p>
                             }
                             else
                             {
-                                <p style="color: blue">Active</p>
+                                <p class="btn btn-success">Active</p>
                             }
                         </td>
                         <td>
