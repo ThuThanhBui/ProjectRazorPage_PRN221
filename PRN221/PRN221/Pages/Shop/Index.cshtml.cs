@@ -5,6 +5,8 @@ using Microsoft.IdentityModel.Tokens;
 using PRN221.Service.Model;
 using Service.Interface;
 using Service.Model;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace PRN221.Pages.Shop
 {
@@ -28,6 +30,8 @@ namespace PRN221.Pages.Shop
 
         [BindProperty(SupportsGet = true)]
         public string keyword { get; set; }
+
+        
 
 
         public async Task OnGetAsync(Guid? id = null)
@@ -55,7 +59,7 @@ namespace PRN221.Pages.Shop
 
             // check order has any userId with status ( not completed ) and then create order and get id order
             var userId = HttpContext.Session.GetString("userId");
-            var order = await _orderService.FindOne(m => m.UserId == Guid.Parse(userId) && m.Status.ToLower() != "Completed".ToLower());
+            var order = await _orderService.FindOne(m => m.UserId == Guid.Parse(userId) && m.Status.ToLower() == "Waiting".ToLower());
 
             // + if has any order with userId and not completed, we use this order, else null we create new order with status Not completed
             if (order == null)
@@ -67,14 +71,14 @@ namespace PRN221.Pages.Shop
                     LastUpdatedDate = DateTime.Now,
                     IsDeleted = false,
                     Description = string.Empty,
-                    Status = "Not completed",
+                    Status = "Waiting",
                     TotalPrice = 0,
                     UserId = Guid.Parse(userId),
                     VoucherId = null,
                 });
                 if (isCreated)
                 {
-                    order = await _orderService.FindOne(m => m.UserId == Guid.Parse(userId) && m.Status.ToLower() != "Completed".ToLower());
+                    order = await _orderService.FindOne(m => m.UserId == Guid.Parse(userId) && m.Status.ToLower() == "Waiting".ToLower());
                 }
             }
 
