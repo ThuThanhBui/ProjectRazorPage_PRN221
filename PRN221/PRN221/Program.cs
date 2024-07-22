@@ -6,15 +6,22 @@ using Repository.Repository;
 using Repository.Repository.Interface;
 using Service;
 using Service.Interface;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
+    
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 builder.Services.AddDbContext<PRNDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB"));
+    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 
 builder.Services.AddDistributedMemoryCache();
@@ -24,11 +31,13 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-
 builder.Services.AddAutoMapper(typeof(Mapper));
 
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+
+builder.Services.AddScoped<IOrderXProductRepository, OrderXProductRepository>();
+builder.Services.AddScoped<IOrderXProductService, OrderXProductService>();
 
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 builder.Services.AddScoped<IBlogService, BlogService>();
@@ -90,7 +99,7 @@ app.MapRazorPages();
 app.MapGet("/", context =>
 {
     context.Response.Redirect("/AuthsPages/Login");
-return Task.CompletedTask;
+    return Task.CompletedTask;
 });
 
 //app.MapGet("/", context =>
