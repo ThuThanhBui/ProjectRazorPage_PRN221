@@ -124,7 +124,7 @@ namespace Repository.Repository
         {
             try
             {
-                return await _context.Users.Include(u => u.Role).Where(u => u.Id == id).SingleOrDefaultAsync();
+                return await _context.Users.Where(u => u.Id == id).SingleOrDefaultAsync();
             }
             catch (Exception ex)
             {
