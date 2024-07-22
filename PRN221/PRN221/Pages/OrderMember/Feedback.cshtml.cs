@@ -46,34 +46,34 @@ namespace PRN221.Pages.OrderMember
             if (userId != null && Guid.TryParse(userId, out Guid parsedUserId))
             {
                 Feedback.UserId = parsedUserId;
-                Feedback.CreatedDate = DateTime.UtcNow;
-                Feedback.LastUpdatedDate = DateTime.UtcNow;
-                Feedback.IsDeleted = false;
-
-                try
-                {
-                    _context.ProductFeedbacks.Add(Feedback);
-                    int affectedRows = await _context.SaveChangesAsync();
-                    if (affectedRows > 0)
-                    {
-                        return RedirectToPage("Pages/OrderMember");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Failed to save feedback.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // Log the exception (ex) details
-                    ModelState.AddModelError(string.Empty, "An error occurred while saving feedback.");
-                }
+               
             }
             else
             {
                 ModelState.AddModelError(string.Empty, "User ID is not valid.");
             }
+            Feedback.CreatedDate = DateTime.UtcNow;
+            Feedback.LastUpdatedDate = DateTime.UtcNow;
+            Feedback.IsDeleted = false;
 
+            try
+            {
+                _context.ProductFeedbacks.Add(Feedback);
+                int affectedRows = await _context.SaveChangesAsync();
+                if (affectedRows > 0)
+                {
+                    return RedirectToPage("/OrderMember");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Failed to save feedback.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (ex) details
+                ModelState.AddModelError(string.Empty, "An error occurred while saving feedback.");
+            }
             return Page();
         }
     }
