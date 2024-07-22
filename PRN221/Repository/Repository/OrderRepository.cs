@@ -4,6 +4,7 @@ using Repository.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 
@@ -31,6 +32,36 @@ namespace Repository.Repository
             return await _context.Orders
                 .Where(o => o.Id == id)
                 .SingleOrDefaultAsync();
+        }
+
+        public async Task<Order> FindOne(Expression<Func<Order, bool>> predicate)
+        {
+            Order order = null;
+            try
+            {
+                order = await _context.Orders.Where(predicate).Include( m=> m.Voucher).SingleOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+
+            }
+            return order;
+        }
+
+        public async Task<List<Order>> FindAll(Expression<Func<Order, bool>> predicate)
+        {
+            List<Order> list = new List<Order>();
+            try
+            {
+                list = await _context.Orders.Include(m => m.Voucher).Where(predicate).ToListAsync();
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return list;
         }
 
         public async Task<bool> DeleteById(Guid id)
@@ -69,6 +100,7 @@ namespace Repository.Repository
                 existingOrder.LastUpdatedDate = order.LastUpdatedDate;
                 existingOrder.VoucherId = order.VoucherId;
 
+                _context.Orders.Update(existingOrder);
                 await _context.SaveChangesAsync();
                 return true;
             }

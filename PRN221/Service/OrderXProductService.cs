@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Data.Entities;
+using Repository.Repository;
 using Repository.Repository.Interface;
 using Service.Interface;
 using Service.Model;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Security.Principal;
 
 namespace Service
@@ -50,6 +52,30 @@ namespace Service
             try
             {
                 return await _repository.DeleteOne(oId, pId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<OrderXProductModel> FindOne(Expression<Func<OrderXProduct, bool>> predicate)
+        {
+            try
+            {
+                return _mapper.Map<OrderXProductModel>(await _repository.FindOne(predicate));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<OrderXProductModel>> FindAll(Expression<Func<OrderXProduct, bool>> predicate)
+        {
+            try
+            {
+                return _mapper.Map<List<OrderXProductModel>>(await _repository.FindAll(predicate));
             }
             catch (Exception ex)
             {
