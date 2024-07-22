@@ -44,18 +44,18 @@ namespace PRN221.Pages.ProductManagement
             //    return Page();
             //}
 
-            if (!ModelState.IsValid)
-            {
-                foreach (var state in ModelState)
-                {
-                    foreach (var error in state.Value.Errors)
-                    {
-                        // Ghi lại hoặc hiển thị lỗi
-                        Console.WriteLine($"Error in {state.Key}: {error.ErrorMessage}");
-                    }
-                }
-                return Page();
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    foreach (var state in ModelState)
+            //    {
+            //        foreach (var error in state.Value.Errors)
+            //        {
+            //            // Ghi lại hoặc hiển thị lỗi
+            //            Console.WriteLine($"Error in {state.Key}: {error.ErrorMessage}");
+            //        }
+            //    }
+            //    return Page();
+            //}
 
             // Xử lý chuyển đổi ảnh sang base64 trong Razor Page Model
             string imageBase64 = null;

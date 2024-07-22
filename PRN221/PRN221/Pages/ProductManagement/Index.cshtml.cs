@@ -25,7 +25,7 @@ namespace PRN221.Pages.ProductManagement
             _productTypeService = productTypeService;
         }
 
-        public List<ProductModel> Products { get;set; } = default!;
+        public PaginatedList<ProductModel> Products { get;set; } = default!;
         public List<ProductTypeModel> ProductTypes { get;set; } = default!;
 
         [BindProperty(SupportsGet = true)]
@@ -34,19 +34,24 @@ namespace PRN221.Pages.ProductManagement
         [BindProperty(SupportsGet = true)]
         public string keyword {  get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? pageIndex)
         {
             ProductTypes = await _productTypeService.GetAll();
+            var list = new List<ProductModel>();
             if (!typeFilter.IsNullOrEmpty())
             {
-                Products = await _productService.GetByTypeId(Guid.Parse(typeFilter));
+                list = await _productService.GetByTypeId(Guid.Parse(typeFilter));
+                Products = PaginatedList<ProductModel>.Create(list, pageIndex ?? 1, 5);
             }
             else if(!keyword.IsNullOrEmpty())
             {
-                Products = await _productService.Search(keyword);
-            }else
+                list = await _productService.Search(keyword);
+                Products = PaginatedList<ProductModel>.Create(list, pageIndex ?? 1, 5);
+            }
+            else
             {
-                Products = await _productService.GetAll();
+                list = await _productService.GetAll();
+                Products = PaginatedList<ProductModel>.Create(list, pageIndex ?? 1, 5);
             }
         }
 
