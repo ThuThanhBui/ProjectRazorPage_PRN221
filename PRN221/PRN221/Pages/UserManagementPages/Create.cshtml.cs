@@ -1,9 +1,13 @@
 using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
 using Service;
 using Service.Interface;
 using Service.Model;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace PRN221.Pages.UserManagement
@@ -24,6 +28,9 @@ namespace PRN221.Pages.UserManagement
         [BindProperty]
         public UserModel User { get; set; } = default!;
 
+        [BindProperty]
+        public IFormFile? Image { get; set; }
+
         public async Task OnGetAsync()
         {
             Roles = await _roleService.GetAll();
@@ -34,6 +41,24 @@ namespace PRN221.Pages.UserManagement
             User.IsDeleted = false;
             User.CreatedDate = DateTime.Now;
             User.LastUpdatedDate = DateTime.Now;
+
+            if (Image != null)
+            {
+                var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+                var filePath = Path.Combine(uploadsFolderPath, Image.FileName);
+
+                // Ensure the directory exists
+                if (!Directory.Exists(uploadsFolderPath))
+                {
+                    Directory.CreateDirectory(uploadsFolderPath);
+                }
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await Image.CopyToAsync(stream);
+                }
+                User.Image = $"/uploads/{Image.FileName}";
+            }
 
             try
             {
@@ -57,7 +82,5 @@ namespace PRN221.Pages.UserManagement
                 return Page();
             }
         }
-
-
     }
 }

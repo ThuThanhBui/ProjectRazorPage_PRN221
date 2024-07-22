@@ -44,6 +44,7 @@
             <thead>
                 <tr>
                     <th>No.</th>
+                    <th>Image</th>
                     <th>Full Name</th>
                     <th>Email</th>
                     <th>Telephone</th>
@@ -60,6 +61,11 @@
                     var user = Model.Users[i];
                     <tr>
                         <td>@((Model.PageIndex - 1) * 5 + i + 1)</td>
+                        <td>
+                            <img src="@(string.IsNullOrEmpty(user.Image) ? "/uploads/default.png" : user.Image)"
+                                 alt="User Image"
+                                 style="width: 100px; height: 100px; object-fit: cover;" />
+                        </td>
                         <td>@Html.DisplayFor(modelItem => user.FullName)</td>
                         <td>@Html.DisplayFor(modelItem => user.Email)</td>
                         <td>@Html.DisplayFor(modelItem => user.Telephone)</td>

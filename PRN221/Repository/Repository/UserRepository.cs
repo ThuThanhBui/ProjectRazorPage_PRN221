@@ -78,6 +78,7 @@ namespace Repository.Repository
                 existingUser.RoleId = user.RoleId;
                 existingUser.CreatedDate = user.CreatedDate;
                 existingUser.LastUpdatedDate = user.LastUpdatedDate;
+                existingUser.Image = user.Image;
 
                 _context.Users.Update(existingUser);
                 return await _context.SaveChangesAsync() > 0;

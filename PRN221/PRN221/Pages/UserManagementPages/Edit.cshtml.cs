@@ -1,10 +1,11 @@
-using Data.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Service;
 using Service.Interface;
 using Service.Model;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace PRN221.Pages.UserManagement
@@ -13,6 +14,7 @@ namespace PRN221.Pages.UserManagement
     {
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
+        private readonly string _uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
 
         public EditModel(IUserService userService, IRoleService roleService)
         {
@@ -23,6 +25,8 @@ namespace PRN221.Pages.UserManagement
         [BindProperty]
         public UserModel User { get; set; } = default!;
         public List<RoleModel> Roles { get; set; } = default!;
+        [BindProperty]
+        public IFormFile? ImageUpload { get; set; }
 
         public async Task OnGetAsync(Guid id)
         {
@@ -34,13 +38,27 @@ namespace PRN221.Pages.UserManagement
         {
             User.LastUpdatedDate = DateTime.Now;
 
+            // Handle file upload
+            if (ImageUpload != null)
+            {
+                var fileName = Path.GetFileName(ImageUpload.FileName);
+                var filePath = Path.Combine(_uploadsFolder, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await ImageUpload.CopyToAsync(stream);
+                }
+
+                User.Image = $"/uploads/{fileName}";
+            }
+
             try
             {
                 var existingUserWithSameEmail = await _userService.GetByEmail(User.Email);
                 if (existingUserWithSameEmail != null && existingUserWithSameEmail.Id != User.Id)
                 {
                     ModelState.AddModelError(string.Empty, "Email is already in use by another user.");
-                    Roles = await _roleService.GetAll(); 
+                    Roles = await _roleService.GetAll();
                     return Page();
                 }
 
@@ -59,11 +77,9 @@ namespace PRN221.Pages.UserManagement
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, $"An error occurred: {ex.Message}");
-                Roles = await _roleService.GetAll(); 
+                Roles = await _roleService.GetAll();
                 return Page();
             }
         }
-
-
     }
 }
