@@ -89,6 +89,20 @@ namespace Service
             }
         }
 
+        public async Task<UserModel?> GetByEmail(string email)
+        {
+            try
+            {
+                var user = await _userRepository.GetUserByEmail(email);
+                return _mapper.Map<UserModel>(user);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
         //ThanhThu
         public Task<bool> UpdateProfile(UserModel user)
         {

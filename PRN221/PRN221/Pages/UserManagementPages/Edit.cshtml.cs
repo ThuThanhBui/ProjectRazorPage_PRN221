@@ -34,18 +34,36 @@ namespace PRN221.Pages.UserManagement
         {
             User.LastUpdatedDate = DateTime.Now;
 
-            var updateSuccess = await _userService.Update(User);
-            if (updateSuccess)
+            try
             {
-                TempData["Message"] = "Edit successful.";
-                return RedirectToPage("/UserManagementPages/Index");
+                var existingUserWithSameEmail = await _userService.GetByEmail(User.Email);
+                if (existingUserWithSameEmail != null && existingUserWithSameEmail.Id != User.Id)
+                {
+                    ModelState.AddModelError(string.Empty, "Email is already in use by another user.");
+                    Roles = await _roleService.GetAll(); 
+                    return Page();
+                }
+
+                var updateSuccess = await _userService.Update(User);
+                if (updateSuccess)
+                {
+                    TempData["Message"] = "Edit successful.";
+                    return RedirectToPage("/UserManagementPages/Index");
+                }
+                else
+                {
+                    Roles = await _roleService.GetAll();
+                    return Page();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await OnGetAsync(User.Id.Value);
+                ModelState.AddModelError(string.Empty, $"An error occurred: {ex.Message}");
+                Roles = await _roleService.GetAll(); 
                 return Page();
             }
         }
+
 
     }
 }

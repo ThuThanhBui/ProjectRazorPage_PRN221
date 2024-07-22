@@ -20,6 +20,7 @@ namespace Service.Interface
         Task<bool> DeleteUser(Guid id);
         Task<List<UserModel>> GetAllUsers();
         Task<UserModel> GetById(Guid id);
+        Task<UserModel?> GetByEmail(string email);
 
         //Thu
         Task<bool> UpdateProfile(UserModel user);
