@@ -10,6 +10,7 @@ namespace Repository.Repository.Interface
     public interface IOrderRepository
     {
         Task<List<Order>> GetAll();
+        Task<List<Order>> GetByUserId(Guid id);
         Task<Order> GetById(Guid id);
         Task<bool> Add(Order order);
         Task<bool> DeleteById(Guid id);

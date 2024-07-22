@@ -86,12 +86,18 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-// Chuyển hướng đến Index.cshtml hoặc trang cụ thể khác
+//Chuyển hướng đến Index.cshtml hoặc trang cụ thể khác
 app.MapGet("/", context =>
 {
-    context.Response.Redirect("/Home");
-    return Task.CompletedTask;
+    context.Response.Redirect("/AuthsPages/Login");
+return Task.CompletedTask;
 });
+
+//app.MapGet("/", context =>
+//{
+//    context.Response.Redirect("/Home");
+//    return Task.CompletedTask;
+//});
 
 
 app.Run();

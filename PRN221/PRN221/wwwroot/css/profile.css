@@ -1,0 +1,80 @@
+﻿:root {
+    --dark-pink: #D14D72;
+    --med-pink: #ffabab;
+    --light-pink: #fcc8d1;
+    --light-color: #fef2f4;
+}
+
+/* General form styling */
+form {
+    margin-top: 20px;
+}
+
+/* Label styling */
+label.control-label {
+    font-weight: bold;
+}
+
+/* Input field styling */
+input.form-control,
+select.form-control,
+textarea.form-control {
+    margin-bottom: 10px;
+}
+
+/* Validation summary styling */
+.text-danger {
+    color: #dc3545;
+}
+
+/* File input styling */
+input[type="file"] {
+    display: block;
+    margin-top: 5px;
+}
+
+/* Submit button styling */
+input[type="submit"].btn-primary {
+    background-color: var(--light-pink);
+    border-color: var(--dark-pink);
+    color: var(--dark-pink);
+    padding: 8px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+    input[type="submit"].btn-primary:hover {
+        background-color: var(--dark-pink);
+        border-color: var(--light-pink);
+        color: var(--light-pink);
+    }
+
+/* Margin for form groups */
+.form-group {
+    margin-bottom: 15px;
+}
+
+    /* Optional additional styling */
+    .form-group.mt-2 {
+        margin-top: 10px;
+    }
+
+#imageDisplay {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    #imageDisplay img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+
+/* Container for the form */
+.col-md-6 {
+    padding: 20px;
+}

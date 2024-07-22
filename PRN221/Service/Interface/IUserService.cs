@@ -10,6 +10,7 @@ namespace Service.Interface
 {
 	public interface IUserService
 	{
+        //Khoi
 		Task<User> Login(string email, string password);
 		Task<bool> Add(User user);
 
@@ -19,5 +20,8 @@ namespace Service.Interface
         Task<bool> DeleteUser(Guid id);
         Task<List<UserModel>> GetAllUsers();
         Task<UserModel> GetById(Guid id);
+
+        //Thu
+        Task<bool> UpdateProfile(UserModel user);
     }
 }

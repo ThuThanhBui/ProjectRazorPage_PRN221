@@ -45,17 +45,25 @@ namespace PRN221.Pages.BlogPages
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
+        [BindProperty]
+        public IFormFile Img { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (Blog != null)
             {
-                return Page();
-            }
-
-           if(Blog != null)
-            {
+                string imageBase64 = null;
+                if (Img != null && Img.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await Img.CopyToAsync(memoryStream);
+                        byte[] imageBytes = memoryStream.ToArray();
+                        imageBase64 = Convert.ToBase64String(imageBytes);
+                    }
+                }
+                Blog.Image = imageBase64;
                 Blog.LastUpdatedDate = DateTime.UtcNow;
-             var up =   await _service.UpdateBlog(Blog);
+                var up =   await _service.UpdateBlog(Blog);
                 if (up)
                 {
                     TempData["Message"] = "Added Successfully.";

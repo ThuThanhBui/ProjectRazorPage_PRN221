@@ -10,6 +10,11 @@ using Repository.Repository.Interface;
 using Service.Model;
 using Service.Interface;
 using PRN221.Service.Model;
+using Microsoft.AspNetCore.Http;
+using System.Buffers.Text;
+using System.Net.NetworkInformation;
+using NuGet.Protocol;
+using System.Text.Json;
 
 namespace PRN221.Pages.AuthsPages
 {
@@ -40,10 +45,20 @@ namespace PRN221.Pages.AuthsPages
             }
             else
             {
-                Session.email = user.Email;
+                if (user.Image != null)
+                {
+                    HttpContext.Session.SetString("image",user.Image);
+                }
+                else
+                {
+                    // Optional: Set a default image or handle this case
+                    HttpContext.Session.SetString("image", "https://i.imgur.com/ZTkt4I5.jpg");
+                }
+                HttpContext.Session.SetString("name", user.FullName);
                 HttpContext.Session.SetString("role", user.Role.RoleName);
                 HttpContext.Session.SetString("email", user.Email);
-                return RedirectToPage("/Home");
+                HttpContext.Session.SetString("userId", user.Id.ToString());
+                return RedirectToPage("/ProfilePages/Index");
             }
         }
     }

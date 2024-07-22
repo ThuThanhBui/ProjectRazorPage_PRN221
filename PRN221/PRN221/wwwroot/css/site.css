@@ -47,11 +47,17 @@ html {
     text-overflow: ellipsis;
     margin: 0;
 }
-
+.navbar-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+}
 .navbar {
+    background-color:var(--light-color);
 }
 
     .navbar li {
+        margin-bottom: 24px;
     }
 
         .navbar li :hover {
@@ -65,8 +71,10 @@ html {
         padding: 8px;
         text-decoration: none;
         color: var(--dark-pink);
+        white-space:nowrap
     }
 
+    
 .btn-pink {
     background-color: var(--light-pink);
     color: var(--dark-pink);

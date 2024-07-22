@@ -78,6 +78,18 @@ namespace Service
             }
         }
 
+        public async Task<List<OrderModel>> GetByUserId(Guid id)
+        {
+            try
+            {
+                return _mapper.Map<List<OrderModel>>(await _orderRepository.GetByUserId(id));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<bool> Update(OrderModel model)
         {
             try

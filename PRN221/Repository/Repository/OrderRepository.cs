@@ -4,6 +4,7 @@ using Repository.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 
 namespace Repository.Repository
@@ -89,6 +90,15 @@ namespace Repository.Repository
         {
             return await _context.Orders
                 .Where(o => o.Status == status)
+                .Include(o => o.Voucher)
+                .Include(o => o.User)
+                .ToListAsync();
+        }
+
+        public async Task<List<Order>> GetByUserId(Guid id)
+        {
+            return await _context.Orders
+                .Where(o => o.UserId == id)
                 .Include(o => o.Voucher)
                 .Include(o => o.User)
                 .ToListAsync();

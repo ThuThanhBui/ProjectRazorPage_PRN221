@@ -1,0 +1,129 @@
+﻿@page
+@model PRN221.Pages.OrderPages.IndexModel
+
+@{
+    ViewData["Title"] = "Order Management";
+    Layout = "~/Pages/Shared/_LayoutManage.cshtml";
+
+}
+<h1>Order Management</h1>
+<hr/>
+<!--
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+-->
+
+<form method="get">
+    <label for="StatusFilter">Filter by Status:</label>
+    <select id="StatusFilter" name="StatusFilter" asp-for="StatusFilter">
+        <option value="">All</option>
+        <option value="Completed">Completed</option>
+        <option value="Approved">Approved</option>
+        <option value="Waiting">Waiting</option>
+        <option value="Delivering">Delivering</option>
+        <option value="Canceled">Canceled</option>
+    </select>
+    <button type="submit" class="btn-pink">Filter</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <p>Full name</p>
+            </th>
+            <th>
+                <p>Description</p>
+            </th>
+            <th>
+                <p>Voucher</p>
+            </th>
+            <th>
+                <p>Total price</p>
+            </th>
+            <th>
+                <p>Created date</p>
+            </th>
+            <th>
+                <p>Updated date</p>
+            </th>
+            <th>
+                <p>Status</p>
+            </th>
+            <th>
+                <p>Edit</p>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Orders)
+        {
+            <tr>
+                <td>
+                    @item.User.FullName
+                </td>
+                <td style="width:25%">
+                    @item.Description
+                </td>
+                <td>
+                    @if (item.Voucher != null)
+                    {
+                        @item.Voucher.VoucherName
+                    }
+                    else
+                    {
+                        <p>No voucher</p>
+                    }
+                </td>
+                <td>
+                    @item.TotalPrice
+                    $
+                </td>
+                <td>
+                    @item.CreatedDate?.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @item.LastUpdatedDate?.ToString("dd/MM/yyyy")
+
+                </td>
+                <td>
+                    @if (item.Status == "Completed")
+                    {
+                        <p class="btn btn-success">
+                            @item.Status
+                        </p>
+                    }
+                    else if (item.Status == "Approved")
+                    {
+                        <p class="btn btn-primary">
+                            @item.Status
+                        </p>
+                    }
+                    else if (item.Status == "Waiting" || item.Status == "Delivering")
+                    {
+                        <p class="btn btn-warning">
+                            @item.Status
+                        </p>
+                    }
+                    else if (item.Status == "Canceled")
+                    {
+                        <p class="btn btn-danger">
+                            @item.Status
+                        </p>
+                    }
+
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> 
+                    <!--
+                        |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    -->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

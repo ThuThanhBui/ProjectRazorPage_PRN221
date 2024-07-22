@@ -17,7 +17,7 @@ namespace PRN221.Pages
         }
 
         [BindProperty(SupportsGet = true)]
-        public string? chosenBrand { get; set; }
+        public string? chosenBrand { get; set; } = null;
 
         public List<ProductModel> Products { get; set; }
         public List<BlogModel> Blogs { get; set; }
@@ -33,8 +33,12 @@ namespace PRN221.Pages
             else
             {
                 Products = await _productService.GetAll();
+                chosenBrand = null;
             }
         }
+        
+
+
 
     }
 }
