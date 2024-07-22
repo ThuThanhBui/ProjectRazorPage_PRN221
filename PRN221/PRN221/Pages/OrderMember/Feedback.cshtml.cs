@@ -62,7 +62,7 @@ namespace PRN221.Pages.OrderMember
                 int affectedRows = await _context.SaveChangesAsync();
                 if (affectedRows > 0)
                 {
-                    return RedirectToPage("/OrderMember");
+                    return Redirect("/OrderMember");
                 }
                 else
                 {
