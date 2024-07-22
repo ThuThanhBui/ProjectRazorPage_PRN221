@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PRN221.Pages.ProductManagement
+namespace PRN221.Pages.OrderMember
 {
-    public class ViewProductDetailModel : PageModel
+    public class FeedbackModel : PageModel
     {
         public void OnGet()
         {
