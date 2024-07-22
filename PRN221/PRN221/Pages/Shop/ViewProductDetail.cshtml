@@ -12,7 +12,7 @@
     </ol>
 </div>
 <div class="container">
-    <div class="card">
+    <div class="card" style="background-color:#fef2f4">
         <div class="container-fluid">
             <div class="wrapper row">
                 <div class="preview col-md-6 d-flex align-items-center justify-content-center">
@@ -23,8 +23,10 @@
                 <div class="details col-md-6">
                     <h3 class="product-title">@Model.Products.ProductName</h3>
                     <h5 class="brand">
-                        Brand: @Model.Products.Brand
+                        <span style="color: #f85f8a"> Brand:</span> @Model.Products.Brand
                     </h5>
+                    <p class="product-description"><span style="color: #f85f8a">Description:</span>@Model.Products.Description</p>
+
                     <div class="rating">
                         <div class="star-rating">
                             <ul class="m-0 p-0">
@@ -48,19 +50,21 @@
                                 }
                             </ul>
                         </div>
-                        <span class="review-no">@Model.countfeedback đánh giá</span>
+                        <span class="review-no">@Model.countfeedback feedbacks</span>
                     </div>
-                    <p class="product-description">@Model.Products.Description</p>
-                    <h4 class="price" style="color: #f85f8a">Giá bán:  @Model.Products.Price $</h4>
+                    <!--
+
                     <p class="vote">
                         <strong>91%</strong> of người mua hài lòng với sản phẩm này <strong>(87 bình chọn)</strong>
                     </p>
+                    -->
+                    <h4 class="price" style="color: #f85f8a">Price:  @Model.Products.Price $</h4>
                     <div class="action">
                         <form method="post" asp-page="./Index" asp-page-handler="AddToCart">
                             <input type="hidden" name="id" value="@Model.Products.Id" />
-                            <button class="add-to-cart btn btn-default" type="submit">MUA NGAY</button>
+                            <button class="add-to-cart btn btn-default" type="submit">BUY NOW</button>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
@@ -68,11 +72,12 @@
     </div>
 </div>
 
-<h4 style="margin-top: 10px; margin-bottom:10px">Feedback</h4>
-@foreach(var item in Model.Feedbacks){
+<h4 class="feedback">Feedback</h4>
+@foreach (var item in Model.Feedbacks)
+{
     <div class="comment">
         <div class="comment-header">
-            <div class="comment-author">Name: @item.User.FullName</div>
+            <div class="comment-author">@item.User.FullName</div>
             <div class="comment-date">@item.CreatedDate</div>
         </div>
         <div class="comment-body">
@@ -101,7 +106,7 @@
         <a class="btn btn-primary disabled" aria-disabled="true">Next</a>
     }
 </div>
-    <!-- Add more comments as needed -->
+<!-- Add more comments as needed -->
 
 
 <style>
@@ -111,8 +116,10 @@
     }
 
     .comment-author {
-        font-size: 16px; /* Kích thước chữ cho tên */
+        font-size: 20px; /* Kích thước chữ cho tên */
         margin-right: 10px; /* Khoảng cách giữa tên và ngày tạo */
+        color: #D14D72;
+
     }
 
     .comment-date {
@@ -120,15 +127,19 @@
         font-style: italic; /* Chữ nghiêng */
         color: rgba(0, 0, 0, 0.5); /* Chữ hơi mờ */
     }
+
     .comment {
-        background: #fcc8d1;
+        background: #fef2f4;
         padding: 10px;
-        width: 100%;
-        border-radius: 5px;
-        margin-bottom: 5px;
+        width: 50%;
+        border-radius: 4px;
+        margin-bottom: 24px;
+        border: solid 1px #c9c7c7;
+    }
+    .comment-body{
+        margin-left: 12px;
     }
 
-  
     brand {
         font-weight: bold
     }
@@ -248,5 +259,25 @@
 
     .tooltip-inner {
         padding: 1.3em;
+    }
+
+    .breadcrumb {
+        background-color: #ffabab;
+        margin: 20px;
+        padding: 8px 16px;
+        border-radius: 28px;
+        width: 35%;
+        font-size: 20px;
+    }
+
+    .feedback{
+        margin: 0px 20px 0px 10px;
+        background-color: #ffabab;
+        text-align:center;
+        margin: 20px;
+        padding: 8px 16px;
+        border-radius: 28px;
+        width: 25%;
+        font-size: 20px;
     }
 </style>
