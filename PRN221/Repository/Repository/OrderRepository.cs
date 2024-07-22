@@ -39,7 +39,7 @@ namespace Repository.Repository
             Order order = null;
             try
             {
-                order = await _context.Orders.SingleOrDefaultAsync(predicate);
+                order = await _context.Orders.Where(predicate).Include( m=> m.Voucher).SingleOrDefaultAsync();
             }
             catch (Exception ex)
             {
@@ -54,7 +54,7 @@ namespace Repository.Repository
             List<Order> list = new List<Order>();
             try
             {
-                list = await _context.Orders.Where(predicate).ToListAsync();
+                list = await _context.Orders.Include(m => m.Voucher).Where(predicate).ToListAsync();
 
             }
             catch (Exception e)
@@ -100,6 +100,7 @@ namespace Repository.Repository
                 existingOrder.LastUpdatedDate = order.LastUpdatedDate;
                 existingOrder.VoucherId = order.VoucherId;
 
+                _context.Orders.Update(existingOrder);
                 await _context.SaveChangesAsync();
                 return true;
             }

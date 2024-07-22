@@ -132,6 +132,7 @@ namespace Repository.Repository
                 if (existingOp != null)
                 {
                     existingOp.Quantity = op.Quantity;
+                    _context.OrderXProducts.Update(existingOp);
                     return await _context.SaveChangesAsync() > 0;
                 }
 

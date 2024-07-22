@@ -37,28 +37,33 @@ namespace PRN221.Pages.Cart
                 carts = new List<OrderXProductModel>();
             }
 
-            var userId = HttpContext.Session.GetString("userId");
-            var order = await _orderService.FindOne(m => m.UserId == Guid.Parse(userId) && m.Status.ToLower() != "Completed".ToLower());
-            if (order == null)
+            await GetOrder();
+            
+            if (orderModel == null)
             {
                 TempData["Message"] = ($"Empty cart");
-                return RedirectToPage();
+                return Page();
             } else
             {
-                var orderXProduct = await _orderXProductService.FindAll(m => m.OrderId == order.Id);
+                var orderXProduct = await _orderXProductService.FindAll(m => m.OrderId == orderModel.Id);
                 if (orderXProduct == null)
                 {
                     TempData["Message"] = ($"Empty cart");
-                    return RedirectToPage();
+                    return Page();
                 }
 
                 carts = orderXProduct.ToList();
                 carts = CalculateTotalPriceInCart(carts); // get total price each product
-                orderModel = order; // get total price
 
                 return Page();
             }
 
+        }
+
+        public async Task GetOrder()
+        {
+            var userId = HttpContext.Session.GetString("userId");
+            orderModel = await _orderService.FindOne(m => m.UserId == Guid.Parse(userId) && m.Status.ToLower() != "Completed".ToLower());
         }
 
         public List<OrderXProductModel> CalculateTotalPriceInCart(List<OrderXProductModel> carts)
@@ -69,6 +74,19 @@ namespace PRN221.Pages.Cart
             }
 
             return carts;
+        }
+
+        public async Task<IActionResult> OnPostCheckoutAsync()
+        {
+            if (orderModel.Id == null)
+            {
+                await GetOrder();
+            }
+
+            orderModel.Status = "Completed";
+            await _orderService.Update(orderModel);
+
+            return RedirectToPage("/Cart/AlertSuccessPayment");
         }
     }
 }
