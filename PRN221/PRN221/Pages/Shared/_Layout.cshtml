@@ -55,20 +55,19 @@
                 @if (Context.Session.GetString("email") != null)
                 {
                     <div class="dropdown">
+                    <!--  <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="data:image/png;base64,Context.Session.GetString("image")" class="rounded-circle avatar-img" style="height: 38px; width: 38px" alt="User Avatar">
+                            <span class="text-white" style="font-size: 16px; margin-left:4px">Context.Session.GetString("name")</span>
+                        </a>
+                            -->
                         <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="@Context.Session.GetString("image")" class="rounded-circle avatar-img" style="height: 38px; width: 38px" alt="User Avatar">
                             <span class="text-white" style="font-size: 16px; margin-left:4px">@Context.Session.GetString("name")</span>
                         </a>
                         <div class="dropdown-menu w-100" aria-labelledby="navbarDropdownMenuLink">
-                            @if (Context.Session.GetString("role") != null)
-                            {
-                                <form method="post" asp-page="/UserManagementPages/Edit" asp-route-id="@Context.Session.GetString("userId")">
-                                    <button type="submit" class="dropdown-item">Profile</button>
-                                </form>
-                            }
-                                <form method="post" asp-page="/authspages/LogOut">
-                                    <button type="submit" class="dropdown-item">Log out</button>
-                                </form>
+                                <a href="/ProfilePages" style="text-decoration: none; color:black" class="dropdown-item">Profile</a>
+                            <form method="post" asp-page="/authspages/LogOut">
+                                <button type="submit" class="dropdown-item">Log out</button>
+                            </form>
                         </div>
                     </div>
                 }else
