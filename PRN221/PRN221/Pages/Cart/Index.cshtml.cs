@@ -1,7 +1,9 @@
 using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 using NuGet.Packaging;
+using PRN221.Hubs;
 using PRN221.Service.Model;
 using Service.Interface;
 using Service.Model;
@@ -15,13 +17,14 @@ namespace PRN221.Pages.Cart
         private readonly IOrderService _orderService;
         private readonly IOrderXProductService _orderXProductService;
         private readonly IProductTypeService _productTypeService;
-
-        public IndexModel(IProductService productService, IOrderService orderService, IOrderXProductService orderXProductService, IProductTypeService productTypeService)
+        private readonly IHubContext<SignalRServer> _signalRHub;
+        public IndexModel(IProductService productService, IOrderService orderService, IOrderXProductService orderXProductService, IProductTypeService productTypeService, IHubContext<SignalRServer> signalRHub)
         {
             _productService = productService;
             _orderService = orderService;
             _orderXProductService = orderXProductService;
             _productTypeService = productTypeService;
+            _signalRHub = signalRHub;
         }
 
         [BindProperty]
@@ -64,7 +67,7 @@ namespace PRN221.Pages.Cart
         public async Task GetOrder()
         {
             var userId = HttpContext.Session.GetString("userId");
-            orderModel = await _orderService.FindOne(m => m.UserId == Guid.Parse(userId) && m.Status.ToLower() != "Completed".ToLower());
+            orderModel = await _orderService.FindOne(m => m.UserId == Guid.Parse(userId) && m.Status.ToLower() == "Waiting".ToLower());
         }
 
         public List<OrderXProductModel> CalculateTotalPriceInCart(List<OrderXProductModel> carts)
@@ -86,7 +89,7 @@ namespace PRN221.Pages.Cart
 
             orderModel.Status = "Completed";
             await _orderService.Update(orderModel);
-
+            await _signalRHub.Clients.All.SendAsync("LoadProducts");
             return RedirectToPage("/Cart/AlertSuccessPayment");
         }
         

@@ -1,4 +1,69 @@
 ﻿// Lấy id của button được chọn từ localStorage nếu có
+$(() => {
+    var connection = new signalR.HubConnectionBuilder()
+        .configureLogging(signalR.LogLevel.Debug)
+        .withUrl("/signalRServer", {
+            skipNegotiation: true,
+            transport: signalR.HttpTransportType.WebSockets
+        }).build();
+
+    connection.start().then(function () {
+        console.log('Connected!');
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    connection.on("LoadProducts", function () {
+        LoadProdData();
+    });
+
+    LoadProdData();
+
+    function LoadProdData() {
+        var tr = '';
+        $.ajax({
+            url: '/OrderManagement/?handler=SignalR',
+            dataType: 'json',
+            method: 'GET',
+            success: (result) => {
+                $.each(result, (k, v) => {
+                    tr += `
+                    <tr>
+                        <td>${v.User.Email}</td>
+                        <td style="width:25%">${v.Description}</td>
+                        <td>
+                            ${v.Voucher != null ? v.Voucher.VoucherName : '<p>No voucher</p>'}
+                        </td>
+                        <td>${v.TotalPrice}$</td>
+                        <td>${v.CreatedDate ? new Date(v.CreatedDate).toLocaleDateString() : ''}</td>
+                        <td>${v.LastUpdatedDate ? new Date(v.LastUpdatedDate).toLocaleDateString() : ''}</td>
+                        <td>
+                            ${v.Status == "Completed" ? '<p class="btn btn-success">' + v.Status + '</p>' :
+                            v.Status == "Approved" ? '<p class="btn btn-primary">' + v.Status + '</p>' :
+                                v.Status == "Waiting" || v.Status == "Delivering" ? '<p class="btn btn-warning">' + v.Status + '</p>' :
+                                    v.Status == "Canceled" ? '<p class="btn btn-danger">' + v.Status + '</p>' : ''}
+                        </td>
+                        <td>
+                            <a href="/OrderManagement/Edit?id=${v.Id}">Edit</a>
+                        </td>
+                    </tr>
+                    `;
+                });
+                console.log(tr);
+                $("#tableBody").html(tr);
+            },
+            error: (error) => {
+                console.error("AJAX Error: ", error);
+                console.error("Status: ", error.status);
+                console.error("Status Text: ", error.statusText);
+                console.error("Response Text: ", error.responseText);
+            }
+        });
+    }
+});
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     var chosenBrand = localStorage.getItem('chosenBrand');
     if (chosenBrand) {
@@ -17,6 +82,7 @@ buttons.forEach(function (button) {
         localStorage.setItem('chosenBrand', button.id);
     });
 });
+
 
 document.getElementById('fileInput').addEventListener('change', function (event) {
     const file = event.target.files[0];
