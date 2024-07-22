@@ -38,12 +38,13 @@ namespace PRN221.Pages.Cart
             }
 
             await GetOrder();
-            
+
             if (orderModel == null)
             {
                 TempData["Message"] = ($"Empty cart");
                 return Page();
-            } else
+            }
+            else
             {
                 var orderXProduct = await _orderXProductService.FindAll(m => m.OrderId == orderModel.Id);
                 if (orderXProduct == null)
@@ -87,6 +88,38 @@ namespace PRN221.Pages.Cart
             await _orderService.Update(orderModel);
 
             return RedirectToPage("/Cart/AlertSuccessPayment");
+        }
+        
+        public async Task<IActionResult> OnPostRemoveAsync(Guid? productId)
+        {
+            if (orderModel.Id == null)
+            {
+                await GetOrder();
+            }
+            var orderXProduct = await _orderXProductService.FindOne(m => m.OrderId == orderModel.Id && m.ProductId == productId);
+
+            if (orderXProduct == null) return RedirectToPage();
+
+            orderXProduct.Quantity -= 1;
+
+            if (orderXProduct.Quantity == 0)
+            {
+                await _orderXProductService.DeleteOne(orderModel.Id.Value, productId.Value);
+            }
+
+            await _orderXProductService.Update(orderXProduct);
+
+            var listCart = await _orderXProductService.FindAll(m => m.OrderId == orderModel.Id);
+
+            orderModel.TotalPrice = 0;
+            listCart.ForEach(async x =>
+            {
+                orderModel.TotalPrice += (x.Quantity * x.Product.Price);
+
+            });
+
+            await _orderService.Update(orderModel);
+            return RedirectToPage();
         }
     }
 }

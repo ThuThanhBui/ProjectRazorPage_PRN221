@@ -50,7 +50,7 @@
         @foreach (var p in Model.Products)
         {
             <div class="col-md-3 box-product-outer">
-               
+
                 <div class="box-product">
                     <div class="img-wrapper">
                         <a style="text-decoration: none" asp-page="/Shop/ViewProductDetail" asp-route-id="@p.Id">
@@ -80,15 +80,15 @@
                                 {
                                     if (star < fullStars)
                                     {
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
                                     }
                                     else if (star < 4.5)
                                     {
-                                                <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
                                     }
                                     else
                                     {
-                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
                                     }
                                 }
                             }
@@ -96,7 +96,7 @@
                     </div>
                 </div>
             </div>
-          
+
         }
     </div>
 </div>

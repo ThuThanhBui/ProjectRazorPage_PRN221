@@ -3,32 +3,10 @@
 @{
 }
 
-<form asp-page-handler="checkout" method="post">
-    <!-- Modal -->
-    <div class="modal fade" id="confirm-checkout" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Confirm checkout</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Do you want to check out?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Checkout</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 <div class="container">
-    @if(Model.carts.Count > 0)
+    @if (Model.carts.Count > 0)
     {
         <div class="row">
             <div class="col-xl-8">
@@ -59,9 +37,32 @@
                                 <div class="flex-shrink-0 ms-2">
                                     <ul class="list-inline mb-0 font-size-16">
                                         <li class="list-inline-item">
-                                            <a href="#" class="text-muted px-1">
-                                                <a asp-page="./Delete" asp-route-id="@item.Product.Id"><i class="mdi mdi-trash-can-outline"></i></a>
-                                            </a>
+                                            <div class="text-muted px-1">
+                                                <form asp-page-handler="remove" method="post">
+                                                    <input type="hidden" name="productId" value="@item.ProductId" />
+                                                    <div class="modal fade" id="confirm-remove-@i" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLongTitle">Confirm Remove</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Do you want to remove one?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary">Remove</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#confirm-remove-@i"
+                                                        style="margin: 10px; padding: 5px 10px;" class="btn btn-light">
+                                                    <i class="mdi mdi-trash-can-outline"></i>
+                                                </button>
+                                            </div>
                                         </li>
                                         <li class="list-inline-item">
                                             <a href="#" class="text-muted px-1">
@@ -91,9 +92,7 @@
                                             </p>
                                         </div>
                                     </div>
-
                                 </div>
-
                                 <div class="row justify-content-md-end">
                                     <div class="col-md-2">
                                         <div class="mt-3">
@@ -114,16 +113,30 @@
                     </div>
                     <div class="col-sm-6">
                         <form asp-page-handler="checkout" method="post">
-                            <div class="text-sm-end mt-2 mt-sm-0">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#confirm-checkout"
-                                        style="margin: 10px; padding: 5px 10px;" class="btn btn-success">
-                                    <i class="mdi mdi-cart-outline me-1"></i>Checkout
-                                </button>
-                                @* <a href="ecommerce-checkout.html" class="btn btn-success">
-                            Checkout
-                            </a> \*@
+                            <div class="modal fade" id="confirm-checkout" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Confirm Checkout</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Do you want to check out?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Checkout</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </form>
+                        <div class="text-sm-end mt-2 mt-sm-0">
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#confirm-checkout"
+                                    style="margin: 10px; padding: 5px 10px;" class="btn btn-success">
+                                <i class="mdi mdi-cart-outline me-1"></i>Checkout
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -137,45 +150,34 @@
                             <div class="table-responsive">
                                 <table class="table mb-0">
                                     <tbody>
-
                                         <tr class="bg-light">
                                             <th>Voucher :</th>
                                             <td class="text-end">
-
                                                 @if (Model.orderModel.Voucher == null)
                                                 {
-                                                    <span id="totalPrice" class="fw-bold">
-                                                        N/A
-                                                    </span>
+                                                    <span id="totalPrice" class="fw-bold">N/A</span>
                                                 }
                                                 else
                                                 {
-                                                    <span id="totalPrice" class="fw-bold">
-                                                        @Model.orderModel.Voucher.VoucherName
-                                                    </span>
+                                                    <span id="totalPrice" class="fw-bold">@Model.orderModel.Voucher.VoucherName</span>
                                                 }
-
                                             </td>
                                         </tr>
                                         <tr class="bg-light">
                                             <th>Total :</th>
                                             <td class="text-end">
-                                                <span id="totalPrice" class="fw-bold">
-                                                    @Model.orderModel.TotalPrice
-                                                </span>
+                                                <span id="totalPrice" class="fw-bold">@Model.orderModel.TotalPrice</span>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     }
-
 </div>
 
 <h1>Cart List</h1>
@@ -186,5 +188,3 @@
         @TempData["Message"]
     </div>
 }
-
-<!-- Your existing HTML code -->
