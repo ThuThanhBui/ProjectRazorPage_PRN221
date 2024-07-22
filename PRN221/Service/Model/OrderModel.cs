@@ -15,7 +15,7 @@ namespace Service.Model
 
         public Guid? VoucherId { get; set; }
         public Guid UserId { get; set; }
-        public User User { get; set; }
+        public UserModel User { get; set; }
         public VoucherModel? Voucher { get; set; }
     }
 

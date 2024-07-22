@@ -22,19 +22,19 @@ namespace PRN221.Pages.OrderMember
 
         public List<OrderModel> Orders { get; set; } = default!;
 
-        [BindProperty(SupportsGet = true)]
-        public string StatusFilter { get; set; }
+   //     [BindProperty(SupportsGet = true)]
+  //      public string StatusFilter { get; set; }
 
         public async Task OnGetAsync()
         {
-            if (!StatusFilter.IsNullOrEmpty())
-            {
+    //        if (!StatusFilter.IsNullOrEmpty())
+  //          {
                 Orders = await _orderService.GetByUserId(Guid.Parse(HttpContext.Session.GetString("userId")));
-            }
-            else
-            {
-                Orders = await _orderService.GetAll();
-            }
+    //        }
+     //       else
+      //      {
+      //          Orders = await _orderService.GetAll();
+       //     }
 
         }
     }

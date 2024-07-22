@@ -127,6 +127,23 @@
          } *@
     </tbody>
 </table>
+<div class="d-flex justify-content-center">
+    <div class="pagination">
+        @if (Model.Orders.HasPreviousPage)
+        {
+            <a asp-page="/OrderManagement/Index" asp-route-pageIndex="@(Model.Orders.PageIndex-1)"> Previous </a>
+        }
 
+        @for (int i = 1; i <= Model.Orders.TotalPages; i++)
+        {
+            <a asp-page="/OrderManagement/Index" asp-route-pageIndex="@i"> @i </a>
+        }
+
+        @if (Model.Orders.HasNextPage)
+        {
+            <a asp-page="/OrderManagement/Index" asp-route-pageIndex="@(Model.Orders.PageIndex + 1)"> Next </a>
+        }
+    </div>
+</div>
 <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>

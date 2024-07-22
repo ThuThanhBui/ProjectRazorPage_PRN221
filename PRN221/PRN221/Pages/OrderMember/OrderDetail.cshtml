@@ -1,0 +1,52 @@
+﻿@page
+@model PRN221.Pages.OrderMember.OrderDetailModel
+@{
+    ViewData["Title"] = "OrderDetail";
+    Layout = "~/Pages/Shared/_LayoutManage.cshtml";
+}
+<h1>Order Detail List</h1>
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <p>Product Name</p>
+            </th>
+            <th>
+                <p>Quantity</p>
+            </th>
+            <th>
+                <p>Created date</p>
+            </th>
+            <th>
+                <p>Status</p>
+            </th>
+            <th>
+                <p>Edit</p>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    @item.Product.ProductName
+                </td>
+                <td>
+                    @item.Quantity
+                </td>
+                <td>
+                    @item.CreatedDate.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @(item.IsDeleted ? "Failed" : "Completed")
+                </td>
+                <td>
+                    <a asp-page="./feedback" asp-route-id="@item.ProductId">FeedBack</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

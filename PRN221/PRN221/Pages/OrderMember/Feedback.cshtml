@@ -2,3 +2,94 @@
 @model PRN221.Pages.OrderMember.FeedbackModel
 @{
 }
+<h1>FeedBack </h1>
+
+<div class="container">
+    <form method="post">
+        <div class="feedback">
+            <p>Please rate our service out of 5</p>
+            <div class="star-rating">
+                <div class="rating-option">
+                    <input type="radio" id="star1" name="Feedback.Rating" value="1" asp-for="Feedback.Rating" />
+                    <label for="star1">1</label>
+                </div>
+                <div class="rating-option">
+                    <input type="radio" id="star2" name="Feedback.Rating" value="2" asp-for="Feedback.Rating" />
+                    <label for="star2">2</label>
+                </div>
+                <div class="rating-option">
+                    <input type="radio" id="star3" name="Feedback.Rating" value="3" asp-for="Feedback.Rating" checked />
+                    <label for="star3">3</label>
+                </div>
+                <div class="rating-option">
+                    <input type="radio" id="star4" name="Feedback.Rating" value="4" asp-for="Feedback.Rating" />
+                    <label for="star4">4</label>
+                </div>
+                <div class="rating-option">
+                    <input type="radio" id="star5" name="Feedback.Rating" value="5" asp-for="Feedback.Rating" />
+                    <label for="star5">5</label>
+                </div>
+            </div>
+            <br />
+            <p>Please leave a comment below</p>
+            <textarea asp-for="Feedback.Comment" placeholder="Thank you for comment"></textarea>
+            <br />
+            <br />
+            <button type="submit">Send Feedback</button>
+        </div>
+    </form>
+</div>
+<style>
+    body {
+        background: white;
+        font-family: sans-serif;
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .feedback {
+        background: #fcc8d1;
+        padding: 20px;
+        width: 500px;
+        border-radius: 5px;
+    }
+
+    .rating-option {
+        display: inline-block;
+        text-align: center;
+        margin: 0 5px;
+    }
+
+        .rating-option label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .rating-option input {
+            display: block;
+        }
+
+    form textarea {
+        width: calc(100% - 22px);
+        height: 100px;
+        resize: none;
+        border: 1px solid #999;
+        border-radius: 4px;
+        padding: 10px;
+    }
+
+    form button {
+        background: #999;
+        padding: 10px 20px;
+        color: #fff;
+        border: 1px solid #999;
+        border-radius: 4px;
+        transition: 0.1s;
+    }
+
+        form button:hover {
+            background: #fff;
+            color: #666;
+        }
+</style>

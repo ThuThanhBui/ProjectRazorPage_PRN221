@@ -57,3 +57,45 @@ h4{
     background-color: var(--light-color);
     padding: 24px
 }
+
+.pagination a {
+    margin: 28px;
+    font-size:16px;
+    text-decoration: none;
+    color: var(--dark-pink);
+    font-weight: 700;
+}
+
+.edit, .detail, .delete{
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius:4px;
+    margin:12px;
+}
+
+.edit{
+    background-color: #adb7ff;
+    color: #020094;
+}
+    .edit:hover {
+        background-color: #020094;
+        color: #adb7ff;
+    }
+
+.detail {
+    background-color: #6aff6f;
+    color: #007f0d;
+}
+    .detail:hover {
+        background-color: #007f0d;
+        color: #6aff6f;
+    }
+
+.delete {
+    background-color: #ff9494;
+    color: #9d0606;
+}
+    .delete:hover {
+        background-color: #9d0606;
+        color: #ff9494;
+    }

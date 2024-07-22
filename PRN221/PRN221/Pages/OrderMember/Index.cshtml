@@ -7,7 +7,8 @@
 
 }
 <h1>Order List</h1>
-<hr/>
+<hr />
+<!--
 <form method="get">
     <label for="StatusFilter">Filter by Status:</label>
     <select id="StatusFilter" name="StatusFilter" asp-for="StatusFilter">
@@ -20,6 +21,7 @@
     </select>
     <button type="submit">Filter</button>
 </form>
+-->
 
 <table class="table">
     <thead>
@@ -109,10 +111,12 @@
 
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>|
-                     <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                     <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                    <a asp-page="./Feedback" asp-route-id="@item.Id">Feedback</a>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="edit">Edit</a>
+                    @if (item.Status != "Cancel")
+                    {
+                        <a asp-page="./Detail" asp-route-id="@item.Id" class="detail">Details</a>
+                    }
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="delete">Delete</a>
                 </td>
             </tr>
         }
