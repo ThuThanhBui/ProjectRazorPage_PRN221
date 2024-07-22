@@ -157,5 +157,17 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<User?> GetUserByEmail(string email)
+        {
+            try
+            {
+                return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error checking for existing user", ex);
+            }
+        }
     }
 }

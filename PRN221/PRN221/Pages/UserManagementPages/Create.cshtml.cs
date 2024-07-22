@@ -35,18 +35,29 @@ namespace PRN221.Pages.UserManagement
             User.CreatedDate = DateTime.Now;
             User.LastUpdatedDate = DateTime.Now;
 
-            var addSuccess = await _userService.AddUser(User);
-            if (addSuccess)
+            try
             {
-                OnGetAsync();
-                return RedirectToPage("/UserManagementPages/Index");
+                var addSuccess = await _userService.AddUser(User);
+                if (addSuccess)
+                {
+                    TempData["Message"] = "Add user successful.";
+                    return RedirectToPage("/UserManagementPages/Index");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "User with this email already exists.");
+                    Roles = await _roleService.GetAll(); // Reload roles for the dropdown
+                    return Page();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                OnGetAsync();
+                ModelState.AddModelError(string.Empty, $"An error occurred: {ex.Message}");
+                Roles = await _roleService.GetAll(); // Reload roles for the dropdown
                 return Page();
             }
         }
+
 
     }
 }

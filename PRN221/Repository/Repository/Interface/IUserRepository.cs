@@ -17,5 +17,6 @@ namespace Repository.Repository.Interface
         Task<User> GetById(Guid id);
 
         Task<bool> UpdateProfile(User user);
+        Task<User?> GetUserByEmail(string email);
     }
 }

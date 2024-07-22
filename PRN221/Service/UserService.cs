@@ -39,6 +39,12 @@ namespace Service
         {
             try
             {
+                var existingUser = await _userRepository.GetUserByEmail(user.Email);
+                if (existingUser != null)
+                {
+                    return false; // User already exists
+                }
+
                 return await _userRepository.Add(_mapper.Map<User>(user));
             }
             catch (Exception ex)
@@ -46,6 +52,7 @@ namespace Service
                 throw new Exception(ex.Message);
             }
         }
+
 
         public async Task<bool> Update(UserModel user)
         {
